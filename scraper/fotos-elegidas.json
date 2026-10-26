@@ -248,12 +248,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Chilaquiles_at_the_Grand_Cantina,_Windsor,_Ontario,_2025-09-01_04.jpg"
   },
   "tortitas-carne": {
-    "consulta": "beef patties tomato sauce | meat patties rice | Salisbury steak",
-    "archivo": "File:Argentine hamburgers made with Paty Clásicas patties, lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo buns, with pickled gherkins, paprika sauce, and malagueta chili peppers.jpg",
+    "consulta": "carne en salsa de tomate | tortas de carne | meatballs tomato sauce rice",
+    "archivo": "File:Capeletti argentino con salsa de tomate, carne picada y cebolla.jpg",
     "ruta": "assets/fotos/tortitas-carne.jpg",
     "autor": "Horacio Cambeiro",
     "licencia": "CC BY-SA 3.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Argentine_hamburgers_made_with_Paty_Cl%C3%A1sicas_patties,_lettuce,_tomato,_fried_egg,_and_mozzarella_cheese_on_Don_Yeyo_buns,_with_pickled_gherkins,_paprika_sauce,_and_malagueta_chili_peppers.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Capeletti_argentino_con_salsa_de_tomate,_carne_picada_y_cebolla.jpg"
   },
   "cocido-res": {
     "consulta": "cocido de res | beef stew corn cassava",
@@ -392,12 +392,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg"
   },
   "aparato-horno": {
-    "consulta": "built-in oven | kitchen oven open door | electric oven kitchen",
-    "archivo": "File:Clay oven in a village in Dinajpur district.jpg",
+    "consulta": "oven door open baking tray | Electrolux oven | stove with oven kitchen",
+    "archivo": "File:Electrolux Microwave.jpg",
     "ruta": "assets/fotos/aparato-horno.jpg",
-    "autor": "Kritzolina",
-    "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Clay_oven_in_a_village_in_Dinajpur_district.jpg"
+    "autor": "Twentyfour Students",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Electrolux_Microwave.jpg"
   },
   "aparato-microondas": {
     "consulta": "microwave oven",
@@ -408,12 +408,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Microwave_Oven.jpg"
   },
   "aparato-freidora": {
-    "consulta": "air fryer appliance | air fryer kitchen | air fryer",
-    "archivo": "File:Untraditional air fryer beignets in toaster oven.jpg",
+    "consulta": "Philips Airfryer | Cosori air fryer | air fryer basket",
+    "archivo": "File:Tabletop convection oven.jpg",
     "ruta": "assets/fotos/aparato-freidora.jpg",
-    "autor": "Infrogmation",
+    "autor": "Bagoto",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Untraditional_air_fryer_beignets_in_toaster_oven.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Tabletop_convection_oven.jpg"
   },
   "aparato-parrilla": {
     "consulta": "barbecue grill meat | grilling steak charcoal",
@@ -440,12 +440,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Food_Processor_2.jpg"
   },
   "aparato-thermomix": {
-    "consulta": "Thermomix TM5 | Thermomix TM6 | Thermomix TM31",
-    "archivo": "File:Thermomix (38377213176).jpg",
+    "consulta": "Thermomix TM6 | Thermomix kitchen | Thermomix TM5",
+    "archivo": "File:2025-03-16 Regio-Messe LÖ 038.jpg",
     "ruta": "assets/fotos/aparato-thermomix.jpg",
-    "autor": "Aaron Davis",
-    "licencia": "CC BY-SA 2.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Thermomix_(38377213176).jpg"
+    "autor": "Ahmet Düz, Dreiländer- & Oberrheinfotograf",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:2025-03-16_Regio-Messe_L%C3%96_038.jpg"
   },
   "aparato-ninja-foodi": {
     "consulta": "Ninja Foodi | multicooker",
