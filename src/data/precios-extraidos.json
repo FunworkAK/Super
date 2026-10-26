@@ -1,1 +1,371 @@
-[]
+[
+  {
+    "tienda": "walmart",
+    "ingredienteId": "tomate",
+    "nombre": "Tomate De Cocina En Red 3 Libras - 5 a 7 Unidades Aproximadamente -",
+    "tamano": 3000,
+    "precio": 6.25,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "cebolla",
+    "nombre": "Cebolla Morada 1 Lb - 3 a 4 Unidades por Libra Aproximadamente",
+    "tamano": 200,
+    "precio": 9.4,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "ajo",
+    "nombre": "Ajo Badia Picado  En Aceite - 227 g",
+    "tamano": 227,
+    "precio": 10,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "papa",
+    "nombre": "Papa Hortifruti Super Red - 10 a 13 Unidades por Libra Aproximadamente",
+    "tamano": 3000,
+    "precio": 8.2,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "zanahoria",
+    "nombre": "Zanahoria Bolsa 4 Lb Ipb",
+    "tamano": 1814.4,
+    "precio": 12.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "guisquil",
+    "nombre": "Guisquil - 1 Unidad",
+    "tamano": 1,
+    "precio": 5.85,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "ejote",
+    "nombre": "Ejote Go fresh tipo Francés Empacado - 454 g",
+    "tamano": 454,
+    "precio": 12.25,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "aguacate",
+    "nombre": "Aguacate Hortifruti hass con minerales y vitaminas en malla - 9 a 10 Unidades Aproximadamente",
+    "tamano": 10,
+    "precio": 30,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "limon",
+    "nombre": "Limón criollo Del Fresco red - 25 Uds",
+    "tamano": 25,
+    "precio": 19.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "platano",
+    "nombre": "Platano Libra",
+    "tamano": 2,
+    "precio": 3.65,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "banano",
+    "nombre": "Banano Datil Libra",
+    "tamano": 7,
+    "precio": 3.5,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "brocoli",
+    "nombre": "Brocoli Entero Libra - Unidad contiene 1Lb Aproximadamente",
+    "tamano": 1000,
+    "precio": 6.6,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "miltomate",
+    "nombre": "Salsa De Miltomate B&B - 370 g",
+    "tamano": 370,
+    "precio": 12.25,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "pollo-pechuga",
+    "nombre": "Filete Pechuga de Pollo Pio Lindo Porcionaditos Precio por Libra",
+    "tamano": 4890,
+    "precio": 31,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "res-molida",
+    "nombre": "Molida Condimentada Empacada 80% Carne 20% Grasa - Precio Indicado Por Libra",
+    "tamano": 1000,
+    "precio": 29.5,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "res-guisar",
+    "nombre": "Costilla Marketside de res en bandeja - Precio indicado por libra",
+    "tamano": 2000,
+    "precio": 22,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "cerdo",
+    "nombre": "Chuleta De Cerdo Ahumada lb",
+    "tamano": 1000,
+    "precio": 27.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "jamon",
+    "nombre": "Jamón Toledo Prensado - 400 g",
+    "tamano": 400,
+    "precio": 14.76,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "huevo",
+    "nombre": "Huevo de Gallina Avicola Fatima Blanco Mediano - 30 Uds",
+    "tamano": 30,
+    "precio": 36.9,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "leche",
+    "nombre": "Leche Entera Trebolac 6 Pack - 5676ml",
+    "tamano": 5676,
+    "precio": 64.84,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "crema",
+    "nombre": "Crema Pura Pasajinak 500ml",
+    "tamano": 500,
+    "precio": 22.25,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "queso-fresco",
+    "nombre": "Queso  San Julián panela fresco - 454 g",
+    "tamano": 454,
+    "precio": 32.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "queso-mozzarella",
+    "nombre": "Queso Monteverde Mozzarella - Precio Indicado por libra",
+    "tamano": 1000,
+    "precio": 56,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "mantequilla",
+    "nombre": "Ayote Mantequilla Libra",
+    "tamano": 1000,
+    "precio": 7,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "arroz",
+    "nombre": "Arroz Suli Blanco 1700 g",
+    "tamano": 1700,
+    "precio": 16.25,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "frijol-negro",
+    "nombre": "Frijol La Chula Entero Negro - 1810 g",
+    "tamano": 1810,
+    "precio": 18,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "pasta",
+    "nombre": "Pasta Alimenticia Suli Spagueti - 180 g",
+    "tamano": 180,
+    "precio": 2.1,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "avena",
+    "nombre": "Avena Quaker Rico Mosh 360gr",
+    "tamano": 360,
+    "precio": 7,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "harina-maiz",
+    "nombre": "Harina Suli De Maiz 800 Gr",
+    "tamano": 800,
+    "precio": 6.5,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "aceite",
+    "nombre": "Aceite Vegetal Aurora con omega 3 y 6 - 3000 ml",
+    "tamano": 3000,
+    "precio": 53,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "azucar",
+    "nombre": "Azúcar Blanca Caña Real, Fortificada con Vitamina A  - 2500g",
+    "tamano": 2500,
+    "precio": 20.2,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "tortillas",
+    "nombre": "Tortilla Tortiamigos De Maiz 20 Uds - 260 g",
+    "tamano": 20,
+    "precio": 6.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "pan-frances",
+    "nombre": "Pan Frances Tradicional Fila - 8 Unidades",
+    "tamano": 8,
+    "precio": 5.9,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "sal",
+    "nombre": "Sal Sabemas De Cocina - 920 g",
+    "tamano": 920,
+    "precio": 2.45,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "pimienta",
+    "nombre": "Sazonador Sassón sal de mar con pimienta negra - 350 g",
+    "tamano": 350,
+    "precio": 22.75,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "consome",
+    "nombre": "Consomé Rodeo Club Don Gusto de pollo - 400 g",
+    "tamano": 400,
+    "precio": 7.5,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "salsa-tomate",
+    "nombre": "Salsa De Tomate Dulce Bolsa - 400g",
+    "tamano": 400,
+    "precio": 6.1,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "salsa-inglesa",
+    "nombre": "Salsa Gourmet Inglesa Envase Plas - 165ml",
+    "tamano": 165,
+    "precio": 5.4,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "pepitoria",
+    "nombre": "Especias Sasson Pepitoria Bolsa - 50 g",
+    "tamano": 50,
+    "precio": 10,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "ajonjoli",
+    "nombre": "Hamburguesa Tahona Ajonjoli 6 Pack - 1800 g",
+    "tamano": 1800,
+    "precio": 10.5,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  },
+  {
+    "tienda": "walmart",
+    "ingredienteId": "vegetales-congelados",
+    "nombre": "Vegetales Great Value Mixtos - 425 g",
+    "tamano": 425,
+    "precio": 13.55,
+    "actualizado": "2026-10-26",
+    "fuente": "extractor"
+  }
+]
