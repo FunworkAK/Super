@@ -20,9 +20,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "ajo",
-    "nombre": "Ajo Great Value Granulado - 737 g",
-    "tamano": 737,
-    "precio": 65,
+    "nombre": "Ajo Mccormick Molido Frasco - 275 g",
+    "tamano": 275,
+    "precio": 41.5,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -83,18 +83,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "platano",
-    "nombre": "Platano Libra",
-    "tamano": 2,
-    "precio": 3.65,
-    "actualizado": "2026-10-26",
-    "fuente": "extractor"
-  },
-  {
-    "tienda": "walmart",
-    "ingredienteId": "banano",
-    "nombre": "Banano Datil Libra",
+    "nombre": "Platano Red 4 Libras - 7 Uds Aproximadamente",
     "tamano": 7,
-    "precio": 3.5,
+    "precio": 14.25,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
