@@ -56,7 +56,7 @@ export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
 
   // Aparatos
   'aparato-estufa': ['gas stove burners', 'kitchen stove'],
-  'aparato-horno': ['wall oven', 'oven interior', 'oven'],
+  'aparato-horno': ['Einbaubackofen', 'Backofen Küche', 'four électrique'],
   'aparato-microondas': ['microwave oven'],
   'aparato-freidora': ['File:Untraditional air fryer beignets in toaster oven.jpg'],
   'aparato-parrilla': ['barbecue grill meat', 'grilling steak charcoal'],
