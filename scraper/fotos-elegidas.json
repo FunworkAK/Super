@@ -112,12 +112,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Caldo_de_Pollo_(2411932823).jpg"
   },
   "caldo-res": {
-    "consulta": "Caldo de res | beef vegetable soup",
-    "archivo": "File:Hong Kong Harbour Night 2019-06-11.jpg",
+    "consulta": "vegetable beef soup | beef soup corn | beef soup",
+    "archivo": "File:Vegetable beef soup - Arlington, MA.jpg",
     "ruta": "assets/fotos/caldo-res.jpg",
-    "autor": "Benh LIEU SONG (Flickr)",
-    "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Harbour_Night_2019-06-11.jpg"
+    "autor": "Daderot",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Vegetable_beef_soup_-_Arlington,_MA.jpg"
   },
   "frijoles-parados": {
     "consulta": "frijoles negros | black beans stew",
@@ -184,12 +184,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:BK_Ham_and_Cheese_Sandwich.JPG"
   },
   "arroz-frito": {
-    "consulta": "egg fried rice",
-    "archivo": "File:A bilao of salted egg, seafood, porkchop and fried rice.jpg",
+    "consulta": "egg fried rice plate | fried rice",
+    "archivo": "File:Fried Rice 1 (Eggs & Vegetables).jpg",
     "ruta": "assets/fotos/arroz-frito.jpg",
-    "autor": "Irvin Parco Sto. Tomas",
+    "autor": "Gary Dee",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:A_bilao_of_salted_egg,_seafood,_porkchop_and_fried_rice.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Fried_Rice_1_(Eggs_%26_Vegetables).jpg"
   },
   "albondigas": {
     "consulta": "albóndigas | meatballs tomato sauce",
@@ -248,7 +248,7 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Chilaquiles_at_the_Grand_Cantina,_Windsor,_Ontario,_2025-09-01_04.jpg"
   },
   "tortitas-carne": {
-    "consulta": "tortitas de carne | beef patties tomato sauce",
+    "consulta": "beef patties tomato sauce | meat patties rice | Salisbury steak",
     "archivo": "File:Argentine hamburgers made with Paty Clásicas patties, lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo buns, with pickled gherkins, paprika sauce, and malagueta chili peppers.jpg",
     "ruta": "assets/fotos/tortitas-carne.jpg",
     "autor": "Horacio Cambeiro",
@@ -280,12 +280,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Baked_Plantains_(3510854117).jpg"
   },
   "sandwich-pavo": {
-    "consulta": "turkey sandwich",
-    "archivo": "File:Krůtí prsa.jpg",
+    "consulta": "turkey sandwich lettuce | turkey club sandwich | turkey sandwich",
+    "archivo": "File:Turkey and cheese sandwich.jpg",
     "ruta": "assets/fotos/sandwich-pavo.jpg",
-    "autor": "Dezidor",
-    "licencia": "CC BY 3.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Kr%C5%AFt%C3%AD_prsa.jpg"
+    "autor": "Djoker180",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Turkey_and_cheese_sandwich.jpg"
   },
   "rollitos-pollo": {
     "consulta": "chicken wrap | chicken wraps tortilla",
@@ -296,12 +296,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Smoked_chicken_and_avocado_wrap.jpg"
   },
   "licuado-banano": {
-    "consulta": "banana smoothie",
-    "archivo": "File:Chicken wings starter and banana smoothie.jpg",
+    "consulta": "banana milkshake | banana smoothie glass",
+    "archivo": "File:Banana Milkshake.jpg",
     "ruta": "assets/fotos/licuado-banano.jpg",
-    "autor": "Mayejiro",
+    "autor": "Deepak Official Id",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Chicken_wings_starter_and_banana_smoothie.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Banana_Milkshake.jpg"
   },
   "pollo-asado": {
     "consulta": "roast chicken | pollo asado",
@@ -360,12 +360,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Sichuan_pepper_chicken_-_air-fried_version_(%E5%B7%9D%E6%A4%92%E9%9B%9E_-_%E6%B0%A3%E7%82%B8%E7%89%88).jpg"
   },
   "ensalada-cesar": {
-    "consulta": "Caesar salad chicken | Caesar salad",
-    "archivo": "File:Chicken fettuccine alfredo.JPG",
+    "consulta": "Caesar salad",
+    "archivo": "File:Caesar Salad - Purezza 2023-11-22.jpg",
     "ruta": "assets/fotos/ensalada-cesar.jpg",
-    "autor": "Dllu",
-    "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Chicken_fettuccine_alfredo.JPG"
+    "autor": "Andy Li",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Caesar_Salad_-_Purezza_2023-11-22.jpg"
   },
   "avena-nocturna": {
     "consulta": "overnight oats",
@@ -392,12 +392,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg"
   },
   "aparato-horno": {
-    "consulta": "kitchen oven | electric oven",
-    "archivo": "File:Castle de Haar (1892-1913) 09 - Kitchen - Oven heated on coal.jpg",
+    "consulta": "built-in oven | kitchen oven open door | electric oven kitchen",
+    "archivo": "File:Clay oven in a village in Dinajpur district.jpg",
     "ruta": "assets/fotos/aparato-horno.jpg",
-    "autor": "Txllxt TxllxT",
+    "autor": "Kritzolina",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Castle_de_Haar_(1892-1913)_09_-_Kitchen_-_Oven_heated_on_coal.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Clay_oven_in_a_village_in_Dinajpur_district.jpg"
   },
   "aparato-microondas": {
     "consulta": "microwave oven",
@@ -408,20 +408,20 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Microwave_Oven.jpg"
   },
   "aparato-freidora": {
-    "consulta": "air fryer",
-    "archivo": "File:Air fryer interior.jpg",
+    "consulta": "air fryer appliance | air fryer kitchen | air fryer",
+    "archivo": "File:Untraditional air fryer beignets in toaster oven.jpg",
     "ruta": "assets/fotos/aparato-freidora.jpg",
-    "autor": "Samay9211",
+    "autor": "Infrogmation",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Air_fryer_interior.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Untraditional_air_fryer_beignets_in_toaster_oven.jpg"
   },
   "aparato-parrilla": {
-    "consulta": "charcoal grill | barbecue grill",
-    "archivo": "File:Starting the charcoal.jpg",
+    "consulta": "barbecue grill meat | grilling steak charcoal",
+    "archivo": "File:Meat-barbecue-grill (23699080033).jpg",
     "ruta": "assets/fotos/aparato-parrilla.jpg",
-    "autor": "Tomascastelazo",
-    "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Starting_the_charcoal.jpg"
+    "autor": "www.Pixel.la Free Stock Photos",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Meat-barbecue-grill_(23699080033).jpg"
   },
   "aparato-licuadora": {
     "consulta": "kitchen blender | blender",
@@ -440,12 +440,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Food_Processor_2.jpg"
   },
   "aparato-thermomix": {
-    "consulta": "Thermomix",
-    "archivo": "File:Thermomix TM31 repair 03.jpg",
+    "consulta": "Thermomix TM5 | Thermomix TM6 | Thermomix TM31",
+    "archivo": "File:Thermomix (38377213176).jpg",
     "ruta": "assets/fotos/aparato-thermomix.jpg",
-    "autor": "Klaus-Dieter Keller",
-    "licencia": "CC0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Thermomix_TM31_repair_03.jpg"
+    "autor": "Aaron Davis",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Thermomix_(38377213176).jpg"
   },
   "aparato-ninja-foodi": {
     "consulta": "Ninja Foodi | multicooker",
@@ -478,5 +478,13 @@
     "autor": "Ajay Suresh from New York, NY, USA",
     "licencia": "CC BY 2.0",
     "pagina": "https://commons.wikimedia.org/wiki/File:Instant_Pot_(49907000991).jpg"
+  },
+  "shucos": {
+    "consulta": "Shuco hot dog | Guatemalan hot dog | hot dog guacamole | hot dog",
+    "archivo": "File:Hot dog in Macau.jpg",
+    "ruta": "assets/fotos/shucos.jpg",
+    "autor": "Pauloleong2002",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Hot_dog_in_Macau.jpg"
   }
 }
