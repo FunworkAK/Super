@@ -93,6 +93,11 @@ async function main() {
     const previa = elegidas[id];
     if (!todas && previa?.consulta === consulta && existsSync(join(RAIZ, previa.ruta))) continue;
 
+    if (terminos.length === 0) {
+      delete elegidas[id];
+      continue;
+    }
+
     let pagina: PaginaCommons | null = null;
     for (const t of terminos) {
       try {

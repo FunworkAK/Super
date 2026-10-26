@@ -1,6 +1,7 @@
 // Qué buscar en Wikimedia Commons para la foto de cada receta y aparato.
 // Se prueban en orden; un término que empieza con "File:" fija ese archivo
-// exacto (sirve para corregir una foto que no quedó bien).
+// exacto (sirve para corregir una foto que no quedó bien). Una lista vacía
+// deja el emoji en vez de foto.
 export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
   // Recetas
   'pepian-pollo': ['Pepián Guatemala', 'pepian chicken'],
@@ -35,7 +36,7 @@ export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
   'panqueques-avena': ['banana pancakes', 'pancakes'],
   salpicon: ['Salpicón Guatemala', 'salpicón de res'],
   chilaquilas: ['chilaquilas Guatemala', 'chilaquiles'],
-  'tortitas-carne': ['carne en salsa de tomate', 'tortas de carne', 'meatballs tomato sauce rice'],
+  'tortitas-carne': [],
   'cocido-res': ['cocido de res', 'beef stew corn cassava'],
   'atol-avena': ['atole', 'oat drink'],
   'platanos-queso': ['baked plantains', 'plátanos maduros'],
@@ -55,9 +56,9 @@ export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
 
   // Aparatos
   'aparato-estufa': ['gas stove burners', 'kitchen stove'],
-  'aparato-horno': ['oven door open baking tray', 'Electrolux oven', 'stove with oven kitchen'],
+  'aparato-horno': ['roasting chicken in oven', 'cake baking in oven', 'oven baking'],
   'aparato-microondas': ['microwave oven'],
-  'aparato-freidora': ['Philips Airfryer', 'Cosori air fryer', 'air fryer basket'],
+  'aparato-freidora': ['File:Untraditional air fryer beignets in toaster oven.jpg'],
   'aparato-parrilla': ['barbecue grill meat', 'grilling steak charcoal'],
   'aparato-licuadora': ['kitchen blender', 'blender'],
   'aparato-procesador': ['food processor'],
