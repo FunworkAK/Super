@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, Text, TextInput, View } from 'react-native';
-import { Boton, Suave, Tarjeta, Titulo, colores, estilos } from '../components/ui';
-import { compararTiendas, formatoQ, sugerirCambios } from '../domain/planificador';
-import { TIENDAS } from '../domain/types';
-import { useApp } from '../state/AppState';
+import { Boton, Suave, Tarjeta, Titulo, colores, estilos } from '../../components/ui';
+import { compararTiendas, formatoQ, sugerirCambios } from '../../domain/planificador';
+import { TIENDAS } from '../../domain/types';
+import { useApp } from '../../state/AppState';
 
 export default function Presupuesto() {
   const { cargado, presupuesto, setPresupuesto, plan, setPlan, inventario, catalogo, estrategia, setEstrategia } = useApp();

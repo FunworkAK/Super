@@ -226,7 +226,9 @@ export function descontarReceta(inventario: Inventario, item: ItemPlan, cat: Cat
 
 export function formatoCantidad(cantidad: number, unidad: Ingrediente['unidad']): string {
   if (unidad === 'u') return `${Math.ceil(cantidad - 1e-9)} u`;
-  if (cantidad >= 1000) return `${+(cantidad / 1000).toFixed(2)} ${unidad === 'g' ? 'kg' : 'L'}`;
+  // En Guatemala el super se compra por libra.
+  if (unidad === 'g' && cantidad >= 113) return `${+(cantidad / 453.6).toFixed(1)} lb`;
+  if (unidad === 'ml' && cantidad >= 1000) return `${+(cantidad / 1000).toFixed(2)} L`;
   return `${Math.round(cantidad)} ${unidad}`;
 }
 

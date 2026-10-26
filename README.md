@@ -4,9 +4,10 @@ App móvil (Android y iPhone) para planificar las comidas de la semana, armar la
 
 ## Qué hace
 
-- **Despensa:** anotas lo que tienes en casa; la lista lo descuenta.
-- **Recetas:** 30 recetas (muchas guatemaltecas), ordenadas por lo que aprovechan tu despensa y por costo por porción.
-- **Plan semanal:** eliges recetas y porciones. Al marcar "Ya la cociné" se descuentan los ingredientes.
+- **Despensa visual:** una cuadrícula de ingredientes por pasillo. Tocas uno para marcarlo y ajustas cuánto tienes (en libras, litros o unidades, con cantidades rápidas). La lista del super lo descuenta.
+- **Descubrir recetas:** al estilo de Mise, deslizas tarjetas a la derecha para agregarlas a tu semana o a la izquierda para pasar. Se pueden ordenar por lo que ya tienes, más proteína, menos calorías o más baratas.
+- **Macros:** cada receta muestra calorías, proteína, carbohidratos y grasa por porción (valores aproximados en `src/data/nutricion.ts`), y el plan suma los de la semana.
+- **Página de receta y Modo cocina:** porciones ajustables, qué ingredientes ya tienes y una vista paso a paso con letra grande. Al terminar se descuenta de la despensa.
 - **Lista del super:** agrupada por pasillo, con la presentación y el precio en la tienda elegida (o la más barata por producto). Lo que marcas como comprado pasa a la despensa.
 - **Presupuesto:** compara el total en cada tienda y, si te pasas, sugiere cambiar recetas por otras más baratas.
 
@@ -46,7 +47,7 @@ npm run typecheck # TypeScript
 
 Estructura:
 
-- `src/app/` pantallas (Expo Router, una por pestaña)
+- `src/app/` pantallas (Expo Router): `(tabs)/` las pestañas, `receta/[id]` y `cocina/[id]`
 - `src/domain/` lógica: lista de compras, costos, sugerencias
 - `src/data/` ingredientes, recetas y precios
 - `src/state/` estado de la app guardado en el teléfono

@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import { Boton, Chip, confirmar, Suave, Tarjeta, Titulo, colores, estilos } from '../components/ui';
-import { agregarCompras, armarLista, formatoCantidad, formatoQ } from '../domain/planificador';
-import { TIENDAS, type Estrategia } from '../domain/types';
-import { useApp } from '../state/AppState';
+import { Boton, Chip, confirmar, Suave, Tarjeta, Titulo, colores, estilos } from '../../components/ui';
+import { agregarCompras, armarLista, formatoCantidad, formatoQ } from '../../domain/planificador';
+import { TIENDAS, type Estrategia } from '../../domain/types';
+import { useApp } from '../../state/AppState';
 
 const OPCIONES: { id: Estrategia; texto: string }[] = [
   { id: 'mejor', texto: 'Más barato' },

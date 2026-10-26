@@ -106,3 +106,25 @@ test('todas las recetas usan ingredientes conocidos con precio', () => {
   }
   assert.equal(Object.keys(RECETAS_POR_ID).length, RECETAS.length, 'ids de receta repetidos');
 });
+
+test('macros por porción y del plan', async () => {
+  const { macrosPorPorcion, macrosPlan } = await import('./macros');
+  const receta = {
+    id: 'x', nombre: 'X', porciones: 2, minutos: 1, etiquetas: [], pasos: [],
+    ingredientes: [{ id: 'huevo', cantidad: 4 }, { id: 'arroz', cantidad: 200 }],
+  };
+  // 4 huevos (72 kcal, 6.3 g prot) + 200 g arroz (365 kcal/100 g) entre 2 porciones
+  const m = macrosPorPorcion(receta, INGREDIENTES_POR_ID);
+  assert.equal(Math.round(m.kcal), Math.round((4 * 72 + 2 * 365) / 2));
+  assert.equal(+m.proteina.toFixed(1), +((4 * 6.3 + 2 * 7) / 2).toFixed(1));
+  const p = macrosPlan([{ recetaId: 'x', porciones: 3 }], { x: receta }, INGREDIENTES_POR_ID);
+  assert.equal(Math.round(p.kcal), Math.round(m.kcal * 3));
+});
+
+test('muestra libras para cantidades de super', async () => {
+  const { formatoCantidad } = await import('./planificador');
+  assert.equal(formatoCantidad(453.6, 'g'), '1 lb');
+  assert.equal(formatoCantidad(50, 'g'), '50 g');
+  assert.equal(formatoCantidad(1500, 'ml'), '1.5 L');
+  assert.equal(formatoCantidad(6, 'u'), '6 u');
+});
