@@ -133,14 +133,14 @@ test('el menú llena cada día y comida elegida, sin repetir en el mismo día', 
   const { generarMenu, huecosDelMenu } = await import('./menu');
   const { RECETAS_POR_ID } = await import('../data/recetas');
   const cat: Catalogo = { recetas: RECETAS_POR_ID, ingredientes: INGREDIENTES_POR_ID, precios: PRECIOS_ESTIMADOS };
-  const config = { personas: 4, ninos: 2, dias: [0, 1, 2, 3, 4, 5], comidas: ['desayuno' as const, 'cena' as const, 'lonchera' as const] };
-  // 6 días × (desayuno + cena) + 5 loncheras (sin sábado)
-  assert.equal(huecosDelMenu(config).length, 17);
+  const config = { personas: 3, dias: [0, 1, 2, 3, 4, 5], comidas: ['desayuno' as const, 'cena' as const] };
+  // 6 días × (desayuno + cena)
+  assert.equal(huecosDelMenu(config).length, 12);
   const menu = generarMenu(config, cat, {}, ['walmart', 'latorre', 'pricesmart'], 0, 7);
-  assert.equal(menu.length, 17);
+  assert.equal(menu.length, 12);
   for (const m of menu) {
     assert.ok(RECETAS_POR_ID[m.recetaId].comidas.includes(m.comida!), `${m.recetaId} no es de ${m.comida}`);
-    assert.equal(m.porciones, m.comida === 'lonchera' ? 2 : 4);
+    assert.equal(m.porciones, 3);
   }
   for (let d = 0; d < 6; d++) {
     const ids = menu.filter((m) => m.dia === d).map((m) => m.recetaId);
@@ -152,9 +152,27 @@ test('el menú se ajusta para no pasarse del presupuesto si se puede', async () 
   const { generarMenu } = await import('./menu');
   const { RECETAS_POR_ID } = await import('../data/recetas');
   const cat: Catalogo = { recetas: RECETAS_POR_ID, ingredientes: INGREDIENTES_POR_ID, precios: PRECIOS_ESTIMADOS };
-  const config = { personas: 4, ninos: 0, dias: [0, 1, 2, 3, 4], comidas: ['almuerzo' as const] };
+  const config = { personas: 4, dias: [0, 1, 2, 3, 4], comidas: ['almuerzo' as const] };
   const tiendas = ['walmart' as const];
   const libre = armarLista(generarMenu(config, cat, {}, tiendas, 0, 3), {}, cat, tiendas).total;
   const ajustado = armarLista(generarMenu(config, cat, {}, tiendas, libre * 0.7, 3), {}, cat, tiendas).total;
   assert.ok(ajustado < libre, `${ajustado} debería ser menor que ${libre}`);
+});
+
+test('solo sugiere recetas que se pueden hacer con los aparatos elegidos', async () => {
+  const { generarMenu, candidatas } = await import('./menu');
+  const { puedeHacer } = await import('./aparatos');
+  const cat: Catalogo = { recetas: RECETAS_POR_ID, ingredientes: INGREDIENTES_POR_ID, precios: PRECIOS_ESTIMADOS };
+  const pollo = RECETAS_POR_ID['pollo-asado'];
+  assert.equal(puedeHacer(pollo, ['estufa']), false);
+  assert.equal(puedeHacer(pollo, ['estufa', 'freidora']), true); // la freidora de aire también asa
+  assert.equal(puedeHacer(RECETAS_POR_ID['pepian-pollo'], ['estufa']), false); // hay que licuar
+  assert.equal(puedeHacer(RECETAS_POR_ID['pepian-pollo'], ['thermomix']), true); // licúa y cocina
+  assert.equal(puedeHacer(pollo, undefined), true); // sin aparatos guardados no se filtra
+
+  const config = { personas: 2, dias: [0, 1, 2, 3, 4, 5, 6], comidas: ['almuerzo' as const, 'cena' as const], aparatos: ['estufa' as const] };
+  const menu = generarMenu(config, cat, {}, ['walmart'], 0, 5);
+  assert.equal(menu.length, 14);
+  for (const m of menu) assert.ok(puedeHacer(RECETAS_POR_ID[m.recetaId], ['estufa']), m.recetaId);
+  assert.ok(candidatas(cat, 'cena', ['parrilla', 'estufa']).some((r) => r.id === 'carne-asada'));
 });

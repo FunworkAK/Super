@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { ConfigurarMenu } from '../../components/configurar';
+import { Foto } from '../../components/foto';
 import { MacrosFila } from '../../components/receta';
 import { Boton, Suave, colores, confirmar, estilos } from '../../components/ui';
 import { EMOJI_RECETA, fondoReceta } from '../../data/visual';
@@ -140,9 +141,9 @@ function Fila({
     <View style={s.fila}>
       <Pressable
         onPress={() => router.push(`/receta/${receta.id}`)}
-        style={[s.miniatura, { backgroundColor: fondoReceta(receta.id) }]}
+        style={s.miniatura}
       >
-        <Text style={{ fontSize: 30 }}>{EMOJI_RECETA[receta.id]}</Text>
+        <Foto clave={receta.id} emoji={EMOJI_RECETA[receta.id]} fondo={fondoReceta(receta.id)} tamanoEmoji={30} style={{ flex: 1 }} />
       </Pressable>
       <View style={{ flex: 1, gap: 3 }}>
         {item.comida && <Text style={s.comida}>{COMIDAS[item.comida].toUpperCase()}</Text>}
@@ -183,8 +184,8 @@ function Alternativas({
   onElegir: (recetaId: string) => void;
   onCerrar: () => void;
 }) {
-  const { catalogo, inventario } = useApp();
-  const opciones = candidatas(catalogo, item.comida ?? 'almuerzo')
+  const { catalogo, inventario, config } = useApp();
+  const opciones = candidatas(catalogo, item.comida ?? 'almuerzo', config?.aparatos)
     .filter((r) => r.id !== item.recetaId)
     .map((r) => ({
       r,
@@ -205,8 +206,8 @@ function Alternativas({
         <ScrollView style={{ maxHeight: 420 }} contentContainerStyle={{ gap: 8 }}>
           {opciones.map(({ r, costo, cobertura, kcal }) => (
             <Pressable key={r.id} onPress={() => onElegir(r.id)} style={s.opcion}>
-              <View style={[s.miniatura, { width: 48, height: 48, backgroundColor: fondoReceta(r.id) }]}>
-                <Text style={{ fontSize: 24 }}>{EMOJI_RECETA[r.id]}</Text>
+              <View style={[s.miniatura, { width: 48, height: 48 }]}>
+                <Foto clave={r.id} emoji={EMOJI_RECETA[r.id]} fondo={fondoReceta(r.id)} tamanoEmoji={24} style={{ flex: 1 }} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={s.nombre}>{r.nombre}</Text>
@@ -241,7 +242,7 @@ const s = StyleSheet.create({
     borderColor: colores.borde,
     padding: 10,
   },
-  miniatura: { width: 68, height: 68, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  miniatura: { width: 68, height: 68, borderRadius: 12, overflow: 'hidden' },
   comida: { fontSize: 11, fontWeight: '800', color: colores.primario, letterSpacing: 0.5 },
   nombre: { fontSize: 15, fontWeight: '700', color: colores.texto },
   meta: { fontSize: 12, color: colores.suave },

@@ -26,6 +26,8 @@ export const EMOJI_INGREDIENTE: Record<string, string> = {
   'pollo-piezas': '🍗',
   'res-molida': '🥩',
   'res-guisar': '🥩',
+  'res-asar': '🥩',
+  tilapia: '🐟',
   cerdo: '🥓',
   jamon: '🍖',
   atun: '🐟',
@@ -35,6 +37,7 @@ export const EMOJI_INGREDIENTE: Record<string, string> = {
   crema: '🥣',
   'queso-fresco': '🧀',
   'queso-mozzarella': '🧀',
+  'queso-parmesano': '🧀',
   mantequilla: '🧈',
   yogur: '🥛',
   arroz: '🍚',
@@ -58,6 +61,7 @@ export const EMOJI_INGREDIENTE: Record<string, string> = {
   pepitoria: '🎃',
   ajonjoli: '⚪',
   'vegetales-congelados': '🧊',
+  'salsa-soya': '🍶',
 };
 
 export const EMOJI_RECETA: Record<string, string> = {
@@ -107,6 +111,16 @@ export const EMOJI_RECETA: Record<string, string> = {
   'manzana-mani': '🍎',
   'barritas-avena': '🍫',
   'licuado-banano': '🥤',
+  'pollo-asado': '🍗',
+  'carne-asada': '🥩',
+  'fajitas-pollo': '🌮',
+  'salteado-pollo': '🥢',
+  shakshuka: '🍳',
+  'tilapia-horno': '🐟',
+  'pollo-freidora': '🍗',
+  'ensalada-cesar': '🥗',
+  'avena-nocturna': '🥣',
+  'tostadas-francesas': '🍞',
   'huevo-duro-fruta': '🥚',
 };
 

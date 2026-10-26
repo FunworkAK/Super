@@ -25,14 +25,12 @@ export interface IngredienteReceta {
   cantidad: number;
 }
 
-export type Comida = 'desayuno' | 'almuerzo' | 'cena' | 'snack' | 'lonchera';
+export type Comida = 'desayuno' | 'almuerzo' | 'cena';
 
 export const COMIDAS: Record<Comida, string> = {
   desayuno: 'Desayuno',
   almuerzo: 'Almuerzo',
   cena: 'Cena',
-  snack: 'Snack',
-  lonchera: 'Lonchera',
 };
 
 export interface Receta {
@@ -44,6 +42,8 @@ export interface Receta {
   porciones: number;
   minutos: number;
   etiquetas: string[];
+  // Funciones de cocina que pide; si falta, se asume que solo usa estufa.
+  necesita?: Funcion[];
   ingredientes: IngredienteReceta[];
   pasos: string[];
 }
@@ -78,10 +78,29 @@ export const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sáb
 
 export interface ConfigMenu {
   personas: number;
-  ninos: number; // para las loncheras
   dias: number[];
   comidas: Comida[];
+  // Aparatos de cocina que la persona tiene; sin este dato no se filtra.
+  aparatos?: AparatoId[];
 }
+
+export type AparatoId =
+  | 'estufa'
+  | 'horno'
+  | 'microondas'
+  | 'freidora'
+  | 'parrilla'
+  | 'licuadora'
+  | 'procesador'
+  | 'thermomix'
+  | 'ninja-foodi'
+  | 'ninja-licuadora'
+  | 'kitchenaid'
+  | 'olla-presion';
+
+// Lo que una receta necesita hacer. Cada aparato cubre una o varias de estas
+// funciones, así una receta "al horno" también se puede hacer en freidora de aire.
+export type Funcion = 'fuego' | 'hornear' | 'asar' | 'licuar' | 'batir';
 
 // Cantidad disponible en casa por ingrediente, en unidad base.
 export type Inventario = Record<string, number>;

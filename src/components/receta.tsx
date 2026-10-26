@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { EMOJI_RECETA, fondoReceta } from '../data/visual';
 import type { Macros } from '../domain/macros';
 import type { Receta } from '../domain/types';
+import { Foto } from './foto';
 import { colores } from './ui';
 
 export function MacrosFila({ m, compacto }: { m: Macros; compacto?: boolean }) {
@@ -25,9 +26,13 @@ export function MacrosFila({ m, compacto }: { m: Macros; compacto?: boolean }) {
 
 export function Portada({ receta, alto = 140, grande }: { receta: Receta; alto?: number; grande?: boolean }) {
   return (
-    <View style={[s.portada, { height: alto, backgroundColor: fondoReceta(receta.id) }]}>
-      <Text style={{ fontSize: grande ? 96 : 56 }}>{EMOJI_RECETA[receta.id] ?? '🍽️'}</Text>
-    </View>
+    <Foto
+      clave={receta.id}
+      emoji={EMOJI_RECETA[receta.id] ?? '🍽️'}
+      fondo={fondoReceta(receta.id)}
+      tamanoEmoji={grande ? 96 : 56}
+      style={{ height: alto }}
+    />
   );
 }
 
@@ -84,7 +89,6 @@ const s = StyleSheet.create({
   macroCompacto: { paddingVertical: 6 },
   macroValor: { fontSize: 17, fontWeight: '700' },
   macroEtiqueta: { fontSize: 11, color: colores.suave },
-  portada: { alignItems: 'center', justifyContent: 'center', width: '100%' },
   tarjeta: {
     width: 160,
     flexGrow: 1,

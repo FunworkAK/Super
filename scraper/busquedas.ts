@@ -42,6 +42,8 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'pollo-piezas', termino: 'pollo piezas', incluir: ['pollo'], excluir: ['pechuga', 'empanizado', 'nugget', 'consom'] },
   { ingredienteId: 'res-molida', termino: 'carne molida res', incluir: ['molida'], excluir: ['cerdo', 'pavo', 'pollo', 'condimentada'] },
   { ingredienteId: 'res-guisar', termino: 'carne res guisar', incluir: ['res'], excluir: ['molida', 'consom', 'hueso'] },
+  { ingredienteId: 'res-asar', termino: 'carne res asar', incluir: ['res'], excluir: ['molida', 'consom', 'hueso'] },
+  { ingredienteId: 'tilapia', termino: 'filete tilapia', incluir: ['tilapia'], excluir: ['empaniz'] },
   { ingredienteId: 'cerdo', termino: 'chuleta cerdo', incluir: ['cerdo'], excluir: ['molida', 'chicharr', 'salchicha'] },
   { ingredienteId: 'jamon', termino: 'jamon', incluir: ['jam'] },
   { ingredienteId: 'atun', termino: 'atun lata', incluir: ['at'], excluir: ['ensalada'] },
@@ -50,6 +52,7 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'crema', termino: 'crema', incluir: ['crema'], excluir: ['dental', 'corporal', 'batida', 'cacahuate', 'manos', 'peinar'] },
   { ingredienteId: 'queso-fresco', termino: 'queso fresco', incluir: ['queso', 'fresco'] },
   { ingredienteId: 'queso-mozzarella', termino: 'queso mozzarella', incluir: ['mozzarella'] },
+  { ingredienteId: 'queso-parmesano', termino: 'queso parmesano', incluir: ['parmesano'] },
   { ingredienteId: 'mantequilla', termino: 'mantequilla', incluir: ['mantequilla'], excluir: ['cacahuate', 'maní', 'galleta', 'ayote'], empieza: ['mantequilla'] },
   { ingredienteId: 'arroz', termino: 'arroz', incluir: ['arroz'], excluir: ['leche', 'galleta', 'harina', 'cereal', 'listo'] },
   { ingredienteId: 'frijol-negro', termino: 'frijol negro', incluir: ['frijol', 'negro'], excluir: ['volteado', 'lata', 'bolsa lista'] },
@@ -69,4 +72,5 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'pepitoria', termino: 'pepitoria', incluir: ['pepitoria'] },
   { ingredienteId: 'ajonjoli', termino: 'ajonjoli', incluir: ['ajonjol'], excluir: ['hamburguesa', 'pan', 'galleta'], empieza: ['ajonjol', 'semilla'] },
   { ingredienteId: 'vegetales-congelados', termino: 'vegetales mixtos congelados', incluir: ['vegetales'] },
+  { ingredienteId: 'salsa-soya', termino: 'salsa soya', incluir: ['soya'], excluir: ['bebida', 'leche'] },
 ];

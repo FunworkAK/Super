@@ -4,10 +4,11 @@ App móvil (Android y iPhone) para planificar las comidas de la semana, armar la
 
 ## Qué hace
 
-- **Mi semana:** antes de sugerir recetas pregunta dónde vas a comprar, tu presupuesto, para cuántas personas, qué días y qué comidas (desayuno, almuerzo, cena, más snacks y loncheras). Con eso arma un menú por día y comida que aprovecha tu despensa y se ajusta al presupuesto. Cada plato se puede cambiar por otro de la misma comida.
+- **Mi semana:** antes de sugerir recetas pregunta dónde vas a comprar, tu presupuesto, para cuántas personas, qué días, qué comidas (desayuno, almuerzo y cena) y qué aparatos tienes en tu cocina (estufa, horno, freidora de aire, licuadora, Thermomix, Ninja, KitchenAid…), que eliges tocando su foto. Solo sugiere recetas que puedas hacer con ellos. Con eso arma un menú por día y comida que aprovecha tu despensa y se ajusta al presupuesto. Cada plato se puede cambiar por otro de la misma comida.
 - **Tiendas:** eliges una o varias (Walmart, La Torre, PriceSmart) y la lista usa el precio más bajo entre ellas.
 - **Recetas:** modo Descubrir (deslizar tarjetas, al estilo de Mise) y cuadrícula con filtros por comida. Algunas recetas vienen de sitios de cocina familiar (The Foodie's Kitchen, Guía Infantil) y enlazan a la original (`src/data/recetas-web.ts`).
-- **Snacks y loncheras:** sección propia con ideas para el recreo y la tarde.
+- **En la web:** enlaces a sitios de recetas sanas, internacionales, de pollo asado, carne asada y comidas fáciles.
+- **Fotos:** las fotos de recetas y aparatos vienen de Wikimedia Commons con licencia libre (`npm run fotos`, o la acción "Buscar fotos"), con su crédito en cada receta.
 - **Despensa visual:** cuadrícula de ingredientes por pasillo; tocas uno y ajustas cuánto tienes (libras, litros o unidades). La lista lo descuenta.
 - **Macros:** calorías, proteína, carbohidratos y grasa por porción (valores aproximados en `src/data/nutricion.ts`), y promedio de la semana.
 - **Modo cocina:** paso a paso con letra grande; al terminar descuenta la despensa.

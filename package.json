@@ -30,7 +30,8 @@
     "web": "expo start --web",
     "test": "tsx --test src/domain/*.test.ts scraper/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "precios:walmart": "tsx scraper/walmart.ts"
+    "precios:walmart": "tsx scraper/walmart.ts",
+    "fotos": "tsx scraper/fotos.ts"
   },
   "private": true
 }

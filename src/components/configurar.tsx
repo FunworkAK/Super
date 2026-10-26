@@ -1,28 +1,30 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { COMIDAS, DIAS, type Comida, type ConfigMenu } from '../domain/types';
+import { APARATOS, APARATOS_INICIALES } from '../data/aparatos';
+import { COMIDAS, DIAS, type AparatoId, type Comida, type ConfigMenu } from '../domain/types';
 import { useApp } from '../state/AppState';
+import { Foto } from './foto';
 import { SelectorTiendas } from './tiendas';
 import { Boton, Chip, Suave, colores, estilos } from './ui';
 
 const PRINCIPALES: Comida[] = ['desayuno', 'almuerzo', 'cena'];
-const EXTRAS: Comida[] = ['snack', 'lonchera'];
-const ICONOS: Record<Comida, string> = { desayuno: '🍳', almuerzo: '🍲', cena: '🌙', snack: '🍎', lonchera: '🎒' };
+const ICONOS: Record<Comida, string> = { desayuno: '🍳', almuerzo: '🍲', cena: '🌙' };
 
 // Preguntas antes de sugerir el menú: dónde compras, presupuesto, para
-// cuántas personas, qué días y qué comidas.
+// cuántas personas, qué días, qué comidas y con qué aparatos cocinas.
 export function ConfigurarMenu({ onListo, onCancelar }: { onListo: (c: ConfigMenu) => void; onCancelar?: () => void }) {
   const { config, presupuesto, setPresupuesto } = useApp();
   const [personas, setPersonas] = useState(config?.personas ?? 4);
-  const [ninos, setNinos] = useState(config?.ninos ?? 1);
   const [dias, setDias] = useState<number[]>(config?.dias ?? [0, 1, 2, 3, 4]);
   const [comidas, setComidas] = useState<Comida[]>(config?.comidas ?? ['almuerzo']);
+  const [aparatos, setAparatos] = useState<AparatoId[]>(config?.aparatos ?? APARATOS_INICIALES);
   const [textoPresupuesto, setTextoPresupuesto] = useState(String(presupuesto));
 
   const alternarDia = (d: number) => setDias(dias.includes(d) ? dias.filter((x) => x !== d) : [...dias, d]);
   const alternarComida = (c: Comida) =>
     setComidas(comidas.includes(c) ? comidas.filter((x) => x !== c) : [...comidas, c]);
-  const principales = comidas.filter((c) => PRINCIPALES.includes(c)).length;
+  const alternarAparato = (a: AparatoId) =>
+    setAparatos(aparatos.includes(a) ? aparatos.filter((x) => x !== a) : [...aparatos, a]);
   const valido = dias.length > 0 && comidas.length > 0;
 
   return (
@@ -76,30 +78,62 @@ export function ConfigurarMenu({ onListo, onCancelar }: { onListo: (c: ConfigMen
       </Paso>
 
       <Paso n={5} titulo="¿Qué comidas necesitas?">
-        <Suave>Elige 1, 2 o las 3 comidas principales ({principales} elegidas).</Suave>
+        <Suave>Elige 1, 2 o las 3 comidas ({comidas.length} elegidas).</Suave>
         <View style={estilos.fila}>
           {PRINCIPALES.map((c) => (
             <Opcion key={c} comida={c} activa={comidas.includes(c)} onPress={() => alternarComida(c)} />
           ))}
         </View>
-        <Suave>Extras</Suave>
-        <View style={estilos.fila}>
-          {EXTRAS.map((c) => (
-            <Opcion key={c} comida={c} activa={comidas.includes(c)} onPress={() => alternarComida(c)} />
-          ))}
+      </Paso>
+
+      <Paso n={6} titulo="¿Qué aparatos tienes en tu cocina?">
+        <Suave>Toca los que tienes ({aparatos.length} elegidos). Solo te sugerimos recetas que puedas hacer con ellos.</Suave>
+        <View style={s.aparatos}>
+          {APARATOS.map((a) => {
+            const activo = aparatos.includes(a.id);
+            return (
+              <Pressable
+                key={a.id}
+                role="checkbox"
+                aria-checked={activo}
+                aria-label={a.nombre}
+                onPress={() => alternarAparato(a.id)}
+                style={({ pressed }) => [s.aparato, activo && s.aparatoActivo, pressed && { opacity: 0.8 }]}
+              >
+                <Foto
+                  clave={`aparato-${a.id}`}
+                  emoji={a.emoji}
+                  fondo={activo ? '#FFFFFF' : colores.fondo}
+                  tamanoEmoji={34}
+                  style={[s.aparatoFoto, !activo && { opacity: 0.55 }]}
+                />
+                <View style={[s.marca, activo && s.marcaActiva]}>
+                  {activo && <Text style={{ color: '#fff', fontSize: 12, fontWeight: '800' }}>✓</Text>}
+                </View>
+                <Text style={[s.aparatoNombre, activo && { color: colores.primario }]} numberOfLines={1}>
+                  {a.nombre}
+                </Text>
+                <Text style={s.aparatoDetalle} numberOfLines={1}>
+                  {a.detalle}
+                </Text>
+              </Pressable>
+            );
+          })}
         </View>
-        {comidas.includes('lonchera') && (
-          <View style={{ gap: 6, marginTop: 4 }}>
-            <Suave>¿Para cuántos niños son las loncheras? (de lunes a viernes)</Suave>
-            <Contador valor={ninos} onCambiar={setNinos} min={1} etiqueta={ninos === 1 ? 'niño' : 'niños'} />
-          </View>
-        )}
       </Paso>
 
       {!valido && <Text style={{ color: colores.alerta }}>Elige al menos un día y una comida.</Text>}
       <Boton
         titulo="✨  Sugerir mi menú"
-        onPress={() => valido && onListo({ personas, ninos, dias: [...dias].sort((a, b) => a - b), comidas })}
+        onPress={() =>
+          valido &&
+          onListo({
+            personas,
+            dias: [...dias].sort((a, b) => a - b),
+            comidas: PRINCIPALES.filter((c) => comidas.includes(c)),
+            aparatos,
+          })
+        }
       />
       {onCancelar && <Boton tipo="secundario" titulo="Cancelar" onPress={onCancelar} />}
     </ScrollView>
@@ -215,4 +249,34 @@ const s = StyleSheet.create({
   },
   opcionActiva: { borderColor: colores.primario, backgroundColor: colores.primarioSuave },
   opcionTexto: { fontWeight: '700', color: colores.texto, fontSize: 13 },
+  aparatos: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  aparato: {
+    width: 104,
+    flexGrow: 1,
+    maxWidth: 160,
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: colores.borde,
+    backgroundColor: colores.fondo,
+    overflow: 'hidden',
+    paddingBottom: 8,
+  },
+  aparatoActivo: { borderColor: colores.primario, backgroundColor: colores.primarioSuave },
+  aparatoFoto: { height: 78 },
+  aparatoNombre: { fontWeight: '700', color: colores.texto, fontSize: 13, paddingHorizontal: 8, marginTop: 6 },
+  aparatoDetalle: { color: colores.suave, fontSize: 11, paddingHorizontal: 8 },
+  marca: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 2,
+    borderColor: '#fff',
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  marcaActiva: { backgroundColor: colores.primario },
 });

@@ -30,6 +30,8 @@ export const NUTRICION: Record<string, Nutrientes> = {
   'pollo-piezas': [160, 17, 0, 10], // con hueso, parte comestible
   'res-molida': [250, 17, 0, 20],
   'res-guisar': [160, 20, 0, 8],
+  'res-asar': [200, 26, 0, 10],
+  tilapia: [96, 20, 0, 1.7],
   cerdo: [200, 19, 0, 13],
   jamon: [145, 17, 2, 7],
   atun: [140, 30, 0, 1.5], // lata escurrida ~120 g
@@ -39,6 +41,7 @@ export const NUTRICION: Record<string, Nutrientes> = {
   crema: [250, 2.5, 3.5, 25],
   'queso-fresco': [300, 18, 3, 24],
   'queso-mozzarella': [300, 22, 2.2, 22],
+  'queso-parmesano': [430, 38, 4, 29],
   mantequilla: [717, 0.9, 0.1, 81],
   yogur: [61, 3.5, 4.7, 3.3],
   arroz: [365, 7, 80, 0.7],
@@ -62,4 +65,5 @@ export const NUTRICION: Record<string, Nutrientes> = {
   pepitoria: [560, 30, 11, 49],
   ajonjoli: [573, 18, 23, 50],
   'vegetales-congelados': [65, 3, 13, 0.5],
+  'salsa-soya': [53, 8, 5, 0.6],
 };

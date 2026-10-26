@@ -33,7 +33,6 @@ export default function LayoutPestanas() {
     >
       <Tabs.Screen name="index" options={{ title: 'Mi semana', tabBarLabel: 'Semana', tabBarIcon: icono('📅') }} />
       <Tabs.Screen name="recetas" options={{ title: 'Recetas', tabBarIcon: icono('🍲') }} />
-      <Tabs.Screen name="snacks" options={{ title: 'Snacks y loncheras', tabBarLabel: 'Snacks', tabBarIcon: icono('🎒') }} />
       <Tabs.Screen name="despensa" options={{ title: 'Mi despensa', tabBarLabel: 'Despensa', tabBarIcon: icono('🥫') }} />
       <Tabs.Screen name="lista" options={{ title: 'Lista del super', tabBarLabel: 'Lista', tabBarIcon: icono('🛒') }} />
       <Tabs.Screen name="presupuesto" options={{ title: 'Presupuesto', tabBarLabel: ancho ? 'Presupuesto' : 'Gastos', tabBarIcon: icono('💰') }} />

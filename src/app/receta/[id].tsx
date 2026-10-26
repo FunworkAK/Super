@@ -3,8 +3,11 @@ import { useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { MacrosFila, Portada } from '../../components/receta';
 import { Boton, Suave, colores, estilos } from '../../components/ui';
+import { APARATOS } from '../../data/aparatos';
+import { FOTOS } from '../../data/fotos';
 import { RECETAS } from '../../data/recetas';
 import { EMOJI_INGREDIENTE } from '../../data/visual';
+import { FUNCIONES_APARATO, NOMBRE_FUNCION, necesita } from '../../domain/aparatos';
 import { macrosPorPorcion } from '../../domain/macros';
 import { costoPorPorcion, formatoCantidad } from '../../domain/planificador';
 import { COMIDAS } from '../../domain/types';
@@ -16,7 +19,7 @@ export function generateStaticParams() {
 
 export default function DetalleReceta() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { catalogo, inventario, plan, setPlan, agregarAlPlan } = useApp();
+  const { catalogo, inventario, plan, setPlan, agregarAlPlan, config } = useApp();
   const receta = catalogo.recetas[id ?? ''];
   const enPlan = plan.findIndex((p) => p.recetaId === id);
   const [porciones, setPorciones] = useState(enPlan >= 0 ? plan[enPlan].porciones : (receta?.porciones ?? 4));
@@ -43,8 +46,15 @@ export default function DetalleReceta() {
   return (
     <View style={estilos.pantalla}>
       <ScrollView contentContainerStyle={[estilos.contenido, { paddingTop: 0, paddingHorizontal: 0 }]}>
-        <Portada receta={receta} alto={220} grande />
+        <Portada receta={receta} alto={260} grande />
         <View style={{ paddingHorizontal: 16, gap: 14 }}>
+          {FOTOS[receta.id] && (
+            <Pressable onPress={() => Linking.openURL(FOTOS[receta.id].pagina)}>
+              <Text style={s.credito} numberOfLines={1}>
+                📷 {FOTOS[receta.id].autor} · {FOTOS[receta.id].licencia} · Wikimedia Commons
+              </Text>
+            </Pressable>
+          )}
           <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace('/recetas'))}>
             <Text style={{ color: colores.primario, fontWeight: '600' }}>‹ Recetas</Text>
           </Pressable>
@@ -59,6 +69,28 @@ export default function DetalleReceta() {
             <Pressable onPress={() => Linking.openURL(receta.fuente!.url)}>
               <Text style={s.fuente}>📎 Receta original en {receta.fuente.sitio} ↗</Text>
             </Pressable>
+          )}
+
+          <Text style={s.seccion}>Aparatos</Text>
+          {necesita(receta).length === 0 ? (
+            <Suave>No necesitas cocinar: solo mezclar y servir.</Suave>
+          ) : (
+            necesita(receta).map((f) => {
+              const sirven = APARATOS.filter((a) => FUNCIONES_APARATO[a.id].includes(f));
+              const tengo = sirven.filter((a) => config?.aparatos?.includes(a.id));
+              const ok = !config?.aparatos || tengo.length > 0;
+              return (
+                <View key={f} style={[estilos.fila, { alignItems: 'flex-start' }]}>
+                  <Text style={{ width: 20, color: ok ? colores.primario : colores.alerta, fontWeight: '700' }}>
+                    {ok ? '✓' : '✕'}
+                  </Text>
+                  <Text style={[estilos.texto, { flex: 1 }]}>
+                    <Text style={{ fontWeight: '700' }}>{NOMBRE_FUNCION[f]}: </Text>
+                    {(tengo.length ? tengo : sirven).map((a) => `${a.emoji} ${a.nombre}`).join(' o ')}
+                  </Text>
+                </View>
+              );
+            })
           )}
 
           <Text style={s.seccion}>Macros por porción</Text>
@@ -129,6 +161,7 @@ export default function DetalleReceta() {
 const s = StyleSheet.create({
   titulo: { fontSize: 26, fontWeight: '800', color: colores.texto },
   meta: { fontSize: 14, color: colores.suave },
+  credito: { fontSize: 11, color: colores.suave, marginTop: 6 },
   fuente: { fontSize: 14, color: colores.primario, fontWeight: '600', textDecorationLine: 'underline' },
   seccion: { fontSize: 17, fontWeight: '700', color: colores.texto, marginTop: 6 },
   caja: { backgroundColor: colores.tarjeta, borderRadius: 14, borderWidth: 1, borderColor: colores.borde },

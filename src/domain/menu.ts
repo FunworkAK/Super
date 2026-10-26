@@ -1,7 +1,8 @@
 import { armarLista, coberturaInventario, costoPorPorcion, type Catalogo } from './planificador';
-import type { Comida, ConfigMenu, Estrategia, Inventario, ItemPlan, Receta } from './types';
+import { puedeHacer } from './aparatos';
+import type { AparatoId, Comida, ConfigMenu, Estrategia, Inventario, ItemPlan, Receta } from './types';
 
-const ORDEN_COMIDAS: Comida[] = ['desayuno', 'almuerzo', 'cena', 'snack', 'lonchera'];
+const ORDEN_COMIDAS: Comida[] = ['desayuno', 'almuerzo', 'cena'];
 
 // Generador pseudoaleatorio con semilla, para que "otra sugerencia" cambie el
 // menú pero el mismo número dé siempre el mismo resultado (y las pruebas sean estables).
@@ -22,23 +23,21 @@ export interface Hueco {
   porciones: number;
 }
 
-// Los huecos del menú: un plato por día y comida elegida. Las loncheras
-// solo van de lunes a viernes y son para los niños.
+// Los huecos del menú: un plato por día y comida elegida.
 export function huecosDelMenu(config: ConfigMenu): Hueco[] {
   const huecos: Hueco[] = [];
   for (const dia of [...config.dias].sort((a, b) => a - b)) {
     for (const comida of ORDEN_COMIDAS) {
       if (!config.comidas.includes(comida)) continue;
-      if (comida === 'lonchera' && dia >= 5) continue;
-      const porciones = comida === 'lonchera' ? config.ninos : config.personas;
-      if (porciones > 0) huecos.push({ dia, comida, porciones });
+      huecos.push({ dia, comida, porciones: config.personas });
     }
   }
   return huecos;
 }
 
-export function candidatas(cat: Catalogo, comida: Comida): Receta[] {
-  return Object.values(cat.recetas).filter((r) => r.comidas.includes(comida));
+// Recetas de esa comida que se pueden hacer con los aparatos de la persona.
+export function candidatas(cat: Catalogo, comida: Comida, aparatos?: AparatoId[]): Receta[] {
+  return Object.values(cat.recetas).filter((r) => r.comidas.includes(comida) && puedeHacer(r, aparatos));
 }
 
 // Puntaje de una receta para un hueco: aprovecha la despensa, es barata y no
@@ -66,7 +65,7 @@ export function generarMenu(
     const delDia = new Set(menu.filter((m) => m.dia === h.dia).map((m) => m.recetaId));
     let mejor: Receta | null = null;
     let mejorPuntaje = -Infinity;
-    for (const r of candidatas(cat, h.comida)) {
+    for (const r of candidatas(cat, h.comida, config.aparatos)) {
       if (delDia.has(r.id)) continue;
       const p = puntaje(r, cat, inventario, usos[r.id] ?? 0, rnd(), costoMax);
       if (p > mejorPuntaje) {
@@ -79,7 +78,7 @@ export function generarMenu(
     menu.push({ recetaId: mejor.id, porciones: h.porciones, dia: h.dia, comida: h.comida });
   }
 
-  return ajustarAPresupuesto(menu, cat, inventario, tiendas, presupuesto);
+  return ajustarAPresupuesto(menu, cat, inventario, tiendas, presupuesto, config.aparatos);
 }
 
 // Si la lista se pasa del presupuesto, cambia los platos más caros por la
@@ -90,6 +89,7 @@ export function ajustarAPresupuesto(
   inventario: Inventario,
   tiendas: Estrategia,
   presupuesto: number,
+  aparatos?: AparatoId[],
 ): ItemPlan[] {
   if (presupuesto <= 0) return menu;
   let actual = menu;
@@ -101,7 +101,7 @@ export function ajustarAPresupuesto(
       if (!receta || !item.comida) continue;
       const costo = costoPorPorcion(receta, cat) ?? 0;
       const delDia = new Set(actual.filter((m) => m.dia === item.dia).map((m) => m.recetaId));
-      for (const r of candidatas(cat, item.comida)) {
+      for (const r of candidatas(cat, item.comida, aparatos)) {
         if (delDia.has(r.id)) continue;
         const ahorro = (costo - (costoPorPorcion(r, cat) ?? Infinity)) * item.porciones;
         if (ahorro > 0 && (!mejorCambio || ahorro > mejorCambio.ahorro)) mejorCambio = { i, recetaId: r.id, ahorro };

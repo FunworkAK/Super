@@ -1,20 +1,20 @@
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
-import { Animated, PanResponder, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
+import { Animated, Linking, PanResponder, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { MacrosFila, Portada, TarjetaReceta } from '../../components/receta';
-import { Chip, Suave, colores, estilos } from '../../components/ui';
+import { Chip, Suave, Tarjeta, colores, estilos } from '../../components/ui';
+import { SITIOS } from '../../data/sitios';
+import { puedeHacer } from '../../domain/aparatos';
 import { macrosPorPorcion } from '../../domain/macros';
 import { recetasSugeridas } from '../../domain/planificador';
 import type { Comida } from '../../domain/types';
 import { useApp } from '../../state/AppState';
 
-const ETIQUETAS = ['guatemalteca', 'económica', 'rápida', 'saludable', 'vegetariana'];
+const ETIQUETAS = ['guatemalteca', 'asado', 'internacional', 'fácil', 'saludable', 'rápida', 'económica', 'vegetariana'];
 const TIPOS: { id: Comida; texto: string }[] = [
   { id: 'desayuno', texto: '🍳 Desayunos' },
   { id: 'almuerzo', texto: '🍲 Almuerzos' },
   { id: 'cena', texto: '🌙 Cenas' },
-  { id: 'snack', texto: '🍎 Snacks' },
-  { id: 'lonchera', texto: '🎒 Loncheras' },
 ];
 const ORDENES = [
   { id: 'despensa', texto: 'Usa lo que tengo' },
@@ -25,8 +25,10 @@ const ORDENES = [
 type Orden = (typeof ORDENES)[number]['id'];
 
 export default function Recetas() {
-  const { catalogo, inventario, plan, agregarAlPlan } = useApp();
-  const [modo, setModo] = useState<'descubrir' | 'todas'>('descubrir');
+  const { catalogo, inventario, plan, agregarAlPlan, config } = useApp();
+  const [modo, setModo] = useState<'descubrir' | 'todas' | 'web'>('descubrir');
+  const [conMisAparatos, setConMisAparatos] = useState(true);
+  const aparatos = conMisAparatos ? config?.aparatos : undefined;
   const [filtro, setFiltro] = useState<string | null>(null);
   const [tipo, setTipo] = useState<Comida | null>(null);
   const [orden, setOrden] = useState<Orden>('despensa');
@@ -38,12 +40,13 @@ export default function Recetas() {
     const base = recetasSugeridas(catalogo, inventario)
       .filter((x) => !filtro || x.receta.etiquetas.includes(filtro))
       .filter((x) => !tipo || x.receta.comidas.includes(tipo))
+      .filter((x) => puedeHacer(x.receta, aparatos))
       .map((x) => ({ ...x, macros: macrosPorPorcion(x.receta, catalogo.ingredientes) }));
     if (orden === 'proteina') base.sort((a, b) => b.macros.proteina - a.macros.proteina);
     if (orden === 'kcal') base.sort((a, b) => a.macros.kcal - b.macros.kcal);
     if (orden === 'costo') base.sort((a, b) => (a.costo ?? Infinity) - (b.costo ?? Infinity));
     return base;
-  }, [catalogo, inventario, filtro, tipo, orden]);
+  }, [catalogo, inventario, filtro, tipo, orden, aparatos]);
 
   const mazo = lista.filter((x) => !enPlan.has(x.receta.id) && !saltadas.includes(x.receta.id));
   const actual = mazo[0];
@@ -52,76 +55,119 @@ export default function Recetas() {
   return (
     <ScrollView style={estilos.pantalla} contentContainerStyle={estilos.contenido}>
       <View style={s.segmento}>
-        {(['descubrir', 'todas'] as const).map((m) => (
+        {(['descubrir', 'todas', 'web'] as const).map((m) => (
           <Pressable key={m} onPress={() => setModo(m)} style={[s.segBoton, modo === m && s.segActivo]}>
             <Text style={[s.segTexto, modo === m && { color: colores.texto }]}>
-              {m === 'descubrir' ? 'Descubrir' : 'Todas las recetas'}
+              {m === 'descubrir' ? 'Descubrir' : m === 'todas' ? 'Todas' : 'En la web'}
             </Text>
           </Pressable>
         ))}
       </View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
-        {TIPOS.map((t) => (
-          <Chip key={t.id} texto={t.texto} activo={tipo === t.id} onPress={() => setTipo(tipo === t.id ? null : t.id)} />
-        ))}
-      </ScrollView>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
-        {ORDENES.map((o) => (
-          <Chip key={o.id} texto={o.texto} activo={orden === o.id} onPress={() => setOrden(o.id)} />
-        ))}
-        {ETIQUETAS.map((e) => (
-          <Chip key={e} texto={e} activo={filtro === e} onPress={() => setFiltro(filtro === e ? null : e)} />
-        ))}
-      </ScrollView>
-
-      {modo === 'descubrir' ? (
+      {modo === 'web' ? (
+        <SitiosWeb />
+      ) : (
         <>
-          <Suave>
-            Desliza a la derecha (o ♥) para agregarla a tu semana, a la izquierda (o ✕) para pasar. Llevas{' '}
-            {plan.length} {plan.length === 1 ? 'receta' : 'recetas'}.
-          </Suave>
-          {actual ? (
-            <View style={{ height: 580 }}>
-              {siguiente && (
-                <View style={[s.carta, s.cartaAtras]} pointerEvents="none">
-                  <CartaContenido {...siguiente} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+            {config?.aparatos && (
+              <Chip
+                texto="🔌 Con mis aparatos"
+                activo={conMisAparatos}
+                onPress={() => setConMisAparatos(!conMisAparatos)}
+              />
+            )}
+            {TIPOS.map((t) => (
+              <Chip key={t.id} texto={t.texto} activo={tipo === t.id} onPress={() => setTipo(tipo === t.id ? null : t.id)} />
+            ))}
+          </ScrollView>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+            {ORDENES.map((o) => (
+              <Chip key={o.id} texto={o.texto} activo={orden === o.id} onPress={() => setOrden(o.id)} />
+            ))}
+            {ETIQUETAS.map((e) => (
+              <Chip key={e} texto={e} activo={filtro === e} onPress={() => setFiltro(filtro === e ? null : e)} />
+            ))}
+          </ScrollView>
+
+          {modo === 'descubrir' ? (
+            <>
+              <Suave>
+                Desliza a la derecha (o ♥) para agregarla a tu semana, a la izquierda (o ✕) para pasar. Llevas{' '}
+                {plan.length} {plan.length === 1 ? 'receta' : 'recetas'}.
+              </Suave>
+              {actual ? (
+                <View style={{ height: 580 }}>
+                  {siguiente && (
+                    <View style={[s.carta, s.cartaAtras]} pointerEvents="none">
+                      <CartaContenido {...siguiente} />
+                    </View>
+                  )}
+                  <CartaDeslizable
+                    key={actual.receta.id}
+                    onSi={() => agregarAlPlan(actual.receta.id)}
+                    onNo={() => setSaltadas((x) => [...x, actual.receta.id])}
+                    onAbrir={() => router.push(`/receta/${actual.receta.id}`)}
+                  >
+                    <CartaContenido {...actual} />
+                  </CartaDeslizable>
+                </View>
+              ) : (
+                <View style={[s.carta, { padding: 24, alignItems: 'center', gap: 12, position: 'relative' }]}>
+                  <Text style={{ fontSize: 48 }}>🎉</Text>
+                  <Text style={s.cartaNombre}>¡Ya viste todas!</Text>
+                  <Suave>Revisa tu plan o vuelve a ver las que pasaste.</Suave>
+                  <View style={estilos.fila}>
+                    <Chip texto="Ver de nuevo" onPress={() => setSaltadas([])} />
+                    <Chip texto="Ir a mi plan" activo onPress={() => router.push('/')} />
+                  </View>
                 </View>
               )}
-              <CartaDeslizable
-                key={actual.receta.id}
-                onSi={() => agregarAlPlan(actual.receta.id)}
-                onNo={() => setSaltadas((x) => [...x, actual.receta.id])}
-                onAbrir={() => router.push(`/receta/${actual.receta.id}`)}
-              >
-                <CartaContenido {...actual} />
-              </CartaDeslizable>
-            </View>
+            </>
           ) : (
-            <View style={[s.carta, { padding: 24, alignItems: 'center', gap: 12, position: 'relative' }]}>
-              <Text style={{ fontSize: 48 }}>🎉</Text>
-              <Text style={s.cartaNombre}>¡Ya viste todas!</Text>
-              <Suave>Revisa tu plan o vuelve a ver las que pasaste.</Suave>
-              <View style={estilos.fila}>
-                <Chip texto="Ver de nuevo" onPress={() => setSaltadas([])} />
-                <Chip texto="Ir a mi plan" activo onPress={() => router.push('/')} />
-              </View>
+            <View style={s.rejilla}>
+              {lista.map((x) => (
+                <TarjetaReceta
+                  key={x.receta.id}
+                  {...x}
+                  enPlan={enPlan.has(x.receta.id)}
+                  onPress={() => router.push(`/receta/${x.receta.id}`)}
+                />
+              ))}
             </View>
           )}
         </>
-      ) : (
-        <View style={s.rejilla}>
-          {lista.map((x) => (
-            <TarjetaReceta
-              key={x.receta.id}
-              {...x}
-              enPlan={enPlan.has(x.receta.id)}
-              onPress={() => router.push(`/receta/${x.receta.id}`)}
-            />
-          ))}
-        </View>
       )}
     </ScrollView>
+  );
+}
+
+// Enlaces a sitios de recetas por tema, para buscar más ideas.
+function SitiosWeb() {
+  return (
+    <>
+      <Suave>Más ideas en sitios de recetas que nos gustan. Se abren en una pestaña nueva.</Suave>
+      {SITIOS.map((t) => (
+        <Tarjeta key={t.tema}>
+          <Text style={s.tema}>
+            {t.emoji} {t.tema}
+          </Text>
+          {t.sitios.map((sitio) => (
+            <Pressable
+              key={sitio.url}
+              role="link"
+              onPress={() => Linking.openURL(sitio.url)}
+              style={({ pressed }) => [s.sitio, pressed && { opacity: 0.6 }]}
+            >
+              <View style={{ flex: 1 }}>
+                <Text style={s.sitioNombre}>{sitio.nombre}</Text>
+                <Text style={s.meta}>{sitio.detalle}</Text>
+              </View>
+              <Text style={{ color: colores.primario, fontSize: 18 }}>↗</Text>
+            </Pressable>
+          ))}
+        </Tarjeta>
+      ))}
+    </>
   );
 }
 
@@ -291,4 +337,14 @@ const s = StyleSheet.create({
     justifyContent: 'center',
   },
   circuloPequeno: { width: 48, height: 48, borderColor: colores.borde },
+  tema: { fontSize: 16, fontWeight: '700', color: colores.texto },
+  sitio: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: colores.borde,
+  },
+  sitioNombre: { fontSize: 15, fontWeight: '600', color: colores.primario },
 });

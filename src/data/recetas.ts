@@ -1,4 +1,4 @@
-import type { Comida, Receta } from '../domain/types';
+import type { Comida, Funcion, Receta } from '../domain/types';
 import { RECETAS_WEB } from './recetas-web';
 
 // Cantidades para 4 porciones, en la unidad base de cada ingrediente.
@@ -626,16 +626,29 @@ const COMIDAS_PROPIAS: Record<string, Comida[]> = {
   'huevos-rancheros': DESAYUNO,
   'omelette-vegetales': ['desayuno', 'cena'],
   mosh: DESAYUNO,
-  'panqueques-avena': ['desayuno', 'lonchera'],
-  'sandwich-jamon': ['desayuno', 'cena', 'lonchera'],
-  tostadas: ['cena', 'snack'],
+  'panqueques-avena': DESAYUNO,
+  'sandwich-jamon': ['desayuno', 'cena'],
+  tostadas: ['cena'],
   shucos: ['cena'],
   'ensalada-atun': ['almuerzo', 'cena'],
   'tortitas-papa': PLATO_FUERTE,
 };
 
+// Lo que necesita cada receta propia además de la estufa (o en vez de ella).
+const NECESITA_PROPIAS: Record<string, Funcion[]> = {
+  'pepian-pollo': ['fuego', 'licuar'],
+  hilachas: ['fuego', 'licuar'],
+  'carne-guisada': ['fuego', 'licuar'],
+  'panqueques-avena': ['fuego', 'licuar'],
+  'ensalada-atun': [],
+};
+
 export const RECETAS: Receta[] = [
-  ...PROPIAS.map((r) => ({ ...r, comidas: COMIDAS_PROPIAS[r.id] ?? PLATO_FUERTE })),
+  ...PROPIAS.map((r) => ({
+    ...r,
+    comidas: COMIDAS_PROPIAS[r.id] ?? PLATO_FUERTE,
+    necesita: NECESITA_PROPIAS[r.id],
+  })),
   ...RECETAS_WEB,
 ];
 

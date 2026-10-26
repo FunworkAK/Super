@@ -3,10 +3,10 @@ name: Publicar web
 on:
   push:
     branches: [main]
-  # Los commits de precios hechos por la acción no disparan "push", así que
-  # también se publica cuando termina la actualización de precios.
+  # Los commits de precios y fotos hechos por las acciones no disparan "push", así que
+  # también se publica cuando terminan esas acciones.
   workflow_run:
-    workflows: [Actualizar precios]
+    workflows: [Actualizar precios, Buscar fotos]
     types: [completed]
   workflow_dispatch:
 

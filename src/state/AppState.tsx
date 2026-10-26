@@ -5,7 +5,7 @@ import { RECETAS_POR_ID } from '../data/recetas';
 import { PRECIOS_ESTIMADOS, combinarPrecios } from '../data/precios';
 import extraidos from '../data/precios-extraidos.json';
 import type { Catalogo } from '../domain/planificador';
-import { TODAS_TIENDAS, type ConfigMenu, type Inventario, type ItemPlan, type ProductoTienda, type TiendaId } from '../domain/types';
+import { COMIDAS, TODAS_TIENDAS, type ConfigMenu, type Inventario, type ItemPlan, type ProductoTienda, type TiendaId } from '../domain/types';
 
 const CLAVE = 'super-recetas/estado-v1';
 
@@ -33,6 +33,14 @@ function migrar(guardado: Record<string, unknown>): Guardado {
     e.tiendas = typeof e.estrategia === 'string' && e.estrategia !== 'mejor' ? [e.estrategia as TiendaId] : TODAS_TIENDAS;
   }
   delete e.estrategia;
+  // Los snacks y loncheras se quitaron: solo quedan desayuno, almuerzo y cena.
+  const vigentes = Object.keys(COMIDAS);
+  e.plan = e.plan.filter((p) => (!p.comida || vigentes.includes(p.comida)) && RECETAS_POR_ID[p.recetaId]);
+  if (e.config) {
+    const { ninos: _, ...config } = e.config as ConfigMenu & { ninos?: number };
+    config.comidas = config.comidas.filter((c) => vigentes.includes(c));
+    e.config = config.comidas.length ? config : null;
+  }
   return e;
 }
 
