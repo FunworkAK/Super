@@ -19,7 +19,7 @@ export function Foto({
   return (
     <View style={[s.caja, { backgroundColor: fondo }, style]}>
       {foto ? (
-        <Image source={foto.src} style={StyleSheet.absoluteFill} resizeMode="cover" accessibilityIgnoresInvertColors />
+        <Image source={foto.src} style={s.imagen} resizeMode="cover" accessibilityIgnoresInvertColors />
       ) : (
         <Text style={{ fontSize: tamanoEmoji }}>{emoji}</Text>
       )}
@@ -29,4 +29,6 @@ export function Foto({
 
 const s = StyleSheet.create({
   caja: { alignItems: 'center', justifyContent: 'center', width: '100%', overflow: 'hidden' },
+  // Sin ancho y alto explícitos, en la web la imagen toma el tamaño del archivo.
+  imagen: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' },
 });
