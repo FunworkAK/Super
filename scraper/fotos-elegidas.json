@@ -1,0 +1,482 @@
+{
+  "pepian-pollo": {
+    "consulta": "Pepián Guatemala | pepian chicken",
+    "archivo": "File:Pepián Guatemala.jpg",
+    "ruta": "assets/fotos/pepian-pollo.jpg",
+    "autor": "Josué Goge from Guatemala",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Pepi%C3%A1n_Guatemala.jpg"
+  },
+  "hilachas": {
+    "consulta": "Hilachas Guatemala | ropa vieja shredded beef",
+    "archivo": "File:Hilacha.jpg",
+    "ruta": "assets/fotos/hilachas.jpg",
+    "autor": "Joshua Heller",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Hilacha.jpg"
+  },
+  "frijoles-volteados-huevo": {
+    "consulta": "Guatemalan breakfast | desayuno chapín",
+    "archivo": "File:Typical Guatemalan breakfast - San Juan la Laguna, Guatemala.jpg",
+    "ruta": "assets/fotos/frijoles-volteados-huevo.jpg",
+    "autor": "young shanahan",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Typical_Guatemalan_breakfast_-_San_Juan_la_Laguna,_Guatemala.jpg"
+  },
+  "huevos-rancheros": {
+    "consulta": "Huevos rancheros",
+    "archivo": "File:Huevos rancheros Amor y Tacos 2015.jpg",
+    "ruta": "assets/fotos/huevos-rancheros.jpg",
+    "autor": "L.A. Foodie",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Huevos_rancheros_Amor_y_Tacos_2015.jpg"
+  },
+  "arroz-con-pollo": {
+    "consulta": "Arroz con pollo",
+    "archivo": "File:Arroz-con-Pollo.jpg",
+    "ruta": "assets/fotos/arroz-con-pollo.jpg",
+    "autor": "Kobako",
+    "licencia": "CC BY-SA 2.5",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Arroz-con-Pollo.jpg"
+  },
+  "pollo-guisado": {
+    "consulta": "Pollo guisado | chicken stew potatoes",
+    "archivo": "File:\"Rostit\",ajadas de pollo guisado con cebolla.jpg",
+    "ruta": "assets/fotos/pollo-guisado.jpg",
+    "autor": "Juan Emilio Prades Bel",
+    "licencia": "CC BY 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:%22Rostit%22,ajadas_de_pollo_guisado_con_cebolla.jpg"
+  },
+  "pechuga-plancha": {
+    "consulta": "grilled chicken breast salad",
+    "archivo": "File:DSC 7112 A plate of grilled chicken Caesar salad on a table set for dinner with glasses of red wine and soft candlelight in the background.jpg",
+    "ruta": "assets/fotos/pechuga-plancha.jpg",
+    "autor": "PattayaPatrol",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:DSC_7112_A_plate_of_grilled_chicken_Caesar_salad_on_a_table_set_for_dinner_with_glasses_of_red_wine_and_soft_candlelight_in_the_background.jpg"
+  },
+  "tacos-res": {
+    "consulta": "ground beef tacos | tacos de carne",
+    "archivo": "File:001 Tacos de carnitas, carne asada y al pastor.jpg",
+    "ruta": "assets/fotos/tacos-res.jpg",
+    "autor": "Larry Miller",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg"
+  },
+  "carne-guisada": {
+    "consulta": "Carne guisada | beef stew",
+    "archivo": "File:01 Stewed Beef Carne Guisada - El Sabor Del Taco Truck.jpg",
+    "ruta": "assets/fotos/carne-guisada.jpg",
+    "autor": "jasonlam",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:01_Stewed_Beef_Carne_Guisada_-_El_Sabor_Del_Taco_Truck.jpg"
+  },
+  "chuletas-cerdo": {
+    "consulta": "pork chops | pork chop dish",
+    "archivo": "File:A Pork rib eye chops with beans and corn with garlic sauce from Diamond Restaurant.jpg",
+    "ruta": "assets/fotos/chuletas-cerdo.jpg",
+    "autor": "Peachyeung316",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:A_Pork_rib_eye_chops_with_beans_and_corn_with_garlic_sauce_from_Diamond_Restaurant.jpg"
+  },
+  "espagueti-bolonesa": {
+    "consulta": "Spaghetti bolognese",
+    "archivo": "File:Spaghetti Bolognese - Figaros, Brighton 2023-10-06.jpg",
+    "ruta": "assets/fotos/espagueti-bolonesa.jpg",
+    "autor": "Andy Li",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Spaghetti_Bolognese_-_Figaros,_Brighton_2023-10-06.jpg"
+  },
+  "pasta-pollo-crema": {
+    "consulta": "chicken pasta cream sauce | chicken alfredo",
+    "archivo": "File:Pasta chicken with cream sauce (2382791628).jpg",
+    "ruta": "assets/fotos/pasta-pollo-crema.jpg",
+    "autor": "Glen Edelson from ATLANTA, USA",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Pasta_chicken_with_cream_sauce_(2382791628).jpg"
+  },
+  "pasta-atun": {
+    "consulta": "tuna pasta",
+    "archivo": "File:Tuna pasta salad.jpg",
+    "ruta": "assets/fotos/pasta-atun.jpg",
+    "autor": "FotoosVanRobin from Netherlands",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Tuna_pasta_salad.jpg"
+  },
+  "sopa-pollo": {
+    "consulta": "Caldo de pollo | chicken soup vegetables",
+    "archivo": "File:Caldo de Pollo (2411932823).jpg",
+    "ruta": "assets/fotos/sopa-pollo.jpg",
+    "autor": "El Gran Dee",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Caldo_de_Pollo_(2411932823).jpg"
+  },
+  "caldo-res": {
+    "consulta": "Caldo de res | beef vegetable soup",
+    "archivo": "File:Hong Kong Harbour Night 2019-06-11.jpg",
+    "ruta": "assets/fotos/caldo-res.jpg",
+    "autor": "Benh LIEU SONG (Flickr)",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Hong_Kong_Harbour_Night_2019-06-11.jpg"
+  },
+  "frijoles-parados": {
+    "consulta": "frijoles negros | black beans stew",
+    "archivo": "File:Guiso de frijoles negros.jpg",
+    "ruta": "assets/fotos/frijoles-parados.jpg",
+    "autor": "Juan Emilio Prades Bel",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Guiso_de_frijoles_negros.jpg"
+  },
+  "chiles-rellenos": {
+    "consulta": "Chiles rellenos",
+    "archivo": "File:Chile Rellenos.jpg",
+    "ruta": "assets/fotos/chiles-rellenos.jpg",
+    "autor": "Skyler Lewis (w:en:User:Double.reed)",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Chile_Rellenos.jpg"
+  },
+  "tostadas": {
+    "consulta": "tostadas guacamol Guatemala | tostadas guacamole",
+    "archivo": "File:Tostada Siberia.jpg",
+    "ruta": "assets/fotos/tostadas.jpg",
+    "autor": "Ccl099",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Tostada_Siberia.jpg"
+  },
+  "enchiladas": {
+    "consulta": "Enchiladas guatemaltecas | Guatemalan enchiladas",
+    "archivo": "File:Enchilada-guatemalteca.jpg",
+    "ruta": "assets/fotos/enchiladas.jpg",
+    "autor": "Luisfi",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Enchilada-guatemalteca.jpg"
+  },
+  "tortitas-papa": {
+    "consulta": "potato patties | potato pancakes",
+    "archivo": "File:Potato patties 1.PNG",
+    "ruta": "assets/fotos/tortitas-papa.png",
+    "autor": "Marco",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Potato_patties_1.PNG"
+  },
+  "omelette-vegetales": {
+    "consulta": "vegetable omelette",
+    "archivo": "File:Cha-om omelette.jpg",
+    "ruta": "assets/fotos/omelette-vegetales.jpg",
+    "autor": "Wagaung at English Wikipedia",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Cha-om_omelette.jpg"
+  },
+  "mosh": {
+    "consulta": "oatmeal porridge bowl | oatmeal",
+    "archivo": "File:Oatmeal porridge 1-minute with additional ingredients.jpg",
+    "ruta": "assets/fotos/mosh.jpg",
+    "autor": "UserTwoSix",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Oatmeal_porridge_1-minute_with_additional_ingredients.jpg"
+  },
+  "sandwich-jamon": {
+    "consulta": "ham and cheese sandwich",
+    "archivo": "File:BK Ham and Cheese Sandwich.JPG",
+    "ruta": "assets/fotos/sandwich-jamon.jpg",
+    "autor": "Jerem43",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:BK_Ham_and_Cheese_Sandwich.JPG"
+  },
+  "arroz-frito": {
+    "consulta": "egg fried rice",
+    "archivo": "File:A bilao of salted egg, seafood, porkchop and fried rice.jpg",
+    "ruta": "assets/fotos/arroz-frito.jpg",
+    "autor": "Irvin Parco Sto. Tomas",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:A_bilao_of_salted_egg,_seafood,_porkchop_and_fried_rice.jpg"
+  },
+  "albondigas": {
+    "consulta": "albóndigas | meatballs tomato sauce",
+    "archivo": "File:Albóndigas con puré de papas.jpg",
+    "ruta": "assets/fotos/albondigas.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Alb%C3%B3ndigas_con_pur%C3%A9_de_papas.jpg"
+  },
+  "pollo-limon": {
+    "consulta": "lemon chicken | roast chicken lemon vegetables",
+    "archivo": "File:Lemon Chicken on Rice.jpg",
+    "ruta": "assets/fotos/pollo-limon.jpg",
+    "autor": "Alpha from Melbourne, Australia",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Lemon_Chicken_on_Rice.jpg"
+  },
+  "ensalada-atun": {
+    "consulta": "tuna salad",
+    "archivo": "File:Veggie+Tuna salad.jpg",
+    "ruta": "assets/fotos/ensalada-atun.jpg",
+    "autor": "Ansh014",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Veggie%2BTuna_salad.jpg"
+  },
+  "papas-carne": {
+    "consulta": "picadillo | ground beef potatoes",
+    "archivo": "File:Picadillo and rice.jpg",
+    "ruta": "assets/fotos/papas-carne.jpg",
+    "autor": "Cary Bass",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Picadillo_and_rice.jpg"
+  },
+  "panqueques-avena": {
+    "consulta": "banana pancakes | pancakes",
+    "archivo": "File:Banana pancakes Gili Trawangan.JPG",
+    "ruta": "assets/fotos/panqueques-avena.jpg",
+    "autor": "Midori",
+    "licencia": "CC BY 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Banana_pancakes_Gili_Trawangan.JPG"
+  },
+  "salpicon": {
+    "consulta": "Salpicón Guatemala | salpicón de res",
+    "archivo": "File:Salpicón de res.jpg",
+    "ruta": "assets/fotos/salpicon.jpg",
+    "autor": "German matus",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Salpic%C3%B3n_de_res.jpg"
+  },
+  "chilaquilas": {
+    "consulta": "chilaquilas Guatemala | chilaquiles",
+    "archivo": "File:Chilaquiles at the Grand Cantina, Windsor, Ontario, 2025-09-01 04.jpg",
+    "ruta": "assets/fotos/chilaquilas.jpg",
+    "autor": "Chris Woodrich",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Chilaquiles_at_the_Grand_Cantina,_Windsor,_Ontario,_2025-09-01_04.jpg"
+  },
+  "tortitas-carne": {
+    "consulta": "tortitas de carne | beef patties tomato sauce",
+    "archivo": "File:Argentine hamburgers made with Paty Clásicas patties, lettuce, tomato, fried egg, and mozzarella cheese on Don Yeyo buns, with pickled gherkins, paprika sauce, and malagueta chili peppers.jpg",
+    "ruta": "assets/fotos/tortitas-carne.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Argentine_hamburgers_made_with_Paty_Cl%C3%A1sicas_patties,_lettuce,_tomato,_fried_egg,_and_mozzarella_cheese_on_Don_Yeyo_buns,_with_pickled_gherkins,_paprika_sauce,_and_malagueta_chili_peppers.jpg"
+  },
+  "cocido-res": {
+    "consulta": "cocido de res | beef stew corn cassava",
+    "archivo": "File:Cocido, o caldo de res.jpg",
+    "ruta": "assets/fotos/cocido-res.jpg",
+    "autor": "Luisfi",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Cocido,_o_caldo_de_res.jpg"
+  },
+  "atol-avena": {
+    "consulta": "atole | oat drink",
+    "archivo": "File:Atole de puscua, Mazatlán, 8 de marzo de 2023 03.jpg",
+    "ruta": "assets/fotos/atol-avena.jpg",
+    "autor": "El Nuevo Doge",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Atole_de_puscua,_Mazatl%C3%A1n,_8_de_marzo_de_2023_03.jpg"
+  },
+  "platanos-queso": {
+    "consulta": "baked plantains | plátanos maduros",
+    "archivo": "File:Baked Plantains (3510854117).jpg",
+    "ruta": "assets/fotos/platanos-queso.jpg",
+    "autor": "Rennett Stowe from USA",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Baked_Plantains_(3510854117).jpg"
+  },
+  "sandwich-pavo": {
+    "consulta": "turkey sandwich",
+    "archivo": "File:Krůtí prsa.jpg",
+    "ruta": "assets/fotos/sandwich-pavo.jpg",
+    "autor": "Dezidor",
+    "licencia": "CC BY 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Kr%C5%AFt%C3%AD_prsa.jpg"
+  },
+  "rollitos-pollo": {
+    "consulta": "chicken wrap | chicken wraps tortilla",
+    "archivo": "File:Smoked chicken and avocado wrap.jpg",
+    "ruta": "assets/fotos/rollitos-pollo.jpg",
+    "autor": "Takeaway",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Smoked_chicken_and_avocado_wrap.jpg"
+  },
+  "licuado-banano": {
+    "consulta": "banana smoothie",
+    "archivo": "File:Chicken wings starter and banana smoothie.jpg",
+    "ruta": "assets/fotos/licuado-banano.jpg",
+    "autor": "Mayejiro",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Chicken_wings_starter_and_banana_smoothie.jpg"
+  },
+  "pollo-asado": {
+    "consulta": "roast chicken | pollo asado",
+    "archivo": "File:Roasted chicken leg piece-MB20.jpg",
+    "ruta": "assets/fotos/pollo-asado.jpg",
+    "autor": "Rajeeb Dutta",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Roasted_chicken_leg_piece-MB20.jpg"
+  },
+  "carne-asada": {
+    "consulta": "Carne asada | churrasco",
+    "archivo": "File:Carne asada at Taqueria La Hacienda - April 2023 - Sarah Stierch.jpg",
+    "ruta": "assets/fotos/carne-asada.jpg",
+    "autor": "Missvain",
+    "licencia": "CC BY 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Carne_asada_at_Taqueria_La_Hacienda_-_April_2023_-_Sarah_Stierch.jpg"
+  },
+  "fajitas-pollo": {
+    "consulta": "chicken fajitas",
+    "archivo": "File:Flickr elisart 324248450--Beef and chicken fajitas.jpg",
+    "ruta": "assets/fotos/fajitas-pollo.jpg",
+    "autor": "Elisa Arteaga from Caracas, Venezuela",
+    "licencia": "CC BY-SA 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Flickr_elisart_324248450--Beef_and_chicken_fajitas.jpg"
+  },
+  "salteado-pollo": {
+    "consulta": "chicken stir fry vegetables | chicken stir fry",
+    "archivo": "File:Kai phat khing.jpg",
+    "ruta": "assets/fotos/salteado-pollo.jpg",
+    "autor": "Takeaway",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Kai_phat_khing.jpg"
+  },
+  "shakshuka": {
+    "consulta": "Shakshuka",
+    "archivo": "File:Shakshuka by Calliopejen1.jpg",
+    "ruta": "assets/fotos/shakshuka.jpg",
+    "autor": "Calliopejen1",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Shakshuka_by_Calliopejen1.jpg"
+  },
+  "tilapia-horno": {
+    "consulta": "baked tilapia | baked fish lemon",
+    "archivo": "File:Child Care Recipes (Team Nutiriton) (20211103-FNS-UNC-9514).jpg",
+    "ruta": "assets/fotos/tilapia-horno.jpg",
+    "autor": "USDAgov",
+    "licencia": "Public domain",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Child_Care_Recipes_(Team_Nutiriton)_(20211103-FNS-UNC-9514).jpg"
+  },
+  "pollo-freidora": {
+    "consulta": "air fried chicken | chicken thighs roasted",
+    "archivo": "File:Sichuan pepper chicken - air-fried version (川椒雞 - 氣炸版).jpg",
+    "ruta": "assets/fotos/pollo-freidora.jpg",
+    "autor": "NeoBatfreak",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Sichuan_pepper_chicken_-_air-fried_version_(%E5%B7%9D%E6%A4%92%E9%9B%9E_-_%E6%B0%A3%E7%82%B8%E7%89%88).jpg"
+  },
+  "ensalada-cesar": {
+    "consulta": "Caesar salad chicken | Caesar salad",
+    "archivo": "File:Chicken fettuccine alfredo.JPG",
+    "ruta": "assets/fotos/ensalada-cesar.jpg",
+    "autor": "Dllu",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Chicken_fettuccine_alfredo.JPG"
+  },
+  "avena-nocturna": {
+    "consulta": "overnight oats",
+    "archivo": "File:Muesli.jpg",
+    "ruta": "assets/fotos/avena-nocturna.jpg",
+    "autor": "Original description was: I, VirtualSteve took this photograph on February 19, 2006.",
+    "licencia": "CC BY-SA 2.5",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Muesli.jpg"
+  },
+  "tostadas-francesas": {
+    "consulta": "French toast",
+    "archivo": "File:French toast 001.jpg",
+    "ruta": "assets/fotos/tostadas-francesas.jpg",
+    "autor": "Ocdp",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:French_toast_001.jpg"
+  },
+  "aparato-estufa": {
+    "consulta": "gas stove burners | kitchen stove",
+    "archivo": "File:Gas stove burner flame.jpg",
+    "ruta": "assets/fotos/aparato-estufa.jpg",
+    "autor": "Lisafern",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg"
+  },
+  "aparato-horno": {
+    "consulta": "kitchen oven | electric oven",
+    "archivo": "File:Castle de Haar (1892-1913) 09 - Kitchen - Oven heated on coal.jpg",
+    "ruta": "assets/fotos/aparato-horno.jpg",
+    "autor": "Txllxt TxllxT",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Castle_de_Haar_(1892-1913)_09_-_Kitchen_-_Oven_heated_on_coal.jpg"
+  },
+  "aparato-microondas": {
+    "consulta": "microwave oven",
+    "archivo": "File:Microwave Oven.jpg",
+    "ruta": "assets/fotos/aparato-microondas.jpg",
+    "autor": "Srini297",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Microwave_Oven.jpg"
+  },
+  "aparato-freidora": {
+    "consulta": "air fryer",
+    "archivo": "File:Air fryer interior.jpg",
+    "ruta": "assets/fotos/aparato-freidora.jpg",
+    "autor": "Samay9211",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Air_fryer_interior.jpg"
+  },
+  "aparato-parrilla": {
+    "consulta": "charcoal grill | barbecue grill",
+    "archivo": "File:Starting the charcoal.jpg",
+    "ruta": "assets/fotos/aparato-parrilla.jpg",
+    "autor": "Tomascastelazo",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Starting_the_charcoal.jpg"
+  },
+  "aparato-licuadora": {
+    "consulta": "kitchen blender | blender",
+    "archivo": "File:Piña Coladas made in home kitchen blender - 3.jpg",
+    "ruta": "assets/fotos/aparato-licuadora.jpg",
+    "autor": "Infrogmation of New Orleans",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Pi%C3%B1a_Coladas_made_in_home_kitchen_blender_-_3.jpg"
+  },
+  "aparato-procesador": {
+    "consulta": "food processor",
+    "archivo": "File:Food Processor 2.jpg",
+    "ruta": "assets/fotos/aparato-procesador.jpg",
+    "autor": "Donovan Govan",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Food_Processor_2.jpg"
+  },
+  "aparato-thermomix": {
+    "consulta": "Thermomix",
+    "archivo": "File:Thermomix TM31 repair 03.jpg",
+    "ruta": "assets/fotos/aparato-thermomix.jpg",
+    "autor": "Klaus-Dieter Keller",
+    "licencia": "CC0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Thermomix_TM31_repair_03.jpg"
+  },
+  "aparato-ninja-foodi": {
+    "consulta": "Ninja Foodi | multicooker",
+    "archivo": "File:Ninja Foodi MAX Health Grill & Air Fryer AG551EU (cropped).jpg",
+    "ruta": "assets/fotos/aparato-ninja-foodi.jpg",
+    "autor": "בר",
+    "licencia": "CC BY-SA 4.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Ninja_Foodi_MAX_Health_Grill_%26_Air_Fryer_AG551EU_(cropped).jpg"
+  },
+  "aparato-ninja-licuadora": {
+    "consulta": "Ninja blender | Nutri Ninja",
+    "archivo": "File:Blender (49907001146).jpg",
+    "ruta": "assets/fotos/aparato-ninja-licuadora.jpg",
+    "autor": "Ajay Suresh from New York, NY, USA",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Blender_(49907001146).jpg"
+  },
+  "aparato-kitchenaid": {
+    "consulta": "KitchenAid stand mixer | KitchenAid mixer",
+    "archivo": "File:KitchenAid Stand Mixer.jpg",
+    "ruta": "assets/fotos/aparato-kitchenaid.jpg",
+    "autor": "Cmh at English Wikipedia",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:KitchenAid_Stand_Mixer.jpg"
+  },
+  "aparato-olla-presion": {
+    "consulta": "Instant Pot | electric pressure cooker",
+    "archivo": "File:Instant Pot (49907000991).jpg",
+    "ruta": "assets/fotos/aparato-olla-presion.jpg",
+    "autor": "Ajay Suresh from New York, NY, USA",
+    "licencia": "CC BY 2.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Instant_Pot_(49907000991).jpg"
+  }
+}
