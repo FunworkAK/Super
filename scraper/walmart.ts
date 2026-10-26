@@ -12,7 +12,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { INGREDIENTES_POR_ID } from '../src/data/ingredientes';
-import type { ProductoTienda, Unidad } from '../src/domain/types';
+import { PRECIOS_ESTIMADOS } from '../src/data/precios';
+import type { ProductoTienda } from '../src/domain/types';
 import { BUSQUEDAS } from './busquedas';
 import { tamanoDesdeNombre } from './tamano';
 
@@ -24,8 +25,6 @@ interface ProductoVtex {
   productName: string;
   items: {
     name: string;
-    measurementUnit?: string;
-    unitMultiplier?: number;
     sellers: { commertialOffer: { Price: number; AvailableQuantity: number } }[];
   }[];
 }
@@ -39,15 +38,13 @@ async function buscar(termino: string): Promise<ProductoVtex[]> {
   return (await res.json()) as ProductoVtex[];
 }
 
-function tamanoItem(item: ProductoVtex['items'][number], nombre: string, unidad: Unidad): number | null {
-  // Productos a granel (frutas, carnes) vienen por kg/lb con unitMultiplier.
-  const mu = item.measurementUnit?.toLowerCase();
-  const mult = item.unitMultiplier ?? 1;
-  if (unidad === 'g' && mu === 'kg') return 1000 * mult;
-  if (unidad === 'g' && mu === 'lb') return 453.6 * mult;
-  if (unidad === 'g' && mu === 'g') return mult;
-  return tamanoDesdeNombre(nombre, unidad);
+// Precio de referencia por unidad base, para descartar coincidencias absurdas
+// (p. ej. "Ayote Mantequilla" al buscar mantequilla).
+function referencia(ingredienteId: string): number | null {
+  const p = PRECIOS_ESTIMADOS.find((x) => x.tienda === 'walmart' && x.ingredienteId === ingredienteId);
+  return p ? p.precio / p.tamano : null;
 }
+const RANGO_ACEPTABLE = [0.25, 4];
 
 const dormir = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -69,8 +66,16 @@ async function main() {
         for (const item of p.items) {
           const oferta = item.sellers[0]?.commertialOffer;
           if (!oferta || oferta.AvailableQuantity <= 0 || oferta.Price <= 0) continue;
-          const tamano = tamanoItem(item, `${p.productName} ${item.name}`, ing.unidad);
+          // measurementUnit/unitMultiplier de VTEX no son confiables en este
+          // sitio; el tamaño se lee del nombre.
+          const tamano = tamanoDesdeNombre(p.productName, ing.unidad) ?? tamanoDesdeNombre(item.name, ing.unidad);
           if (!tamano) continue;
+          const ref = referencia(ing.id);
+          const proporcion = ref ? oferta.Price / tamano / ref : 1;
+          if (proporcion < RANGO_ACEPTABLE[0] || proporcion > RANGO_ACEPTABLE[1]) {
+            console.log(`  descartado (${proporcion.toFixed(2)}× la referencia): ${p.productName}`);
+            continue;
+          }
           const candidato: ProductoTienda = {
             tienda: 'walmart',
             ingredienteId: ing.id,

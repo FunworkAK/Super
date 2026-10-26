@@ -18,6 +18,8 @@ export function tamanoDesdeNombre(nombre: string, unidad: Unidad): number | null
     const multiplo = m[1] ? Number(m[1]) : 1;
     return Math.round(multiplo * Number(m[2]) * factor * 100) / 100;
   }
+  // Productos a granel: "Precio por libra", "Chuleta de cerdo lb", "Banano Libra".
+  if (unidad === 'g' && /\b(libra|lb)\b/.test(texto)) return A_GRAMOS.lb;
   // Paquetes como "pack 6" o "6 pack" para ingredientes por unidad.
   if (unidad === 'u') {
     const pack = texto.match(/(\d+)\s*pack|pack\s*(?:de\s*)?(\d+)/);

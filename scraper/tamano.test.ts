@@ -13,3 +13,14 @@ test('lee tamaños comunes de etiquetas', () => {
   assert.equal(tamanoDesdeNombre('Sopa 6 pack', 'u'), 6);
   assert.equal(tamanoDesdeNombre('Producto sin tamaño', 'g'), null);
 });
+
+test('productos a granel de Walmart se toman por libra', () => {
+  assert.equal(tamanoDesdeNombre('Tomate De Cocina En Red 3 Libras - 5 a 7 Unidades Aproximadamente', 'g'), 1360.8);
+  assert.equal(tamanoDesdeNombre('Papa Hortifruti Super Red - 10 a 13 Unidades por Libra Aproximadamente', 'g'), 453.6);
+  assert.equal(tamanoDesdeNombre('Filete Pechuga de Pollo Pio Lindo Porcionaditos Precio por Libra', 'g'), 453.6);
+  assert.equal(tamanoDesdeNombre('Brocoli Entero Libra - Unidad contiene 1Lb Aproximadamente', 'g'), 453.6);
+  assert.equal(tamanoDesdeNombre('Chuleta De Cerdo Ahumada lb', 'g'), 453.6);
+  // Por unidad no se puede convertir una libra de plátanos.
+  assert.equal(tamanoDesdeNombre('Platano Libra', 'u'), null);
+  assert.equal(tamanoDesdeNombre('Aguacate hass en malla - 9 a 10 Unidades Aproximadamente', 'u'), 10);
+});
