@@ -1,13 +1,21 @@
 import { router } from 'expo-router';
 import { useMemo, useRef, useState } from 'react';
-import { Animated, PanResponder, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Animated, PanResponder, Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { MacrosFila, Portada, TarjetaReceta } from '../../components/receta';
 import { Chip, Suave, colores, estilos } from '../../components/ui';
 import { macrosPorPorcion } from '../../domain/macros';
 import { recetasSugeridas } from '../../domain/planificador';
+import type { Comida } from '../../domain/types';
 import { useApp } from '../../state/AppState';
 
-const ETIQUETAS = ['guatemalteca', 'económica', 'rápida', 'desayuno', 'saludable', 'vegetariana'];
+const ETIQUETAS = ['guatemalteca', 'económica', 'rápida', 'saludable', 'vegetariana'];
+const TIPOS: { id: Comida; texto: string }[] = [
+  { id: 'desayuno', texto: '🍳 Desayunos' },
+  { id: 'almuerzo', texto: '🍲 Almuerzos' },
+  { id: 'cena', texto: '🌙 Cenas' },
+  { id: 'snack', texto: '🍎 Snacks' },
+  { id: 'lonchera', texto: '🎒 Loncheras' },
+];
 const ORDENES = [
   { id: 'despensa', texto: 'Usa lo que tengo' },
   { id: 'proteina', texto: 'Más proteína' },
@@ -20,6 +28,7 @@ export default function Recetas() {
   const { catalogo, inventario, plan, agregarAlPlan } = useApp();
   const [modo, setModo] = useState<'descubrir' | 'todas'>('descubrir');
   const [filtro, setFiltro] = useState<string | null>(null);
+  const [tipo, setTipo] = useState<Comida | null>(null);
   const [orden, setOrden] = useState<Orden>('despensa');
   const [saltadas, setSaltadas] = useState<string[]>([]);
 
@@ -28,12 +37,13 @@ export default function Recetas() {
   const lista = useMemo(() => {
     const base = recetasSugeridas(catalogo, inventario)
       .filter((x) => !filtro || x.receta.etiquetas.includes(filtro))
+      .filter((x) => !tipo || x.receta.comidas.includes(tipo))
       .map((x) => ({ ...x, macros: macrosPorPorcion(x.receta, catalogo.ingredientes) }));
     if (orden === 'proteina') base.sort((a, b) => b.macros.proteina - a.macros.proteina);
     if (orden === 'kcal') base.sort((a, b) => a.macros.kcal - b.macros.kcal);
     if (orden === 'costo') base.sort((a, b) => (a.costo ?? Infinity) - (b.costo ?? Infinity));
     return base;
-  }, [catalogo, inventario, filtro, orden]);
+  }, [catalogo, inventario, filtro, tipo, orden]);
 
   const mazo = lista.filter((x) => !enPlan.has(x.receta.id) && !saltadas.includes(x.receta.id));
   const actual = mazo[0];
@@ -51,6 +61,11 @@ export default function Recetas() {
         ))}
       </View>
 
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+        {TIPOS.map((t) => (
+          <Chip key={t.id} texto={t.texto} activo={tipo === t.id} onPress={() => setTipo(tipo === t.id ? null : t.id)} />
+        ))}
+      </ScrollView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
         {ORDENES.map((o) => (
           <Chip key={o.id} texto={o.texto} activo={orden === o.id} onPress={() => setOrden(o.id)} />
@@ -89,7 +104,7 @@ export default function Recetas() {
               <Suave>Revisa tu plan o vuelve a ver las que pasaste.</Suave>
               <View style={estilos.fila}>
                 <Chip texto="Ver de nuevo" onPress={() => setSaltadas([])} />
-                <Chip texto="Ir a mi plan" activo onPress={() => router.push('/plan')} />
+                <Chip texto="Ir a mi plan" activo onPress={() => router.push('/')} />
               </View>
             </View>
           )}
@@ -163,6 +178,13 @@ function CartaDeslizable({
     );
   };
 
+  const soltar = (dx: number) => {
+    setTimeout(() => (arrastro.current = false), 100);
+    if (dx > 110) salir(1);
+    else if (dx < -110) salir(-1);
+    else Animated.spring(pos, { toValue: { x: 0, y: 0 }, useNativeDriver: false }).start();
+  };
+
   const pan = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dx) > 8 && Math.abs(g.dx) > Math.abs(g.dy),
@@ -170,12 +192,10 @@ function CartaDeslizable({
         arrastro.current = true;
       },
       onPanResponderMove: Animated.event([null, { dx: pos.x }], { useNativeDriver: false }),
-      onPanResponderRelease: (_, g) => {
-        setTimeout(() => (arrastro.current = false), 100);
-        if (g.dx > 110) salir(1);
-        else if (g.dx < -110) salir(-1);
-        else Animated.spring(pos, { toValue: { x: 0, y: 0 }, useNativeDriver: false }).start();
-      },
+      onPanResponderTerminationRequest: () => false,
+      onPanResponderRelease: (_, g) => soltar(g.dx),
+      // Si el puntero se suelta fuera de la tarjeta (p. ej. sobre el menú) igual cuenta.
+      onPanResponderTerminate: (_, g) => soltar(g.dx),
     }),
   ).current;
 
@@ -189,7 +209,9 @@ function CartaDeslizable({
         {...pan.panHandlers}
         style={[s.carta, { transform: [{ translateX: pos.x }, { rotate: rotar }] }]}
       >
-        <Pressable onPress={() => !arrastro.current && onAbrir()}>{children}</Pressable>
+        <Pressable onPress={() => !arrastro.current && onAbrir()} style={SIN_SELECCION}>
+          {children}
+        </Pressable>
         <Animated.View style={[s.sello, { left: 16, borderColor: colores.primario, opacity: si }]}>
           <Text style={[s.selloTexto, { color: colores.primario }]}>¡A LA SEMANA!</Text>
         </Animated.View>
@@ -216,6 +238,10 @@ function CartaDeslizable({
     </>
   );
 }
+
+// En la web, arrastrar no debe seleccionar el texto de la tarjeta (userSelect
+// existe en react-native-web pero no en los tipos de View).
+const SIN_SELECCION = { userSelect: 'none' } as ViewStyle;
 
 const s = StyleSheet.create({
   segmento: { flexDirection: 'row', backgroundColor: colores.borde, borderRadius: 12, padding: 3 },

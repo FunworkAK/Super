@@ -30,9 +30,9 @@ const prod = (p: Partial<ProductoTienda>): ProductoTienda => ({
 const catPequeno: Catalogo = {
   ingredientes: INGREDIENTES_POR_ID,
   recetas: {
-    a: { id: 'a', nombre: 'A', porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'arroz', cantidad: 500 }, { id: 'huevo', cantidad: 2 }] },
-    b: { id: 'b', nombre: 'B', porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'arroz', cantidad: 300 }] },
-    c: { id: 'c', nombre: 'C', porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'huevo', cantidad: 1 }] },
+    a: { id: 'a', nombre: 'A', comidas: ['almuerzo'], porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'arroz', cantidad: 500 }, { id: 'huevo', cantidad: 2 }] },
+    b: { id: 'b', nombre: 'B', comidas: ['almuerzo'], porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'arroz', cantidad: 300 }] },
+    c: { id: 'c', nombre: 'C', comidas: ['almuerzo'], porciones: 2, minutos: 1, etiquetas: [], pasos: [], ingredientes: [{ id: 'huevo', cantidad: 1 }] },
   },
   precios: [
     prod({ tienda: 'walmart', ingredienteId: 'arroz', tamano: 1000, precio: 10 }),
@@ -60,8 +60,8 @@ test('cotiza paquetes enteros', () => {
   assert.equal(c.costo, 20);
 });
 
-test('la estrategia "mejor" elige la tienda más barata por producto', () => {
-  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, 'mejor');
+test('elige la tienda más barata entre las elegidas', () => {
+  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, ['walmart', 'latorre', 'pricesmart']);
   // arroz 500 g: Walmart Q10 vs PriceSmart Q40 → Walmart; huevo: La Torre Q24
   assert.equal(l.total, 34);
   assert.equal(l.porTienda.walmart, 10);
@@ -69,19 +69,19 @@ test('la estrategia "mejor" elige la tienda más barata por producto', () => {
 });
 
 test('una sola tienda marca lo que no vende', () => {
-  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, 'pricesmart');
+  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, ['pricesmart']);
   assert.equal(l.sinPrecio.length, 1);
   assert.equal(l.sinPrecio[0].ingrediente.id, 'huevo');
 });
 
 test('sugiere cambiar a una receta más barata', () => {
-  const s = sugerirCambios([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, 'mejor');
+  const s = sugerirCambios([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, ['walmart', 'latorre', 'pricesmart']);
   assert.equal(s[0].poner.id, 'b');
   assert.equal(s[0].ahorro, 24);
 });
 
 test('comprar suma al inventario y cocinar descuenta', () => {
-  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, 'mejor');
+  const l = armarLista([{ recetaId: 'a', porciones: 2 }], {}, catPequeno, ['walmart', 'latorre']);
   const inv = agregarCompras({}, l.lineas);
   assert.deepEqual(inv, { arroz: 1000, huevo: 15 });
   assert.deepEqual(descontarReceta(inv, { recetaId: 'a', porciones: 2 }, catPequeno), { arroz: 500, huevo: 13 });
@@ -110,7 +110,7 @@ test('todas las recetas usan ingredientes conocidos con precio', () => {
 test('macros por porción y del plan', async () => {
   const { macrosPorPorcion, macrosPlan } = await import('./macros');
   const receta = {
-    id: 'x', nombre: 'X', porciones: 2, minutos: 1, etiquetas: [], pasos: [],
+    id: 'x', nombre: 'X', comidas: ['almuerzo' as const], porciones: 2, minutos: 1, etiquetas: [], pasos: [],
     ingredientes: [{ id: 'huevo', cantidad: 4 }, { id: 'arroz', cantidad: 200 }],
   };
   // 4 huevos (72 kcal, 6.3 g prot) + 200 g arroz (365 kcal/100 g) entre 2 porciones
@@ -127,4 +127,34 @@ test('muestra libras para cantidades de super', async () => {
   assert.equal(formatoCantidad(50, 'g'), '50 g');
   assert.equal(formatoCantidad(1500, 'ml'), '1.5 L');
   assert.equal(formatoCantidad(6, 'u'), '6 u');
+});
+
+test('el menú llena cada día y comida elegida, sin repetir en el mismo día', async () => {
+  const { generarMenu, huecosDelMenu } = await import('./menu');
+  const { RECETAS_POR_ID } = await import('../data/recetas');
+  const cat: Catalogo = { recetas: RECETAS_POR_ID, ingredientes: INGREDIENTES_POR_ID, precios: PRECIOS_ESTIMADOS };
+  const config = { personas: 4, ninos: 2, dias: [0, 1, 2, 3, 4, 5], comidas: ['desayuno' as const, 'cena' as const, 'lonchera' as const] };
+  // 6 días × (desayuno + cena) + 5 loncheras (sin sábado)
+  assert.equal(huecosDelMenu(config).length, 17);
+  const menu = generarMenu(config, cat, {}, ['walmart', 'latorre', 'pricesmart'], 0, 7);
+  assert.equal(menu.length, 17);
+  for (const m of menu) {
+    assert.ok(RECETAS_POR_ID[m.recetaId].comidas.includes(m.comida!), `${m.recetaId} no es de ${m.comida}`);
+    assert.equal(m.porciones, m.comida === 'lonchera' ? 2 : 4);
+  }
+  for (let d = 0; d < 6; d++) {
+    const ids = menu.filter((m) => m.dia === d).map((m) => m.recetaId);
+    assert.equal(new Set(ids).size, ids.length);
+  }
+});
+
+test('el menú se ajusta para no pasarse del presupuesto si se puede', async () => {
+  const { generarMenu } = await import('./menu');
+  const { RECETAS_POR_ID } = await import('../data/recetas');
+  const cat: Catalogo = { recetas: RECETAS_POR_ID, ingredientes: INGREDIENTES_POR_ID, precios: PRECIOS_ESTIMADOS };
+  const config = { personas: 4, ninos: 0, dias: [0, 1, 2, 3, 4], comidas: ['almuerzo' as const] };
+  const tiendas = ['walmart' as const];
+  const libre = armarLista(generarMenu(config, cat, {}, tiendas, 0, 3), {}, cat, tiendas).total;
+  const ajustado = armarLista(generarMenu(config, cat, {}, tiendas, libre * 0.7, 3), {}, cat, tiendas).total;
+  assert.ok(ajustado < libre, `${ajustado} debería ser menor que ${libre}`);
 });

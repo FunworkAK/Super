@@ -30,7 +30,7 @@ export default function ModoCocina() {
     confirmar('¡Buen provecho!', 'Se descontarán los ingredientes de tu despensa.', 'Terminar', () => {
       setInventario(descontarReceta(inventario, item, catalogo));
       if (iPlan >= 0) setPlan(plan.filter((_, j) => j !== iPlan));
-      router.replace('/plan');
+      router.replace('/');
     });
 
   return (

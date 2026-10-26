@@ -1,7 +1,8 @@
-import type { Receta } from '../domain/types';
+import type { Comida, Receta } from '../domain/types';
+import { RECETAS_WEB } from './recetas-web';
 
 // Cantidades para 4 porciones, en la unidad base de cada ingrediente.
-export const RECETAS: Receta[] = [
+const PROPIAS: Omit<Receta, 'comidas'>[] = [
   {
     id: 'pepian-pollo',
     nombre: 'Pepián de pollo',
@@ -614,6 +615,28 @@ export const RECETAS: Receta[] = [
     ],
     pasos: ['Licúa avena, banano, huevo y leche.', 'Cocina los panqueques en sartén con mantequilla.'],
   },
+];
+
+const DESAYUNO: Comida[] = ['desayuno'];
+const PLATO_FUERTE: Comida[] = ['almuerzo', 'cena'];
+
+// En qué comidas del día encaja cada receta propia.
+const COMIDAS_PROPIAS: Record<string, Comida[]> = {
+  'frijoles-volteados-huevo': ['desayuno', 'cena'],
+  'huevos-rancheros': DESAYUNO,
+  'omelette-vegetales': ['desayuno', 'cena'],
+  mosh: DESAYUNO,
+  'panqueques-avena': ['desayuno', 'lonchera'],
+  'sandwich-jamon': ['desayuno', 'cena', 'lonchera'],
+  tostadas: ['cena', 'snack'],
+  shucos: ['cena'],
+  'ensalada-atun': ['almuerzo', 'cena'],
+  'tortitas-papa': PLATO_FUERTE,
+};
+
+export const RECETAS: Receta[] = [
+  ...PROPIAS.map((r) => ({ ...r, comidas: COMIDAS_PROPIAS[r.id] ?? PLATO_FUERTE })),
+  ...RECETAS_WEB,
 ];
 
 export const RECETAS_POR_ID: Record<string, Receta> = Object.fromEntries(

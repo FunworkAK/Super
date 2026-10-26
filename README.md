@@ -4,12 +4,14 @@ App móvil (Android y iPhone) para planificar las comidas de la semana, armar la
 
 ## Qué hace
 
-- **Despensa visual:** una cuadrícula de ingredientes por pasillo. Tocas uno para marcarlo y ajustas cuánto tienes (en libras, litros o unidades, con cantidades rápidas). La lista del super lo descuenta.
-- **Descubrir recetas:** al estilo de Mise, deslizas tarjetas a la derecha para agregarlas a tu semana o a la izquierda para pasar. Se pueden ordenar por lo que ya tienes, más proteína, menos calorías o más baratas.
-- **Macros:** cada receta muestra calorías, proteína, carbohidratos y grasa por porción (valores aproximados en `src/data/nutricion.ts`), y el plan suma los de la semana.
-- **Página de receta y Modo cocina:** porciones ajustables, qué ingredientes ya tienes y una vista paso a paso con letra grande. Al terminar se descuenta de la despensa.
-- **Lista del super:** agrupada por pasillo, con la presentación y el precio en la tienda elegida (o la más barata por producto). Lo que marcas como comprado pasa a la despensa.
-- **Presupuesto:** compara el total en cada tienda y, si te pasas, sugiere cambiar recetas por otras más baratas.
+- **Mi semana:** antes de sugerir recetas pregunta dónde vas a comprar, tu presupuesto, para cuántas personas, qué días y qué comidas (desayuno, almuerzo, cena, más snacks y loncheras). Con eso arma un menú por día y comida que aprovecha tu despensa y se ajusta al presupuesto. Cada plato se puede cambiar por otro de la misma comida.
+- **Tiendas:** eliges una o varias (Walmart, La Torre, PriceSmart) y la lista usa el precio más bajo entre ellas.
+- **Recetas:** modo Descubrir (deslizar tarjetas, al estilo de Mise) y cuadrícula con filtros por comida. Algunas recetas vienen de sitios de cocina familiar (The Foodie's Kitchen, Guía Infantil) y enlazan a la original (`src/data/recetas-web.ts`).
+- **Snacks y loncheras:** sección propia con ideas para el recreo y la tarde.
+- **Despensa visual:** cuadrícula de ingredientes por pasillo; tocas uno y ajustas cuánto tienes (libras, litros o unidades). La lista lo descuenta.
+- **Macros:** calorías, proteína, carbohidratos y grasa por porción (valores aproximados en `src/data/nutricion.ts`), y promedio de la semana.
+- **Modo cocina:** paso a paso con letra grande; al terminar descuenta la despensa.
+- **Lista del super y presupuesto:** agrupada por pasillo, con comparación entre tiendas.
 
 Los datos se guardan en el teléfono.
 
@@ -48,7 +50,7 @@ npm run typecheck # TypeScript
 Estructura:
 
 - `src/app/` pantallas (Expo Router): `(tabs)/` las pestañas, `receta/[id]` y `cocina/[id]`
-- `src/domain/` lógica: lista de compras, costos, sugerencias
+- `src/domain/` lógica: lista de compras, costos, menú semanal (`menu.ts`), macros
 - `src/data/` ingredientes, recetas y precios
 - `src/state/` estado de la app guardado en el teléfono
 - `scraper/` extractores de precios

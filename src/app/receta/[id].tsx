@@ -1,12 +1,13 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { MacrosFila, Portada } from '../../components/receta';
 import { Boton, Suave, colores, estilos } from '../../components/ui';
 import { RECETAS } from '../../data/recetas';
 import { EMOJI_INGREDIENTE } from '../../data/visual';
 import { macrosPorPorcion } from '../../domain/macros';
 import { costoPorPorcion, formatoCantidad } from '../../domain/planificador';
+import { COMIDAS } from '../../domain/types';
 import { useApp } from '../../state/AppState';
 
 export function generateStaticParams() {
@@ -52,6 +53,13 @@ export default function DetalleReceta() {
             ⏱ {receta.minutos} min{costo !== null ? ` · Q${costo.toFixed(2)} por porción` : ''}
             {receta.etiquetas.length ? ` · ${receta.etiquetas.join(', ')}` : ''}
           </Text>
+
+          <Text style={s.meta}>Ideal para: {receta.comidas.map((c) => COMIDAS[c]).join(', ')}</Text>
+          {receta.fuente && (
+            <Pressable onPress={() => Linking.openURL(receta.fuente!.url)}>
+              <Text style={s.fuente}>📎 Receta original en {receta.fuente.sitio} ↗</Text>
+            </Pressable>
+          )}
 
           <Text style={s.seccion}>Macros por porción</Text>
           <MacrosFila m={macros} />
@@ -121,6 +129,7 @@ export default function DetalleReceta() {
 const s = StyleSheet.create({
   titulo: { fontSize: 26, fontWeight: '800', color: colores.texto },
   meta: { fontSize: 14, color: colores.suave },
+  fuente: { fontSize: 14, color: colores.primario, fontWeight: '600', textDecorationLine: 'underline' },
   seccion: { fontSize: 17, fontWeight: '700', color: colores.texto, marginTop: 6 },
   caja: { backgroundColor: colores.tarjeta, borderRadius: 14, borderWidth: 1, borderColor: colores.borde },
   ingrediente: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingHorizontal: 12, paddingVertical: 10 },

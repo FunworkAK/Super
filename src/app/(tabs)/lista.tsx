@@ -1,24 +1,18 @@
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import { Boton, Chip, confirmar, Suave, Tarjeta, Titulo, colores, estilos } from '../../components/ui';
+import { Boton, confirmar, Suave, Tarjeta, Titulo, colores, estilos } from '../../components/ui';
 import { agregarCompras, armarLista, formatoCantidad, formatoQ } from '../../domain/planificador';
-import { TIENDAS, type Estrategia } from '../../domain/types';
+import { SelectorTiendas } from '../../components/tiendas';
+import { TIENDAS } from '../../domain/types';
 import { useApp } from '../../state/AppState';
 
-const OPCIONES: { id: Estrategia; texto: string }[] = [
-  { id: 'mejor', texto: 'Más barato' },
-  { id: 'walmart', texto: TIENDAS.walmart },
-  { id: 'latorre', texto: TIENDAS.latorre },
-  { id: 'pricesmart', texto: TIENDAS.pricesmart },
-];
-
 export default function Lista() {
-  const { plan, inventario, catalogo, estrategia, setEstrategia, presupuesto, setInventario } = useApp();
+  const { plan, inventario, catalogo, tiendas, presupuesto, setInventario } = useApp();
   const [marcados, setMarcados] = useState<Set<string>>(new Set());
 
   const lista = useMemo(
-    () => armarLista(plan, inventario, catalogo, estrategia),
-    [plan, inventario, catalogo, estrategia],
+    () => armarLista(plan, inventario, catalogo, tiendas),
+    [plan, inventario, catalogo, tiendas],
   );
 
   const alternar = (id: string) =>
@@ -40,11 +34,7 @@ export default function Lista() {
 
   return (
     <ScrollView style={estilos.pantalla} contentContainerStyle={estilos.contenido}>
-      <View style={[estilos.fila, { flexWrap: 'wrap' }]}>
-        {OPCIONES.map((o) => (
-          <Chip key={o.id} texto={o.texto} activo={estrategia === o.id} onPress={() => setEstrategia(o.id)} />
-        ))}
-      </View>
+      <SelectorTiendas />
 
       <Tarjeta style={{ backgroundColor: pasado ? colores.alertaSuave : colores.primarioSuave }}>
         <Titulo>Total estimado: {formatoQ(lista.total)}</Titulo>

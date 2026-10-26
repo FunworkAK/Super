@@ -5,7 +5,7 @@ import { RECETAS_POR_ID } from '../data/recetas';
 import { PRECIOS_ESTIMADOS, combinarPrecios } from '../data/precios';
 import extraidos from '../data/precios-extraidos.json';
 import type { Catalogo } from '../domain/planificador';
-import type { Estrategia, Inventario, ItemPlan, ProductoTienda } from '../domain/types';
+import { TODAS_TIENDAS, type ConfigMenu, type Inventario, type ItemPlan, type ProductoTienda, type TiendaId } from '../domain/types';
 
 const CLAVE = 'super-recetas/estado-v1';
 
@@ -13,15 +13,28 @@ interface Guardado {
   inventario: Inventario;
   plan: ItemPlan[];
   presupuesto: number;
-  estrategia: Estrategia;
+  tiendas: TiendaId[];
+  // null hasta que la persona configura su menú por primera vez.
+  config: ConfigMenu | null;
 }
 
 const INICIAL: Guardado = {
   inventario: {},
   plan: [],
   presupuesto: 500,
-  estrategia: 'mejor',
+  tiendas: TODAS_TIENDAS,
+  config: null,
 };
+
+// Ajusta datos guardados por versiones anteriores de la app.
+function migrar(guardado: Record<string, unknown>): Guardado {
+  const e = { ...INICIAL, ...guardado } as Guardado & { estrategia?: unknown };
+  if (!Array.isArray(e.tiendas) || e.tiendas.length === 0) {
+    e.tiendas = typeof e.estrategia === 'string' && e.estrategia !== 'mejor' ? [e.estrategia as TiendaId] : TODAS_TIENDAS;
+  }
+  delete e.estrategia;
+  return e;
+}
 
 interface AppState extends Guardado {
   cargado: boolean;
@@ -31,7 +44,8 @@ interface AppState extends Guardado {
   setPlan: (plan: ItemPlan[]) => void;
   agregarAlPlan: (recetaId: string, porciones?: number) => void;
   setPresupuesto: (q: number) => void;
-  setEstrategia: (e: Estrategia) => void;
+  setTiendas: (t: TiendaId[]) => void;
+  setConfig: (c: ConfigMenu) => void;
 }
 
 const Ctx = createContext<AppState | null>(null);
@@ -43,7 +57,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     AsyncStorage.getItem(CLAVE)
       .then((json) => {
-        if (json) setEstado({ ...INICIAL, ...JSON.parse(json) });
+        if (json) setEstado(migrar(JSON.parse(json)));
       })
       .catch(() => {})
       .finally(() => setCargado(true));
@@ -78,10 +92,14 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     agregarAlPlan: (recetaId, porciones) =>
       setEstado((s) => ({
         ...s,
-        plan: [...s.plan, { recetaId, porciones: porciones ?? RECETAS_POR_ID[recetaId]?.porciones ?? 4 }],
+        plan: [
+          ...s.plan,
+          { recetaId, porciones: porciones ?? s.config?.personas ?? RECETAS_POR_ID[recetaId]?.porciones ?? 4 },
+        ],
       })),
     setPresupuesto: (presupuesto) => setEstado((s) => ({ ...s, presupuesto })),
-    setEstrategia: (estrategia) => setEstado((s) => ({ ...s, estrategia })),
+    setTiendas: (tiendas) => setEstado((s) => ({ ...s, tiendas: tiendas.length ? tiendas : s.tiendas })),
+    setConfig: (config) => setEstado((s) => ({ ...s, config })),
   };
 
   return <Ctx.Provider value={valor}>{children}</Ctx.Provider>;

@@ -1,225 +1,271 @@
+import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Boton, Chip, Suave, colores, estilos } from '../../components/ui';
-import { INGREDIENTES } from '../../data/ingredientes';
-import { EMOJI_INGREDIENTE, PRESETS } from '../../data/visual';
-import { formatoCantidad } from '../../domain/planificador';
-import type { Ingrediente, Pasillo } from '../../domain/types';
+import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ConfigurarMenu } from '../../components/configurar';
+import { MacrosFila } from '../../components/receta';
+import { Boton, Suave, colores, confirmar, estilos } from '../../components/ui';
+import { EMOJI_RECETA, fondoReceta } from '../../data/visual';
+import { macrosPlan, macrosPorPorcion } from '../../domain/macros';
+import { candidatas, generarMenu } from '../../domain/menu';
+import { armarLista, coberturaInventario, costoPorPorcion, descontarReceta, formatoQ } from '../../domain/planificador';
+import { COMIDAS, DIAS, TIENDAS, type ConfigMenu, type ItemPlan } from '../../domain/types';
 import { useApp } from '../../state/AppState';
 
-const PASILLOS: Pasillo[] = [
-  'Frutas y verduras',
-  'Carnes y pescado',
-  'Lácteos y huevos',
-  'Granos y abarrotes',
-  'Panadería',
-  'Condimentos y salsas',
-  'Congelados',
-];
+export default function Semana() {
+  const { plan, setPlan, catalogo, inventario, setInventario, tiendas, presupuesto, config, setConfig } = useApp();
+  const [editando, setEditando] = useState(false);
+  const [cambiando, setCambiando] = useState<number | null>(null);
 
-export default function Despensa() {
-  const { inventario, setCantidad } = useApp();
-  const [busqueda, setBusqueda] = useState('');
-  const [pasillo, setPasillo] = useState<Pasillo | 'mios' | null>(null);
-  const [editando, setEditando] = useState<Ingrediente | null>(null);
-
-  const visibles = useMemo(() => {
-    const q = normalizar(busqueda.trim());
-    return INGREDIENTES.filter(
-      (i) =>
-        (!q || normalizar(i.nombre).includes(q)) &&
-        (pasillo === null || (pasillo === 'mios' ? inventario[i.id] > 0 : i.pasillo === pasillo)),
-    );
-  }, [busqueda, pasillo, inventario]);
-
-  const grupos = PASILLOS.map((p) => ({ pasillo: p, items: visibles.filter((i) => i.pasillo === p) })).filter(
-    (g) => g.items.length > 0,
-  );
-  const cuantos = Object.keys(inventario).length;
-
-  const tocar = (ing: Ingrediente) => {
-    if (!(inventario[ing.id] > 0)) setCantidad(ing.id, ing.paso);
-    setEditando(ing);
+  const crear = (c: ConfigMenu) => {
+    setConfig(c);
+    setPlan(generarMenu(c, catalogo, inventario, tiendas, presupuesto, Date.now() % 100000));
+    setEditando(false);
   };
+
+  const lista = useMemo(() => armarLista(plan, inventario, catalogo, tiendas), [plan, inventario, catalogo, tiendas]);
+
+  if (!config || editando) {
+    return <ConfigurarMenu onListo={crear} onCancelar={config ? () => setEditando(false) : undefined} />;
+  }
+
+  const porciones = plan.reduce((s, p) => s + p.porciones, 0);
+  const total = macrosPlan(plan, catalogo.recetas, catalogo.ingredientes);
+  const promedio = porciones
+    ? { kcal: total.kcal / porciones, proteina: total.proteina / porciones, carbos: total.carbos / porciones, grasa: total.grasa / porciones }
+    : total;
+  const pasado = lista.total > presupuesto;
+
+  const quitar = (i: number) => setPlan(plan.filter((_, j) => j !== i));
+  const cocinada = (i: number) => {
+    setInventario(descontarReceta(inventario, plan[i], catalogo));
+    quitar(i);
+  };
+  const hecha = (i: number) =>
+    confirmar('¿Ya la cocinaste?', 'Se descontarán los ingredientes de tu despensa.', 'Sí', () => cocinada(i));
+
+  const indices = plan.map((item, i) => ({ item, i }));
+  const extras = indices.filter(({ item }) => item.dia === undefined);
 
   return (
     <View style={estilos.pantalla}>
-      <ScrollView contentContainerStyle={estilos.contenido} keyboardShouldPersistTaps="handled">
-        <Text style={s.titular}>¿Qué tienes en casa?</Text>
-        <Suave>Toca un ingrediente para agregarlo y ajusta cuánto tienes. Lo descontamos de tu lista del super.</Suave>
-
-        <TextInput
-          style={estilos.input}
-          placeholder="Buscar ingrediente…"
-          placeholderTextColor={colores.suave}
-          value={busqueda}
-          onChangeText={setBusqueda}
-        />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
-          <Chip texto="Todo" activo={pasillo === null} onPress={() => setPasillo(null)} />
-          <Chip texto={`En mi despensa (${cuantos})`} activo={pasillo === 'mios'} onPress={() => setPasillo('mios')} />
-          {PASILLOS.map((p) => (
-            <Chip key={p} texto={p} activo={pasillo === p} onPress={() => setPasillo(p)} />
-          ))}
-        </ScrollView>
-
-        {grupos.length === 0 && <Suave>No hay ingredientes que coincidan.</Suave>}
-        {grupos.map((g) => (
-          <View key={g.pasillo} style={{ gap: 8 }}>
-            <Text style={s.seccion}>{g.pasillo}</Text>
-            <View style={s.rejilla}>
-              {g.items.map((ing) => {
-                const cant = inventario[ing.id] ?? 0;
-                const tengo = cant > 0;
-                return (
-                  <Pressable
-                    key={ing.id}
-                    onPress={() => tocar(ing)}
-                    role="button"
-                    aria-label={`${ing.nombre}${tengo ? `, tienes ${formatoCantidad(cant, ing.unidad)}` : ''}`}
-                    style={({ pressed }) => [s.ficha, tengo && s.fichaActiva, pressed && { transform: [{ scale: 0.96 }] }]}
-                  >
-                    {tengo && <Text style={s.check}>✓</Text>}
-                    <Text style={s.emoji}>{EMOJI_INGREDIENTE[ing.id] ?? '🛒'}</Text>
-                    <Text style={s.nombre} numberOfLines={2}>
-                      {ing.nombre}
-                    </Text>
-                    <Text style={[s.cantidad, !tengo && { color: colores.suave }]}>
-                      {tengo ? formatoCantidad(cant, ing.unidad) : 'Agregar'}
-                    </Text>
-                  </Pressable>
-                );
-              })}
+      <ScrollView contentContainerStyle={estilos.contenido}>
+        <View style={s.resumen}>
+          <Text style={s.resumenTitulo}>Tu semana</Text>
+          <Text style={s.resumenMeta}>
+            {config.personas} personas · {config.dias.length} días · {config.comidas.map((c) => COMIDAS[c]).join(', ')}
+          </Text>
+          <Text style={s.resumenMeta}>Comprando en {tiendas.map((t) => TIENDAS[t]).join(', ')}</Text>
+          <View style={[s.gasto, pasado && { backgroundColor: colores.alertaSuave }]}>
+            <Text style={[s.gastoTexto, pasado && { color: colores.alerta }]}>
+              Lista: {formatoQ(lista.total)} de {formatoQ(presupuesto)}
+              {pasado ? ` · te pasas ${formatoQ(lista.total - presupuesto)}` : ` · te sobran ${formatoQ(presupuesto - lista.total)}`}
+            </Text>
+          </View>
+          <Text style={[s.resumenMeta, { marginTop: 6 }]}>Promedio por porción</Text>
+          <MacrosFila m={promedio} compacto />
+          <View style={[estilos.fila, { marginTop: 8 }]}>
+            <View style={{ flex: 1 }}>
+              <Boton
+                tipo="secundario"
+                titulo="🔄 Otra sugerencia"
+                onPress={() =>
+                  confirmar('Otra sugerencia', 'Se reemplazará el menú actual.', 'Cambiar', () =>
+                    setPlan(generarMenu(config, catalogo, inventario, tiendas, presupuesto, Date.now() % 100000)),
+                  )
+                }
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Boton tipo="secundario" titulo="⚙️ Preferencias" onPress={() => setEditando(true)} />
             </View>
           </View>
-        ))}
+        </View>
+
+        {config.dias.map((d) => {
+          const delDia = indices.filter(({ item }) => item.dia === d);
+          if (delDia.length === 0) return null;
+          return (
+            <View key={d} style={{ gap: 8 }}>
+              <Text style={s.dia}>{DIAS[d]}</Text>
+              {delDia.map(({ item, i }) => (
+                <Fila key={i} item={item} onCambiar={() => setCambiando(i)} onQuitar={() => quitar(i)} onHecha={() => hecha(i)} />
+              ))}
+            </View>
+          );
+        })}
+
+        {extras.length > 0 && (
+          <View style={{ gap: 8 }}>
+            <Text style={s.dia}>Otras recetas que agregaste</Text>
+            {extras.map(({ item, i }) => (
+              <Fila key={i} item={item} onQuitar={() => quitar(i)} onHecha={() => hecha(i)} />
+            ))}
+          </View>
+        )}
+
+        {plan.length === 0 && <Suave>No hay recetas en tu semana. Toca "Otra sugerencia" o agrega desde Recetas.</Suave>}
+        <Boton titulo="🛒  Ver lista del super" onPress={() => router.push('/lista')} />
       </ScrollView>
 
-      <EditorCantidad
-        ingrediente={editando}
-        cantidad={editando ? (inventario[editando.id] ?? 0) : 0}
-        onCambiar={(n) => editando && setCantidad(editando.id, n)}
-        onCerrar={() => setEditando(null)}
-      />
+      {cambiando !== null && plan[cambiando] && (
+        <Alternativas
+          item={plan[cambiando]}
+          onElegir={(recetaId) => {
+            setPlan(plan.map((p, j) => (j === cambiando ? { ...p, recetaId } : p)));
+            setCambiando(null);
+          }}
+          onCerrar={() => setCambiando(null)}
+        />
+      )}
     </View>
   );
 }
 
-function EditorCantidad({
-  ingrediente,
-  cantidad,
+function Fila({
+  item,
   onCambiar,
+  onQuitar,
+  onHecha,
+}: {
+  item: ItemPlan;
+  onCambiar?: () => void;
+  onQuitar: () => void;
+  onHecha: () => void;
+}) {
+  const { catalogo } = useApp();
+  const receta = catalogo.recetas[item.recetaId];
+  if (!receta) return null;
+  const m = macrosPorPorcion(receta, catalogo.ingredientes);
+  return (
+    <View style={s.fila}>
+      <Pressable
+        onPress={() => router.push(`/receta/${receta.id}`)}
+        style={[s.miniatura, { backgroundColor: fondoReceta(receta.id) }]}
+      >
+        <Text style={{ fontSize: 30 }}>{EMOJI_RECETA[receta.id]}</Text>
+      </Pressable>
+      <View style={{ flex: 1, gap: 3 }}>
+        {item.comida && <Text style={s.comida}>{COMIDAS[item.comida].toUpperCase()}</Text>}
+        <Pressable onPress={() => router.push(`/receta/${receta.id}`)}>
+          <Text style={s.nombre}>{receta.nombre}</Text>
+        </Pressable>
+        <Text style={s.meta}>
+          {item.porciones} porc. · 🔥 {Math.round(m.kcal)} kcal · 💪 {Math.round(m.proteina)} g · ⏱ {receta.minutos} min
+        </Text>
+        <View style={[estilos.fila, { gap: 4, flexWrap: 'wrap' }]}>
+          {onCambiar && (
+            <Pressable onPress={onCambiar}>
+              <Text style={s.accion}>🔄 Cambiar</Text>
+            </Pressable>
+          )}
+          <Pressable onPress={() => router.push(`/cocina/${receta.id}`)}>
+            <Text style={s.accion}>👩‍🍳 Cocinar</Text>
+          </Pressable>
+          <Pressable onPress={onHecha}>
+            <Text style={s.accion}>✓ Hecha</Text>
+          </Pressable>
+          <Pressable onPress={onQuitar}>
+            <Text style={[s.accion, { color: colores.alerta }]}>Quitar</Text>
+          </Pressable>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// Recetas de la misma comida para reemplazar un plato del menú.
+function Alternativas({
+  item,
+  onElegir,
   onCerrar,
 }: {
-  ingrediente: Ingrediente | null;
-  cantidad: number;
-  onCambiar: (n: number) => void;
+  item: ItemPlan;
+  onElegir: (recetaId: string) => void;
   onCerrar: () => void;
 }) {
-  if (!ingrediente) return null;
-  const paso = ingrediente.unidad === 'g' ? 113.4 : ingrediente.unidad === 'ml' ? 250 : 1;
+  const { catalogo, inventario } = useApp();
+  const opciones = candidatas(catalogo, item.comida ?? 'almuerzo')
+    .filter((r) => r.id !== item.recetaId)
+    .map((r) => ({
+      r,
+      costo: costoPorPorcion(r, catalogo),
+      cobertura: coberturaInventario(r, inventario),
+      kcal: macrosPorPorcion(r, catalogo.ingredientes).kcal,
+    }))
+    .sort((a, b) => b.cobertura - a.cobertura || (a.costo ?? 0) - (b.costo ?? 0));
+
   return (
     <Modal transparent animationType="slide" visible onRequestClose={onCerrar}>
       <Pressable style={s.velo} onPress={onCerrar} />
       <View style={s.hoja}>
-        <View style={s.asa} />
-        <Text style={{ fontSize: 56, textAlign: 'center' }}>{EMOJI_INGREDIENTE[ingrediente.id]}</Text>
-        <Text style={[s.titular, { textAlign: 'center' }]}>{ingrediente.nombre}</Text>
-
-        <View style={[estilos.fila, { justifyContent: 'center', gap: 20, marginVertical: 8 }]}>
-          <Pressable style={s.redondo} onPress={() => onCambiar(Math.max(0, cantidad - paso))}>
-            <Text style={s.redondoTexto}>−</Text>
-          </Pressable>
-          <Text style={s.grande}>{cantidad > 0 ? formatoCantidad(cantidad, ingrediente.unidad) : '0'}</Text>
-          <Pressable style={s.redondo} onPress={() => onCambiar(cantidad + paso)}>
-            <Text style={s.redondoTexto}>+</Text>
-          </Pressable>
-        </View>
-
-        <Text style={[estilos.suave, { textAlign: 'center' }]}>Cantidad rápida</Text>
-        <View style={[estilos.fila, { justifyContent: 'center', flexWrap: 'wrap' }]}>
-          {PRESETS[ingrediente.unidad].map((p) => (
-            <Chip
-              key={p.etiqueta}
-              texto={p.etiqueta}
-              activo={Math.abs(cantidad - p.valor) < 0.5}
-              onPress={() => onCambiar(p.valor)}
-            />
+        <Text style={s.hojaTitulo}>
+          Cambiar {item.comida ? COMIDAS[item.comida].toLowerCase() : 'receta'}
+          {item.dia !== undefined ? ` del ${DIAS[item.dia].toLowerCase()}` : ''}
+        </Text>
+        <ScrollView style={{ maxHeight: 420 }} contentContainerStyle={{ gap: 8 }}>
+          {opciones.map(({ r, costo, cobertura, kcal }) => (
+            <Pressable key={r.id} onPress={() => onElegir(r.id)} style={s.opcion}>
+              <View style={[s.miniatura, { width: 48, height: 48, backgroundColor: fondoReceta(r.id) }]}>
+                <Text style={{ fontSize: 24 }}>{EMOJI_RECETA[r.id]}</Text>
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={s.nombre}>{r.nombre}</Text>
+                <Text style={s.meta}>
+                  {costo !== null ? `${formatoQ(costo)}/porción · ` : ''}
+                  {Math.round(kcal)} kcal
+                  {cobertura > 0 ? ` · tienes ${Math.round(cobertura * 100)}%` : ''}
+                </Text>
+              </View>
+            </Pressable>
           ))}
-        </View>
-
-        <View style={[estilos.fila, { marginTop: 12 }]}>
-          <View style={{ flex: 1 }}>
-            <Boton
-              tipo="peligro"
-              titulo="Ya no tengo"
-              onPress={() => {
-                onCambiar(0);
-                onCerrar();
-              }}
-            />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Boton titulo="Listo" onPress={onCerrar} />
-          </View>
-        </View>
+        </ScrollView>
+        <Boton tipo="secundario" titulo="Cerrar" onPress={onCerrar} />
       </View>
     </Modal>
   );
 }
 
-function normalizar(t: string) {
-  return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-}
-
 const s = StyleSheet.create({
-  titular: { fontSize: 22, fontWeight: '700', color: colores.texto },
-  seccion: { fontSize: 13, fontWeight: '700', color: colores.suave, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: 6 },
-  rejilla: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  ficha: {
-    width: 104,
-    minHeight: 112,
+  resumen: { backgroundColor: colores.primario, borderRadius: 18, padding: 16, gap: 4 },
+  resumenTitulo: { color: '#fff', fontSize: 22, fontWeight: '800' },
+  resumenMeta: { color: '#E3F1E8', fontSize: 13 },
+  gasto: { backgroundColor: colores.primarioSuave, borderRadius: 10, padding: 8, marginTop: 6 },
+  gastoTexto: { color: colores.primario, fontWeight: '700' },
+  dia: { fontSize: 18, fontWeight: '800', color: colores.texto, marginTop: 8 },
+  fila: {
+    flexDirection: 'row',
+    gap: 12,
     backgroundColor: colores.tarjeta,
     borderRadius: 16,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colores.borde,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 8,
-    gap: 2,
+    padding: 10,
   },
-  fichaActiva: { borderColor: colores.primario, backgroundColor: colores.primarioSuave },
-  check: {
-    position: 'absolute',
-    top: 6,
-    right: 8,
-    color: colores.primario,
-    fontWeight: '800',
-  },
-  emoji: { fontSize: 34 },
-  nombre: { fontSize: 13, textAlign: 'center', color: colores.texto },
-  cantidad: { fontSize: 13, fontWeight: '700', color: colores.primario },
+  miniatura: { width: 68, height: 68, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  comida: { fontSize: 11, fontWeight: '800', color: colores.primario, letterSpacing: 0.5 },
+  nombre: { fontSize: 15, fontWeight: '700', color: colores.texto },
+  meta: { fontSize: 12, color: colores.suave },
+  accion: { fontSize: 13, color: colores.primario, fontWeight: '600', paddingHorizontal: 4, paddingVertical: 2 },
   velo: { flex: 1, backgroundColor: 'rgba(0,0,0,0.35)' },
   hoja: {
     backgroundColor: colores.fondo,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 20,
-    paddingBottom: 32,
-    gap: 8,
+    gap: 12,
     width: '100%',
     maxWidth: 560,
     alignSelf: 'center',
   },
-  asa: { width: 40, height: 4, borderRadius: 2, backgroundColor: colores.borde, alignSelf: 'center' },
-  redondo: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: colores.primarioSuave,
+  hojaTitulo: { fontSize: 18, fontWeight: '800', color: colores.texto },
+  opcion: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    gap: 10,
+    backgroundColor: colores.tarjeta,
+    borderRadius: 12,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: colores.borde,
   },
-  redondoTexto: { fontSize: 28, color: colores.primario, fontWeight: '600' },
-  grande: { fontSize: 30, fontWeight: '700', color: colores.texto, minWidth: 120, textAlign: 'center' },
 });

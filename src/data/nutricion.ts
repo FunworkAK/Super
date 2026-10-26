@@ -20,6 +20,12 @@ export const NUTRICION: Record<string, Nutrientes> = {
   lechuga: [75, 6, 14, 1], // pieza ~500 g
   brocoli: [34, 2.8, 7, 0.4],
   miltomate: [32, 1, 6, 1],
+  manzana: [95, 0.5, 25, 0.3], // pieza ~180 g
+  pepino: [45, 2, 11, 0.3], // pieza ~300 g
+  elote: [90, 3.3, 19, 1.4], // mazorca ~100 g de grano
+  yuca: [160, 1.4, 38, 0.3],
+  guicoy: [35, 2.5, 7, 0.4], // pieza ~200 g
+  hierbabuena: [44, 3.3, 8, 0.7],
   'pollo-pechuga': [120, 22.5, 0, 2.6],
   'pollo-piezas': [160, 17, 0, 10], // con hueso, parte comestible
   'res-molida': [250, 17, 0, 20],
@@ -27,12 +33,14 @@ export const NUTRICION: Record<string, Nutrientes> = {
   cerdo: [200, 19, 0, 13],
   jamon: [145, 17, 2, 7],
   atun: [140, 30, 0, 1.5], // lata escurrida ~120 g
+  pavo: [105, 17, 3, 2.5],
   huevo: [72, 6.3, 0.4, 4.8],
   leche: [61, 3.2, 4.8, 3.3],
   crema: [250, 2.5, 3.5, 25],
   'queso-fresco': [300, 18, 3, 24],
   'queso-mozzarella': [300, 22, 2.2, 22],
   mantequilla: [717, 0.9, 0.1, 81],
+  yogur: [61, 3.5, 4.7, 3.3],
   arroz: [365, 7, 80, 0.7],
   'frijol-negro': [341, 21.6, 62, 1.4],
   pasta: [371, 13, 75, 1.5],
@@ -40,6 +48,9 @@ export const NUTRICION: Record<string, Nutrientes> = {
   'harina-maiz': [365, 9, 76, 4],
   aceite: [820, 0, 0, 92],
   azucar: [387, 0, 100, 0],
+  'harina-trigo': [364, 10, 76, 1],
+  'mantequilla-mani': [588, 25, 20, 50],
+  granola: [470, 10, 64, 20],
   tortillas: [65, 1.7, 13.5, 0.8], // pieza ~30 g
   'pan-frances': [160, 5, 30, 2], // pieza ~60 g
   'pan-molde': [1450, 45, 270, 18], // bolsa ~550 g

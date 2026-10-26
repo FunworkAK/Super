@@ -7,6 +7,7 @@ import type {
   Receta,
   TiendaId,
 } from './types';
+import { TODAS_TIENDAS } from './types';
 
 export interface Catalogo {
   recetas: Record<string, Receta>;
@@ -59,7 +60,7 @@ export function mejorCompra(
   let mejor: Compra | null = null;
   for (const p of precios) {
     if (p.ingredienteId !== ingredienteId) continue;
-    if (estrategia !== 'mejor' && p.tienda !== estrategia) continue;
+    if (!estrategia.includes(p.tienda)) continue;
     const c = cotizar(cantidad, p);
     if (!mejor || c.costo < mejor.costo) mejor = c;
   }
@@ -107,13 +108,17 @@ export function armarLista(
   return { lineas, total, sinPrecio: lineas.filter((l) => !l.compra), porTienda };
 }
 
-// Total de la lista para cada estrategia, para comparar tiendas.
+// Total de la lista en cada tienda por separado y combinando las elegidas.
 export function compararTiendas(
   plan: ItemPlan[],
   inventario: Inventario,
   cat: Catalogo,
+  elegidas: Estrategia,
 ): { estrategia: Estrategia; total: number; sinPrecio: number }[] {
-  const estrategias: Estrategia[] = ['mejor', 'walmart', 'latorre', 'pricesmart'];
+  const estrategias: Estrategia[] = [
+    ...(elegidas.length > 1 ? [elegidas] : []),
+    ...TODAS_TIENDAS.map((t) => [t]),
+  ];
   return estrategias.map((estrategia) => {
     const l = armarLista(plan, inventario, cat, estrategia);
     return { estrategia, total: l.total, sinPrecio: l.sinPrecio.length };

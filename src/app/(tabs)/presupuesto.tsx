@@ -3,10 +3,11 @@ import { ScrollView, Text, TextInput, View } from 'react-native';
 import { Boton, Suave, Tarjeta, Titulo, colores, estilos } from '../../components/ui';
 import { compararTiendas, formatoQ, sugerirCambios } from '../../domain/planificador';
 import { TIENDAS } from '../../domain/types';
+import { SelectorTiendas } from '../../components/tiendas';
 import { useApp } from '../../state/AppState';
 
 export default function Presupuesto() {
-  const { cargado, presupuesto, setPresupuesto, plan, setPlan, inventario, catalogo, estrategia, setEstrategia } = useApp();
+  const { cargado, presupuesto, setPresupuesto, plan, setPlan, inventario, catalogo, tiendas, setTiendas } = useApp();
   const [texto, setTexto] = useState(String(presupuesto));
 
   // El presupuesto guardado se carga después del primer render.
@@ -15,13 +16,14 @@ export default function Presupuesto() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cargado]);
 
-  const comparacion = useMemo(() => compararTiendas(plan, inventario, catalogo), [plan, inventario, catalogo]);
-  const actual = comparacion.find((c) => c.estrategia === estrategia)?.total ?? 0;
+  const comparacion = useMemo(() => compararTiendas(plan, inventario, catalogo, tiendas), [plan, inventario, catalogo, tiendas]);
+  const mismas = (a: string[]) => a.length === tiendas.length && a.every((t) => tiendas.includes(t as never));
+  const actual = comparacion.find((c) => mismas(c.estrategia))?.total ?? 0;
   const pasado = actual > presupuesto;
 
   const sugerencias = useMemo(
-    () => (pasado ? sugerirCambios(plan, inventario, catalogo, estrategia) : []),
-    [pasado, plan, inventario, catalogo, estrategia],
+    () => (pasado ? sugerirCambios(plan, inventario, catalogo, tiendas) : []),
+    [pasado, plan, inventario, catalogo, tiendas],
   );
 
   const aplicar = (quitarId: string, ponerId: string) =>
@@ -49,12 +51,16 @@ export default function Presupuesto() {
         </View>
       </Tarjeta>
 
-      <Titulo>¿Dónde sale más barato?</Titulo>
+      <Titulo>¿Dónde vas a comprar?</Titulo>
+      <SelectorTiendas />
+      <Suave>El total usa el precio más bajo entre las tiendas que elijas.</Suave>
+
+      <Titulo>Comparar tiendas</Titulo>
       {comparacion.map((c) => {
-        const nombre = c.estrategia === 'mejor' ? 'Combinando tiendas' : TIENDAS[c.estrategia];
-        const activo = c.estrategia === estrategia;
+        const nombre = c.estrategia.length > 1 ? 'Tus tiendas, combinadas' : TIENDAS[c.estrategia[0]];
+        const activo = mismas(c.estrategia);
         return (
-          <Tarjeta key={c.estrategia} style={activo && { borderColor: colores.primario, borderWidth: 2 }}>
+          <Tarjeta key={c.estrategia.join('+')} style={activo && { borderColor: colores.primario, borderWidth: 2 }}>
             <View style={estilos.fila}>
               <View style={{ flex: 1 }}>
                 <Text style={estilos.texto}>{nombre}</Text>
@@ -63,7 +69,7 @@ export default function Presupuesto() {
               <Text style={[estilos.texto, { color: c.total > presupuesto ? colores.alerta : colores.primario }]}>
                 {formatoQ(c.total)}
               </Text>
-              {!activo && <Boton pequeno tipo="secundario" titulo="Usar" onPress={() => setEstrategia(c.estrategia)} />}
+              {!activo && <Boton pequeno tipo="secundario" titulo="Usar" onPress={() => setTiendas(c.estrategia)} />}
             </View>
           </Tarjeta>
         );

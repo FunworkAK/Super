@@ -93,6 +93,7 @@ export const estilos = StyleSheet.create({
   suave: { fontSize: 13, color: colores.suave },
   texto: { fontSize: 15, color: colores.texto },
   input: {
+    minWidth: 0, // en la web, sin esto un input con flex: 1 se sale de su fila
     backgroundColor: colores.tarjeta,
     borderWidth: 1,
     borderColor: colores.borde,
