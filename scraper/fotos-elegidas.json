@@ -296,12 +296,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Banana_Milkshake.jpg"
   },
   "pollo-asado": {
-    "consulta": "roast chicken | pollo asado",
-    "archivo": "File:Roasted chicken leg piece-MB20.jpg",
+    "consulta": "File:Roasted chicken with vegetables.jpg",
+    "archivo": "File:Roasted chicken with vegetables.jpg",
     "ruta": "assets/fotos/pollo-asado.jpg",
-    "autor": "Rajeeb Dutta",
-    "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Roasted_chicken_leg_piece-MB20.jpg"
+    "autor": "Phoebe",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Roasted_chicken_with_vegetables.jpg"
   },
   "carne-asada": {
     "consulta": "Carne asada | churrasco",
@@ -384,12 +384,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg"
   },
   "aparato-horno": {
-    "consulta": "roasting chicken in oven | cake baking in oven | oven baking",
-    "archivo": "File:Roasted chicken with vegetables.jpg",
+    "consulta": "wall oven | oven interior | oven",
+    "archivo": "File:Clay oven near Kouty, Třebíč District.jpg",
     "ruta": "assets/fotos/aparato-horno.jpg",
-    "autor": "Phoebe",
+    "autor": "Jiří Sedláček",
     "licencia": "CC BY-SA 3.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Roasted_chicken_with_vegetables.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Clay_oven_near_Kouty,_T%C5%99eb%C3%AD%C4%8D_District.jpg"
   },
   "aparato-microondas": {
     "consulta": "microwave oven",
