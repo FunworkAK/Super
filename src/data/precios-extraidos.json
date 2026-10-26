@@ -3,7 +3,7 @@
     "tienda": "walmart",
     "ingredienteId": "tomate",
     "nombre": "Tomate De Cocina En Red 3 Libras - 5 a 7 Unidades Aproximadamente -",
-    "tamano": 3000,
+    "tamano": 1360.8,
     "precio": 6.25,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
@@ -12,7 +12,7 @@
     "tienda": "walmart",
     "ingredienteId": "cebolla",
     "nombre": "Cebolla Morada 1 Lb - 3 a 4 Unidades por Libra Aproximadamente",
-    "tamano": 200,
+    "tamano": 453.6,
     "precio": 9.4,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
@@ -20,18 +20,18 @@
   {
     "tienda": "walmart",
     "ingredienteId": "ajo",
-    "nombre": "Ajo Badia Picado  En Aceite - 227 g",
-    "tamano": 227,
-    "precio": 10,
+    "nombre": "Palitos Helios Con Ajo - 163 g",
+    "tamano": 163,
+    "precio": 9.5,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
     "ingredienteId": "papa",
-    "nombre": "Papa Hortifruti Super Red - 10 a 13 Unidades por Libra Aproximadamente",
-    "tamano": 3000,
-    "precio": 8.2,
+    "nombre": "Papa Libra - 5 Unidades por lb Aproximadamente",
+    "tamano": 453.6,
+    "precio": 5.6,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -102,43 +102,34 @@
     "tienda": "walmart",
     "ingredienteId": "brocoli",
     "nombre": "Brocoli Entero Libra - Unidad contiene 1Lb Aproximadamente",
-    "tamano": 1000,
+    "tamano": 453.6,
     "precio": 6.6,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
-    "ingredienteId": "miltomate",
-    "nombre": "Salsa De Miltomate B&B - 370 g",
-    "tamano": 370,
-    "precio": 12.25,
-    "actualizado": "2026-10-26",
-    "fuente": "extractor"
-  },
-  {
-    "tienda": "walmart",
     "ingredienteId": "pollo-pechuga",
-    "nombre": "Filete Pechuga de Pollo Pio Lindo Porcionaditos Precio por Libra",
-    "tamano": 4890,
-    "precio": 31,
+    "nombre": "Pechuga Deshuesada Pollo Rey En Bandeja De 5 lbs Aproximadamente - Precio Indicado Por libra",
+    "tamano": 2268,
+    "precio": 39,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
     "ingredienteId": "res-molida",
-    "nombre": "Molida Condimentada Empacada 80% Carne 20% Grasa - Precio Indicado Por Libra",
-    "tamano": 1000,
-    "precio": 29.5,
+    "nombre": "Carne Molida Especial Don Cristóbal 85% Carne y 15% Grasa Empacado - Precio Indicado por libra",
+    "tamano": 453.6,
+    "precio": 34.9,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
     "ingredienteId": "res-guisar",
-    "nombre": "Costilla Marketside de res en bandeja - Precio indicado por libra",
-    "tamano": 2000,
+    "nombre": "Hueso Especial De Res Porcionado - Precio Indicado por libra",
+    "tamano": 453.6,
     "precio": 22,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
@@ -146,9 +137,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "cerdo",
-    "nombre": "Chuleta De Cerdo Ahumada lb",
-    "tamano": 1000,
-    "precio": 27.75,
+    "nombre": "Chuleta Fresca De Cerdo Porcionada lb",
+    "tamano": 453.6,
+    "precio": 16.5,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -200,18 +191,18 @@
   {
     "tienda": "walmart",
     "ingredienteId": "queso-mozzarella",
-    "nombre": "Queso Monteverde Mozzarella - Precio Indicado por libra",
-    "tamano": 1000,
-    "precio": 56,
+    "nombre": "Queso Mozzarella Great Value semidescremado rallado - 2.27 kg",
+    "tamano": 2270,
+    "precio": 135,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
     "ingredienteId": "mantequilla",
-    "nombre": "Ayote Mantequilla Libra",
-    "tamano": 1000,
-    "precio": 7,
+    "nombre": "Jarabe Maby de maple mantequilla - 420 g",
+    "tamano": 420,
+    "precio": 14,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -308,18 +299,18 @@
   {
     "tienda": "walmart",
     "ingredienteId": "pimienta",
-    "nombre": "Sazonador Sassón sal de mar con pimienta negra - 350 g",
-    "tamano": 350,
-    "precio": 22.75,
+    "nombre": "Pimienta Great Value Negra Molida - 510 g",
+    "tamano": 510,
+    "precio": 61.75,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
   {
     "tienda": "walmart",
     "ingredienteId": "consome",
-    "nombre": "Consomé Rodeo Club Don Gusto de pollo - 400 g",
-    "tamano": 400,
-    "precio": 7.5,
+    "nombre": "Consomé Sasson de pollo tradicional - 454 g",
+    "tamano": 454,
+    "precio": 13,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -353,9 +344,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "ajonjoli",
-    "nombre": "Hamburguesa Tahona Ajonjoli 6 Pack - 1800 g",
-    "tamano": 1800,
-    "precio": 10.5,
+    "nombre": "Nachos Los Cebollines Chía y Ajonjolí - 350 g",
+    "tamano": 350,
+    "precio": 22.5,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
