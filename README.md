@@ -12,6 +12,12 @@ App móvil (Android y iPhone) para planificar las comidas de la semana, armar la
 
 Los datos se guardan en el teléfono.
 
+## Versión web
+
+Se publica sola en **https://funworkak.github.io/Super/** cada vez que cambia `main` y después de cada actualización de precios (`.github/workflows/web.yml`). Los datos se guardan en el navegador.
+
+Para generarla a mano: `npx expo export --platform web` (queda en `dist/`).
+
 ## Probarla en tu teléfono
 
 1. Instala [Node.js 22](https://nodejs.org) y la app **Expo Go** en tu teléfono.

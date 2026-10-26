@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { Alert, Pressable, ScrollView, Text, View } from 'react-native';
-import { Boton, Chip, Suave, Tarjeta, Titulo, colores, estilos } from '../components/ui';
+import { Pressable, ScrollView, Text, View } from 'react-native';
+import { Boton, Chip, confirmar, Suave, Tarjeta, Titulo, colores, estilos } from '../components/ui';
 import { agregarCompras, armarLista, formatoCantidad, formatoQ } from '../domain/planificador';
 import { TIENDAS, type Estrategia } from '../domain/types';
 import { useApp } from '../state/AppState';
@@ -77,7 +77,7 @@ export default function Lista() {
                   </Text>
                   <Suave>
                     {l.compra
-                      ? `${l.compra.paquetes} × ${l.compra.producto.nombre} en ${TIENDAS[l.compra.producto.tienda]}`
+                      ? `${l.compra.paquetes} × ${l.compra.producto.nombre} en ${TIENDAS[l.compra.producto.tienda]}${l.compra.producto.fuente === 'estimado' ? ' (precio estimado)' : ''}`
                       : 'No disponible en esta tienda'}
                   </Suave>
                 </View>
@@ -92,10 +92,7 @@ export default function Lista() {
         <Boton
           titulo={`Pasar ${marcados.size} comprados a la despensa`}
           onPress={() =>
-            Alert.alert('Terminar compra', 'Los productos marcados se agregarán a tu despensa.', [
-              { text: 'Cancelar', style: 'cancel' },
-              { text: 'Agregar', onPress: terminarCompra },
-            ])
+            confirmar('Terminar compra', 'Los productos marcados se agregarán a tu despensa.', 'Agregar', terminarCompra)
           }
         />
       )}

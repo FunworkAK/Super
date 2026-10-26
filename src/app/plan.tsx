@@ -1,5 +1,5 @@
-import { Alert, ScrollView, Text, View } from 'react-native';
-import { Boton, Suave, Tarjeta, Titulo, estilos } from '../components/ui';
+import { ScrollView, Text, View } from 'react-native';
+import { Boton, confirmar, Suave, Tarjeta, Titulo, estilos } from '../components/ui';
 import { descontarReceta } from '../domain/planificador';
 import { useApp } from '../state/AppState';
 
@@ -40,10 +40,7 @@ export default function Plan() {
                 pequeno
                 titulo="Ya la cociné"
                 onPress={() =>
-                  Alert.alert('¿Ya la cocinaste?', 'Se descontarán los ingredientes de tu despensa.', [
-                    { text: 'Cancelar', style: 'cancel' },
-                    { text: 'Sí', onPress: () => cocinada(i) },
-                  ])
+                  confirmar('¿Ya la cocinaste?', 'Se descontarán los ingredientes de tu despensa.', 'Sí', () => cocinada(i))
                 }
               />
               <Boton pequeno tipo="peligro" titulo="Quitar" onPress={() => quitar(i)} />

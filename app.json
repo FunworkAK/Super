@@ -19,11 +19,16 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "static",
+      "name": "Super y Recetas"
     },
     "plugins": [
       "expo-router"
     ],
-    "scheme": "superrecetas"
+    "scheme": "superrecetas",
+    "experiments": {
+      "baseUrl": "/Super"
+    }
   }
 }

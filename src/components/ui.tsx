@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import { Alert, Platform, Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
 export const colores = {
   fondo: '#F7F5F0',
@@ -12,6 +12,18 @@ export const colores = {
   alerta: '#B3412E',
   alertaSuave: '#F8E5E1',
 };
+
+// Alert.alert no muestra nada en la web, así que ahí se usa window.confirm.
+export function confirmar(titulo: string, mensaje: string, textoOk: string, onOk: () => void) {
+  if (Platform.OS === 'web') {
+    if (window.confirm(`${titulo}\n\n${mensaje}`)) onOk();
+    return;
+  }
+  Alert.alert(titulo, mensaje, [
+    { text: 'Cancelar', style: 'cancel' },
+    { text: textoOk, onPress: onOk },
+  ]);
+}
 
 export function Tarjeta({ children, style }: { children: ReactNode; style?: StyleProp<ViewStyle> }) {
   return <View style={[estilos.tarjeta, style]}>{children}</View>;
@@ -67,7 +79,7 @@ export function Suave({ children }: { children: ReactNode }) {
 
 export const estilos = StyleSheet.create({
   pantalla: { flex: 1, backgroundColor: colores.fondo },
-  contenido: { padding: 16, gap: 12, paddingBottom: 40 },
+  contenido: { padding: 16, gap: 12, paddingBottom: 40, width: '100%', maxWidth: 720, alignSelf: 'center' },
   tarjeta: {
     backgroundColor: colores.tarjeta,
     borderRadius: 12,
