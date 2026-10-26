@@ -13,7 +13,7 @@ export interface Busqueda {
 export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'tomate', termino: 'tomate', incluir: ['tomate'], excluir: ['salsa', 'pasta', 'pure', 'cherry'] },
   { ingredienteId: 'cebolla', termino: 'cebolla', incluir: ['cebolla'], excluir: ['polvo', 'sopa'] },
-  { ingredienteId: 'ajo', termino: 'ajo', incluir: ['ajo'], excluir: ['polvo', 'sal', 'pasta', 'aceite', 'picado', 'granulado'], empieza: ['ajo'] },
+  { ingredienteId: 'ajo', termino: 'ajo', incluir: ['ajo'], excluir: ['polvo', 'sal', 'pasta', 'aceite', 'picado', 'granulado', 'molido', 'frasco'], empieza: ['ajo'] },
   { ingredienteId: 'chile-pimiento', termino: 'chile pimiento', incluir: ['chile'] },
   { ingredienteId: 'papa', termino: 'papa', incluir: ['papa'], excluir: ['frita', 'tostada', 'chip', 'congelada'] },
   { ingredienteId: 'zanahoria', termino: 'zanahoria', incluir: ['zanahoria'], excluir: ['jugo', 'baby food'] },

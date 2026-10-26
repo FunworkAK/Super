@@ -29,7 +29,7 @@ Los datos se guardan en el teléfono.
 - `scraper/busquedas.ts` define cómo buscar cada ingrediente; ajusta los términos si un producto no se encuentra bien.
 - Pendiente: extractores de La Torre y PriceSmart.
 
-> El extractor de Walmart todavía no se ha probado contra el sitio real; revisa la salida de la primera ejecución.
+> El extractor de Walmart ya funciona contra walmart.com.gt (unos 40 de 47 ingredientes). Si algún producto queda mal emparejado, ajusta su entrada en `scraper/busquedas.ts`.
 
 ## Desarrollo
 
