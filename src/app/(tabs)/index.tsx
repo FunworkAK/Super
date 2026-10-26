@@ -133,7 +133,7 @@ function Fila({
   onQuitar: () => void;
   onHecha: () => void;
 }) {
-  const { catalogo } = useApp();
+  const { catalogo, fotos } = useApp();
   const receta = catalogo.recetas[item.recetaId];
   if (!receta) return null;
   const m = macrosPorPorcion(receta, catalogo.ingredientes);
@@ -143,7 +143,7 @@ function Fila({
         onPress={() => router.push(`/receta/${receta.id}`)}
         style={s.miniatura}
       >
-        <Foto clave={receta.id} emoji={EMOJI_RECETA[receta.id]} fondo={fondoReceta(receta.id)} tamanoEmoji={30} style={{ flex: 1 }} />
+        <Foto clave={receta.id} uri={fotos[receta.id]?.[0]?.uri} emoji={EMOJI_RECETA[receta.id]} fondo={fondoReceta(receta.id)} tamanoEmoji={30} style={{ flex: 1 }} />
       </Pressable>
       <View style={{ flex: 1, gap: 3 }}>
         {item.comida && <Text style={s.comida}>{COMIDAS[item.comida].toUpperCase()}</Text>}
@@ -184,7 +184,7 @@ function Alternativas({
   onElegir: (recetaId: string) => void;
   onCerrar: () => void;
 }) {
-  const { catalogo, inventario, config } = useApp();
+  const { catalogo, inventario, config, fotos } = useApp();
   const opciones = candidatas(catalogo, item.comida ?? 'almuerzo', config?.aparatos)
     .filter((r) => r.id !== item.recetaId)
     .map((r) => ({
@@ -207,7 +207,7 @@ function Alternativas({
           {opciones.map(({ r, costo, cobertura, kcal }) => (
             <Pressable key={r.id} onPress={() => onElegir(r.id)} style={s.opcion}>
               <View style={[s.miniatura, { width: 48, height: 48 }]}>
-                <Foto clave={r.id} emoji={EMOJI_RECETA[r.id]} fondo={fondoReceta(r.id)} tamanoEmoji={24} style={{ flex: 1 }} />
+                <Foto clave={r.id} uri={fotos[r.id]?.[0]?.uri} emoji={EMOJI_RECETA[r.id]} fondo={fondoReceta(r.id)} tamanoEmoji={24} style={{ flex: 1 }} />
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={s.nombre}>{r.nombre}</Text>

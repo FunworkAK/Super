@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { EMOJI_RECETA, fondoReceta } from '../data/visual';
 import type { Macros } from '../domain/macros';
 import type { Receta } from '../domain/types';
+import { useApp } from '../state/AppState';
 import { Foto } from './foto';
 import { colores } from './ui';
 
@@ -24,10 +25,13 @@ export function MacrosFila({ m, compacto }: { m: Macros; compacto?: boolean }) {
   );
 }
 
+// Muestra la foto más reciente que la persona subió de esta receta.
 export function Portada({ receta, alto = 140, grande }: { receta: Receta; alto?: number; grande?: boolean }) {
+  const { fotos } = useApp();
   return (
     <Foto
       clave={receta.id}
+      uri={fotos[receta.id]?.[0]?.uri}
       emoji={EMOJI_RECETA[receta.id] ?? '🍽️'}
       fondo={fondoReceta(receta.id)}
       tamanoEmoji={grande ? 96 : 56}

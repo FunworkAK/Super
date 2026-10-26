@@ -1,10 +1,10 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { MacrosFila, Portada } from '../../components/receta';
-import { Boton, Suave, colores, estilos } from '../../components/ui';
+import { elegirFoto } from '../../components/subir-foto';
+import { Boton, Suave, colores, confirmar, estilos } from '../../components/ui';
 import { APARATOS } from '../../data/aparatos';
-import { FOTOS } from '../../data/fotos';
 import { RECETAS } from '../../data/recetas';
 import { EMOJI_INGREDIENTE } from '../../data/visual';
 import { FUNCIONES_APARATO, NOMBRE_FUNCION, necesita } from '../../domain/aparatos';
@@ -19,7 +19,7 @@ export function generateStaticParams() {
 
 export default function DetalleReceta() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { catalogo, inventario, plan, setPlan, agregarAlPlan, config } = useApp();
+  const { catalogo, inventario, plan, setPlan, agregarAlPlan, config, fotos, agregarFoto, quitarFoto } = useApp();
   const receta = catalogo.recetas[id ?? ''];
   const enPlan = plan.findIndex((p) => p.recetaId === id);
   const [porciones, setPorciones] = useState(enPlan >= 0 ? plan[enPlan].porciones : (receta?.porciones ?? 4));
@@ -33,6 +33,11 @@ export default function DetalleReceta() {
   }
 
   const factor = porciones / receta.porciones;
+  const misFotos = fotos[receta.id] ?? [];
+  const subir = async () => {
+    const uri = await elegirFoto().catch(() => null);
+    if (uri) agregarFoto(receta.id, uri);
+  };
   const macros = macrosPorPorcion(receta, catalogo.ingredientes);
   const costo = costoPorPorcion(receta, catalogo);
   const tengo = receta.ingredientes.filter((i) => (inventario[i.id] ?? 0) >= i.cantidad * factor).length;
@@ -48,13 +53,6 @@ export default function DetalleReceta() {
       <ScrollView contentContainerStyle={[estilos.contenido, { paddingTop: 0, paddingHorizontal: 0 }]}>
         <Portada receta={receta} alto={260} grande />
         <View style={{ paddingHorizontal: 16, gap: 14 }}>
-          {FOTOS[receta.id] && (
-            <Pressable onPress={() => Linking.openURL(FOTOS[receta.id].pagina)}>
-              <Text style={s.credito} numberOfLines={1}>
-                📷 {FOTOS[receta.id].autor} · {FOTOS[receta.id].licencia} · Wikimedia Commons
-              </Text>
-            </Pressable>
-          )}
           <Pressable onPress={() => (router.canGoBack() ? router.back() : router.replace('/recetas'))}>
             <Text style={{ color: colores.primario, fontWeight: '600' }}>‹ Recetas</Text>
           </Pressable>
@@ -70,6 +68,28 @@ export default function DetalleReceta() {
               <Text style={s.fuente}>📎 Receta original en {receta.fuente.sitio} ↗</Text>
             </Pressable>
           )}
+
+          <Text style={s.seccion}>Mis fotos</Text>
+          {misFotos.length === 0 ? (
+            <Suave>¿Ya la cocinaste? Sube una foto de tu plato y será la portada de la receta.</Suave>
+          ) : (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+              {misFotos.map((f) => (
+                <View key={f.uri} style={s.miFoto}>
+                  <Image source={{ uri: f.uri }} style={s.miFotoImagen} resizeMode="cover" />
+                  <Pressable
+                    aria-label="Borrar foto"
+                    style={s.borrar}
+                    onPress={() => confirmar('Borrar foto', '¿Quieres borrar esta foto?', 'Borrar', () => quitarFoto(receta.id, f.uri))}
+                  >
+                    <Text style={{ color: '#fff', fontWeight: '800' }}>✕</Text>
+                  </Pressable>
+                  <Text style={s.fecha}>{new Date(f.fecha).toLocaleDateString('es-GT')}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          )}
+          <Boton tipo="secundario" titulo="📷  Subir foto de mi plato" onPress={subir} />
 
           <Text style={s.seccion}>Aparatos</Text>
           {necesita(receta).length === 0 ? (
@@ -161,7 +181,20 @@ export default function DetalleReceta() {
 const s = StyleSheet.create({
   titulo: { fontSize: 26, fontWeight: '800', color: colores.texto },
   meta: { fontSize: 14, color: colores.suave },
-  credito: { fontSize: 11, color: colores.suave, marginTop: 6 },
+  miFoto: { width: 150, borderRadius: 12, overflow: 'hidden', backgroundColor: colores.tarjeta },
+  miFotoImagen: { width: 150, height: 112 },
+  borrar: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: 'rgba(0,0,0,0.55)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fecha: { fontSize: 11, color: colores.suave, padding: 6 },
   fuente: { fontSize: 14, color: colores.primario, fontWeight: '600', textDecorationLine: 'underline' },
   seccion: { fontSize: 17, fontWeight: '700', color: colores.texto, marginTop: 6 },
   caja: { backgroundColor: colores.tarjeta, borderRadius: 14, borderWidth: 1, borderColor: colores.borde },

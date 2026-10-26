@@ -8,6 +8,14 @@ import type { Catalogo } from '../domain/planificador';
 import { COMIDAS, TODAS_TIENDAS, type ConfigMenu, type Inventario, type ItemPlan, type ProductoTienda, type TiendaId } from '../domain/types';
 
 const CLAVE = 'super-recetas/estado-v1';
+// Las fotos van aparte para no reescribirlas cada vez que cambia el estado.
+const CLAVE_FOTOS = 'super-recetas/fotos-v1';
+
+export interface FotoPropia {
+  uri: string;
+  fecha: string;
+}
+
 
 interface Guardado {
   inventario: Inventario;
@@ -54,6 +62,10 @@ interface AppState extends Guardado {
   setPresupuesto: (q: number) => void;
   setTiendas: (t: TiendaId[]) => void;
   setConfig: (c: ConfigMenu) => void;
+  // Fotos que la persona sube de los platos que cocina, la más reciente primero.
+  fotos: Record<string, FotoPropia[]>;
+  agregarFoto: (recetaId: string, uri: string) => void;
+  quitarFoto: (recetaId: string, uri: string) => void;
 }
 
 const Ctx = createContext<AppState | null>(null);
@@ -61,6 +73,8 @@ const Ctx = createContext<AppState | null>(null);
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const [estado, setEstado] = useState<Guardado>(INICIAL);
   const [cargado, setCargado] = useState(false);
+  const [fotos, setFotos] = useState<Record<string, FotoPropia[]>>({});
+  const [fotosCargadas, setFotosCargadas] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(CLAVE)
@@ -74,6 +88,19 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (cargado) AsyncStorage.setItem(CLAVE, JSON.stringify(estado)).catch(() => {});
   }, [estado, cargado]);
+
+  useEffect(() => {
+    AsyncStorage.getItem(CLAVE_FOTOS)
+      .then((json) => {
+        if (json) setFotos(JSON.parse(json));
+      })
+      .catch(() => {})
+      .finally(() => setFotosCargadas(true));
+  }, []);
+
+  useEffect(() => {
+    if (fotosCargadas) AsyncStorage.setItem(CLAVE_FOTOS, JSON.stringify(fotos)).catch(() => {});
+  }, [fotos, fotosCargadas]);
 
   const catalogo = useMemo<Catalogo>(
     () => ({
@@ -108,6 +135,16 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     setPresupuesto: (presupuesto) => setEstado((s) => ({ ...s, presupuesto })),
     setTiendas: (tiendas) => setEstado((s) => ({ ...s, tiendas: tiendas.length ? tiendas : s.tiendas })),
     setConfig: (config) => setEstado((s) => ({ ...s, config })),
+    fotos,
+    agregarFoto: (recetaId, uri) =>
+      setFotos((f) => ({ ...f, [recetaId]: [{ uri, fecha: new Date().toISOString() }, ...(f[recetaId] ?? [])] })),
+    quitarFoto: (recetaId, uri) =>
+      setFotos((f) => {
+        const resto = (f[recetaId] ?? []).filter((x) => x.uri !== uri);
+        const nuevo = { ...f, [recetaId]: resto };
+        if (!resto.length) delete nuevo[recetaId];
+        return nuevo;
+      }),
   };
 
   return <Ctx.Provider value={valor}>{children}</Ctx.Provider>;

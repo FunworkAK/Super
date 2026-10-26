@@ -1,21 +1,24 @@
 import { Image, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 import { FOTOS } from '../data/fotos';
 
-// Foto de Wikimedia Commons si la hay; si no, el emoji sobre un fondo de color.
+// La foto (subida por la persona o de Wikimedia Commons) si la hay; si no,
+// el emoji sobre un fondo de color.
 export function Foto({
   clave,
+  uri,
   emoji,
   fondo,
   tamanoEmoji = 56,
   style,
 }: {
   clave: string;
+  uri?: string;
   emoji: string;
   fondo: string;
   tamanoEmoji?: number;
   style?: StyleProp<ViewStyle>;
 }) {
-  const foto = FOTOS[clave];
+  const foto = uri ? { src: { uri } } : FOTOS[clave];
   return (
     <View style={[s.caja, { backgroundColor: fondo }, style]}>
       {foto ? (

@@ -1,6 +1,6 @@
 /// <reference types="node" />
-// Busca fotos con licencia libre en Wikimedia Commons para cada receta y
-// aparato de fotos-busquedas.ts, las guarda en assets/fotos/ y genera
+// Busca fotos con licencia libre en Wikimedia Commons para cada aparato
+// de cocina de fotos-busquedas.ts, las guarda en assets/fotos/ y genera
 // src/data/fotos.ts con la imagen y su crédito.
 //
 // Uso: npm run fotos            (solo busca las que faltan o cambiaron)

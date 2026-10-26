@@ -8,7 +8,7 @@ App móvil (Android y iPhone) para planificar las comidas de la semana, armar la
 - **Tiendas:** eliges una o varias (Walmart, La Torre, PriceSmart) y la lista usa el precio más bajo entre ellas.
 - **Recetas:** modo Descubrir (deslizar tarjetas, al estilo de Mise) y cuadrícula con filtros por comida. Algunas recetas vienen de sitios de cocina familiar (The Foodie's Kitchen, Guía Infantil) y enlazan a la original (`src/data/recetas-web.ts`).
 - **En la web:** enlaces a sitios de recetas sanas, internacionales, de pollo asado, carne asada y comidas fáciles.
-- **Fotos:** las fotos de recetas y aparatos vienen de Wikimedia Commons con licencia libre (`npm run fotos`, o la acción "Buscar fotos"), con su crédito en cada receta.
+- **Fotos:** cada persona sube las fotos de los platos que cocina desde la receta o al terminar el Modo cocina; se guardan en su dispositivo. Las fotos de los aparatos vienen de Wikimedia Commons con licencia libre (`npm run fotos`, o la acción "Buscar fotos").
 - **Despensa visual:** cuadrícula de ingredientes por pasillo; tocas uno y ajustas cuánto tienes (libras, litros o unidades). La lista lo descuenta.
 - **Macros:** calorías, proteína, carbohidratos y grasa por porción (valores aproximados en `src/data/nutricion.ts`), y promedio de la semana.
 - **Modo cocina:** paso a paso con letra grande; al terminar descuenta la despensa.

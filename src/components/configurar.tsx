@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Linking, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { APARATOS, APARATOS_INICIALES } from '../data/aparatos';
+import { FOTOS } from '../data/fotos';
 import { COMIDAS, DIAS, type AparatoId, type Comida, type ConfigMenu } from '../domain/types';
 import { useApp } from '../state/AppState';
 import { Foto } from './foto';
@@ -17,6 +18,7 @@ export function ConfigurarMenu({ onListo, onCancelar }: { onListo: (c: ConfigMen
   const [personas, setPersonas] = useState(config?.personas ?? 4);
   const [dias, setDias] = useState<number[]>(config?.dias ?? [0, 1, 2, 3, 4]);
   const [comidas, setComidas] = useState<Comida[]>(config?.comidas ?? ['almuerzo']);
+  const [verCreditos, setVerCreditos] = useState(false);
   const [aparatos, setAparatos] = useState<AparatoId[]>(config?.aparatos ?? APARATOS_INICIALES);
   const [textoPresupuesto, setTextoPresupuesto] = useState(String(presupuesto));
 
@@ -120,6 +122,20 @@ export function ConfigurarMenu({ onListo, onCancelar }: { onListo: (c: ConfigMen
             );
           })}
         </View>
+        <Pressable onPress={() => setVerCreditos(!verCreditos)}>
+          <Text style={s.creditos}>Fotos de Wikimedia Commons · {verCreditos ? 'ocultar' : 'ver'} créditos</Text>
+        </Pressable>
+        {verCreditos &&
+          APARATOS.filter((a) => FOTOS[`aparato-${a.id}`]).map((a) => {
+            const f = FOTOS[`aparato-${a.id}`];
+            return (
+              <Pressable key={a.id} onPress={() => Linking.openURL(f.pagina)}>
+                <Text style={s.creditos}>
+                  {a.nombre}: {f.autor} · {f.licencia} ↗
+                </Text>
+              </Pressable>
+            );
+          })}
       </Paso>
 
       {!valido && <Text style={{ color: colores.alerta }}>Elige al menos un día y una comida.</Text>}
@@ -249,6 +265,7 @@ const s = StyleSheet.create({
   },
   opcionActiva: { borderColor: colores.primario, backgroundColor: colores.primarioSuave },
   opcionTexto: { fontWeight: '700', color: colores.texto, fontSize: 13 },
+  creditos: { fontSize: 11, color: colores.suave },
   aparatos: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   aparato: {
     width: 104,

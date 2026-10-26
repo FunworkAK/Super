@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { elegirFoto } from '../../components/subir-foto';
 import { Boton, Suave, colores, confirmar, estilos } from '../../components/ui';
 import { RECETAS } from '../../data/recetas';
 import { EMOJI_INGREDIENTE, EMOJI_RECETA } from '../../data/visual';
@@ -14,7 +15,7 @@ export function generateStaticParams() {
 // Modo cocina: un paso a la vez, con letra grande y los ingredientes a mano.
 export default function ModoCocina() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { catalogo, plan, setPlan, inventario, setInventario } = useApp();
+  const { catalogo, plan, setPlan, inventario, setInventario, fotos, agregarFoto } = useApp();
   const receta = catalogo.recetas[id ?? ''];
   const [paso, setPaso] = useState(-1); // -1 = ingredientes
 
@@ -64,6 +65,19 @@ export default function ModoCocina() {
               PASO {paso + 1} DE {total}
             </Text>
             <Text style={s.grande}>{receta.pasos[paso]}</Text>
+            {ultimo && (
+              <View style={{ marginTop: 24, gap: 8 }}>
+                <Text style={s.etiqueta}>¿QUEDÓ RICO?</Text>
+                <Boton
+                  tipo="secundario"
+                  titulo={fotos[receta.id]?.length ? '📷  Subir otra foto de tu plato' : '📷  Sube una foto de tu plato'}
+                  onPress={async () => {
+                    const uri = await elegirFoto().catch(() => null);
+                    if (uri) agregarFoto(receta.id, uri);
+                  }}
+                />
+              </View>
+            )}
           </>
         )}
       </ScrollView>
