@@ -43,7 +43,7 @@ export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
   'sandwich-pavo': ['turkey sandwich lettuce', 'turkey club sandwich', 'turkey sandwich'],
   'rollitos-pollo': ['chicken wrap', 'chicken wraps tortilla'],
   'licuado-banano': ['banana milkshake', 'banana smoothie glass'],
-  'pollo-asado': ['roast chicken', 'pollo asado'],
+  'pollo-asado': ['File:Roasted chicken with vegetables.jpg'],
   'carne-asada': ['Carne asada', 'churrasco'],
   'fajitas-pollo': ['chicken fajitas'],
   'salteado-pollo': ['chicken stir fry vegetables', 'chicken stir fry'],
@@ -56,7 +56,7 @@ export const BUSQUEDAS_FOTOS: Record<string, string[]> = {
 
   // Aparatos
   'aparato-estufa': ['gas stove burners', 'kitchen stove'],
-  'aparato-horno': ['roasting chicken in oven', 'cake baking in oven', 'oven baking'],
+  'aparato-horno': ['wall oven', 'oven interior', 'oven'],
   'aparato-microondas': ['microwave oven'],
   'aparato-freidora': ['File:Untraditional air fryer beignets in toaster oven.jpg'],
   'aparato-parrilla': ['barbecue grill meat', 'grilling steak charcoal'],
