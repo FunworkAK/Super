@@ -69,7 +69,10 @@ async function main() {
           if (!oferta || oferta.AvailableQuantity <= 0 || oferta.Price <= 0) continue;
           // measurementUnit/unitMultiplier de VTEX no son confiables en este
           // sitio; el tamaño se lee del nombre.
-          const tamano = tamanoDesdeNombre(p.productName, ing.unidad) ?? tamanoDesdeNombre(item.name, ing.unidad);
+          const porLibra = /\b(libra|lb|lbs)\b/i.test(p.productName);
+          const tamano =
+            tamanoDesdeNombre(p.productName, ing.unidad) ??
+            (porLibra ? null : tamanoDesdeNombre(item.name, ing.unidad));
           if (!tamano) continue;
           const ref = referencia(ing.id);
           const proporcion = ref ? oferta.Price / tamano / ref : 1;
