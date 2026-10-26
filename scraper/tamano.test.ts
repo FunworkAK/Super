@@ -20,6 +20,8 @@ test('productos a granel de Walmart se toman por libra', () => {
   assert.equal(tamanoDesdeNombre('Filete Pechuga de Pollo Pio Lindo Porcionaditos Precio por Libra', 'g'), 453.6);
   assert.equal(tamanoDesdeNombre('Brocoli Entero Libra - Unidad contiene 1Lb Aproximadamente', 'g'), 453.6);
   assert.equal(tamanoDesdeNombre('Chuleta De Cerdo Ahumada lb', 'g'), 453.6);
+  assert.equal(tamanoDesdeNombre('Pechuga Pollo Rey En Bandeja De 5 lbs Aproximadamente - Precio Indicado Por libra', 'g'), 453.6);
+  assert.equal(tamanoDesdeNombre('Banano Datil Libra', 'u'), null);
   // Por unidad no se puede convertir una libra de plátanos.
   assert.equal(tamanoDesdeNombre('Platano Libra', 'u'), null);
   assert.equal(tamanoDesdeNombre('Aguacate hass en malla - 9 a 10 Unidades Aproximadamente', 'u'), 10);

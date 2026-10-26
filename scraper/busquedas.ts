@@ -6,12 +6,14 @@ export interface Busqueda {
   termino: string;
   incluir: string[];
   excluir?: string[];
+  // El nombre debe empezar con alguna de estas palabras.
+  empieza?: string[];
 }
 
 export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'tomate', termino: 'tomate', incluir: ['tomate'], excluir: ['salsa', 'pasta', 'pure', 'cherry'] },
   { ingredienteId: 'cebolla', termino: 'cebolla', incluir: ['cebolla'], excluir: ['polvo', 'sopa'] },
-  { ingredienteId: 'ajo', termino: 'ajo', incluir: ['ajo'], excluir: ['polvo', 'sal', 'pasta', 'aceite', 'picado'] },
+  { ingredienteId: 'ajo', termino: 'ajo', incluir: ['ajo'], excluir: ['polvo', 'sal', 'pasta', 'aceite', 'picado'], empieza: ['ajo'] },
   { ingredienteId: 'chile-pimiento', termino: 'chile pimiento', incluir: ['chile'] },
   { ingredienteId: 'papa', termino: 'papa', incluir: ['papa'], excluir: ['frita', 'tostada', 'chip', 'congelada'] },
   { ingredienteId: 'zanahoria', termino: 'zanahoria', incluir: ['zanahoria'], excluir: ['jugo', 'baby food'] },
@@ -28,7 +30,7 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'pollo-pechuga', termino: 'pechuga de pollo', incluir: ['pechuga'], excluir: ['empanizada', 'nugget', 'jamón', 'jamon'] },
   { ingredienteId: 'pollo-piezas', termino: 'pollo piezas', incluir: ['pollo'], excluir: ['pechuga', 'empanizado', 'nugget', 'consom'] },
   { ingredienteId: 'res-molida', termino: 'carne molida res', incluir: ['molida'], excluir: ['cerdo', 'pavo', 'pollo', 'condimentada'] },
-  { ingredienteId: 'res-guisar', termino: 'carne res guisar', incluir: ['res'], excluir: ['molida', 'consom'] },
+  { ingredienteId: 'res-guisar', termino: 'carne res guisar', incluir: ['res'], excluir: ['molida', 'consom', 'hueso'] },
   { ingredienteId: 'cerdo', termino: 'chuleta cerdo', incluir: ['cerdo'], excluir: ['molida', 'chicharr', 'salchicha'] },
   { ingredienteId: 'jamon', termino: 'jamon', incluir: ['jam'] },
   { ingredienteId: 'atun', termino: 'atun lata', incluir: ['at'], excluir: ['ensalada'] },
@@ -37,7 +39,7 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'crema', termino: 'crema', incluir: ['crema'], excluir: ['dental', 'corporal', 'batida', 'cacahuate', 'manos', 'peinar'] },
   { ingredienteId: 'queso-fresco', termino: 'queso fresco', incluir: ['queso', 'fresco'] },
   { ingredienteId: 'queso-mozzarella', termino: 'queso mozzarella', incluir: ['mozzarella'] },
-  { ingredienteId: 'mantequilla', termino: 'mantequilla', incluir: ['mantequilla'], excluir: ['cacahuate', 'maní', 'galleta', 'ayote'] },
+  { ingredienteId: 'mantequilla', termino: 'mantequilla', incluir: ['mantequilla'], excluir: ['cacahuate', 'maní', 'galleta', 'ayote'], empieza: ['mantequilla'] },
   { ingredienteId: 'arroz', termino: 'arroz', incluir: ['arroz'], excluir: ['leche', 'galleta', 'harina', 'cereal', 'listo'] },
   { ingredienteId: 'frijol-negro', termino: 'frijol negro', incluir: ['frijol', 'negro'], excluir: ['volteado', 'lata', 'bolsa lista'] },
   { ingredienteId: 'pasta', termino: 'pasta espagueti', incluir: ['pasta'], excluir: ['dental', 'tomate', 'salsa'] },
@@ -54,6 +56,6 @@ export const BUSQUEDAS: Busqueda[] = [
   { ingredienteId: 'salsa-tomate', termino: 'salsa de tomate', incluir: ['salsa', 'tomate'], excluir: ['ketchup', 'kétchup'] },
   { ingredienteId: 'salsa-inglesa', termino: 'salsa inglesa', incluir: ['inglesa'] },
   { ingredienteId: 'pepitoria', termino: 'pepitoria', incluir: ['pepitoria'] },
-  { ingredienteId: 'ajonjoli', termino: 'ajonjoli', incluir: ['ajonjol'], excluir: ['hamburguesa', 'pan', 'galleta'] },
+  { ingredienteId: 'ajonjoli', termino: 'ajonjoli', incluir: ['ajonjol'], excluir: ['hamburguesa', 'pan', 'galleta'], empieza: ['ajonjol', 'semilla'] },
   { ingredienteId: 'vegetales-congelados', termino: 'vegetales mixtos congelados', incluir: ['vegetales'] },
 ];

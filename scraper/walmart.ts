@@ -63,6 +63,7 @@ async function main() {
         const nombre = p.productName.toLowerCase();
         if (!b.incluir.every((k) => nombre.includes(k))) continue;
         if (b.excluir?.some((k) => nombre.includes(k))) continue;
+        if (b.empieza && !b.empieza.some((k) => nombre.trimStart().startsWith(k))) continue;
         for (const item of p.items) {
           const oferta = item.sellers[0]?.commertialOffer;
           if (!oferta || oferta.AvailableQuantity <= 0 || oferta.Price <= 0) continue;

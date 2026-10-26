@@ -10,6 +10,11 @@ const A_UNIDADES: Record<string, number> = { u: 1, un: 1, und: 1, unidad: 1, uni
 // "Huevos blancos 15 unidades" → 15, "Atún 4 x 140 g" → 560 g.
 export function tamanoDesdeNombre(nombre: string, unidad: Unidad): number | null {
   const texto = nombre.toLowerCase().replace(/,/g, '.');
+  const porLibra = /\b(libra|lb|lbs)\b/.test(texto);
+  // Lo que se vende por libra no se puede convertir a unidades.
+  if (unidad === 'u' && porLibra && !/\d+\s*(u|uds|unidades)\b/.test(texto)) return null;
+  // "Bandeja de 5 lbs - Precio indicado por libra": el precio es de 1 lb.
+  if (unidad === 'g' && /precio (indicado )?por (libra|lb)/.test(texto)) return A_GRAMOS.lb;
   const tabla = unidad === 'g' ? A_GRAMOS : unidad === 'ml' ? A_ML : A_UNIDADES;
   const re = /(?:(\d+)\s*[x×]\s*)?(\d+(?:\.\d+)?)\s*([a-zá]+)\b/g;
   for (const m of texto.matchAll(re)) {
@@ -19,7 +24,7 @@ export function tamanoDesdeNombre(nombre: string, unidad: Unidad): number | null
     return Math.round(multiplo * Number(m[2]) * factor * 100) / 100;
   }
   // Productos a granel: "Precio por libra", "Chuleta de cerdo lb", "Banano Libra".
-  if (unidad === 'g' && /\b(libra|lb)\b/.test(texto)) return A_GRAMOS.lb;
+  if (unidad === 'g' && porLibra) return A_GRAMOS.lb;
   // Paquetes como "pack 6" o "6 pack" para ingredientes por unidad.
   if (unidad === 'u') {
     const pack = texto.match(/(\d+)\s*pack|pack\s*(?:de\s*)?(\d+)/);
