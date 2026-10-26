@@ -20,9 +20,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "ajo",
-    "nombre": "Palitos Helios Con Ajo - 163 g",
-    "tamano": 163,
-    "precio": 9.5,
+    "nombre": "Ajo Great Value Granulado - 737 g",
+    "tamano": 737,
+    "precio": 65,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -110,9 +110,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "pollo-pechuga",
-    "nombre": "Pechuga Deshuesada Pollo Rey En Bandeja De 5 lbs Aproximadamente - Precio Indicado Por libra",
-    "tamano": 2268,
-    "precio": 39,
+    "nombre": "Filete de pechuga de pollo Pio Lindo corte fresco - 3 lb",
+    "tamano": 1360.8,
+    "precio": 35,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -128,7 +128,7 @@
   {
     "tienda": "walmart",
     "ingredienteId": "res-guisar",
-    "nombre": "Hueso Especial De Res Porcionado - Precio Indicado por libra",
+    "nombre": "Costilla Marketside de res en bandeja - Precio indicado por libra",
     "tamano": 453.6,
     "precio": 22,
     "actualizado": "2026-10-26",
@@ -200,9 +200,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "mantequilla",
-    "nombre": "Jarabe Maby de maple mantequilla - 420 g",
-    "tamano": 420,
-    "precio": 14,
+    "nombre": "Mantequilla Lurpak Con Sal - 200 g",
+    "tamano": 200,
+    "precio": 30,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
@@ -344,9 +344,9 @@
   {
     "tienda": "walmart",
     "ingredienteId": "ajonjoli",
-    "nombre": "Nachos Los Cebollines Chía y Ajonjolí - 350 g",
-    "tamano": 350,
-    "precio": 22.5,
+    "nombre": "Ajonjoli  De La Provincia - 56 g",
+    "tamano": 56,
+    "precio": 5.5,
     "actualizado": "2026-10-26",
     "fuente": "extractor"
   },
