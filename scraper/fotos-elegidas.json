@@ -247,14 +247,6 @@
     "licencia": "CC BY-SA 4.0",
     "pagina": "https://commons.wikimedia.org/wiki/File:Chilaquiles_at_the_Grand_Cantina,_Windsor,_Ontario,_2025-09-01_04.jpg"
   },
-  "tortitas-carne": {
-    "consulta": "carne en salsa de tomate | tortas de carne | meatballs tomato sauce rice",
-    "archivo": "File:Capeletti argentino con salsa de tomate, carne picada y cebolla.jpg",
-    "ruta": "assets/fotos/tortitas-carne.jpg",
-    "autor": "Horacio Cambeiro",
-    "licencia": "CC BY-SA 3.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Capeletti_argentino_con_salsa_de_tomate,_carne_picada_y_cebolla.jpg"
-  },
   "cocido-res": {
     "consulta": "cocido de res | beef stew corn cassava",
     "archivo": "File:Cocido, o caldo de res.jpg",
@@ -392,12 +384,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg"
   },
   "aparato-horno": {
-    "consulta": "oven door open baking tray | Electrolux oven | stove with oven kitchen",
-    "archivo": "File:Electrolux Microwave.jpg",
+    "consulta": "roasting chicken in oven | cake baking in oven | oven baking",
+    "archivo": "File:Roasted chicken with vegetables.jpg",
     "ruta": "assets/fotos/aparato-horno.jpg",
-    "autor": "Twentyfour Students",
-    "licencia": "CC BY-SA 2.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Electrolux_Microwave.jpg"
+    "autor": "Phoebe",
+    "licencia": "CC BY-SA 3.0",
+    "pagina": "https://commons.wikimedia.org/wiki/File:Roasted_chicken_with_vegetables.jpg"
   },
   "aparato-microondas": {
     "consulta": "microwave oven",
@@ -408,12 +400,12 @@
     "pagina": "https://commons.wikimedia.org/wiki/File:Microwave_Oven.jpg"
   },
   "aparato-freidora": {
-    "consulta": "Philips Airfryer | Cosori air fryer | air fryer basket",
-    "archivo": "File:Tabletop convection oven.jpg",
+    "consulta": "File:Untraditional air fryer beignets in toaster oven.jpg",
+    "archivo": "File:Untraditional air fryer beignets in toaster oven.jpg",
     "ruta": "assets/fotos/aparato-freidora.jpg",
-    "autor": "Bagoto",
+    "autor": "Infrogmation",
     "licencia": "CC BY-SA 4.0",
-    "pagina": "https://commons.wikimedia.org/wiki/File:Tabletop_convection_oven.jpg"
+    "pagina": "https://commons.wikimedia.org/wiki/File:Untraditional_air_fryer_beignets_in_toaster_oven.jpg"
   },
   "aparato-parrilla": {
     "consulta": "barbecue grill meat | grilling steak charcoal",

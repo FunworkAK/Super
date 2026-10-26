@@ -11,8 +11,8 @@ export interface Foto {
 export const FOTOS: Record<string, Foto> = {
   'albondigas': { src: require('../../assets/fotos/albondigas.jpg'), autor: "Horacio Cambeiro", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Alb%C3%B3ndigas_con_pur%C3%A9_de_papas.jpg" },
   'aparato-estufa': { src: require('../../assets/fotos/aparato-estufa.jpg'), autor: "Lisafern", licencia: "CC0", pagina: "https://commons.wikimedia.org/wiki/File:Gas_stove_burner_flame.jpg" },
-  'aparato-freidora': { src: require('../../assets/fotos/aparato-freidora.jpg'), autor: "Bagoto", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Tabletop_convection_oven.jpg" },
-  'aparato-horno': { src: require('../../assets/fotos/aparato-horno.jpg'), autor: "Twentyfour Students", licencia: "CC BY-SA 2.0", pagina: "https://commons.wikimedia.org/wiki/File:Electrolux_Microwave.jpg" },
+  'aparato-freidora': { src: require('../../assets/fotos/aparato-freidora.jpg'), autor: "Infrogmation", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Untraditional_air_fryer_beignets_in_toaster_oven.jpg" },
+  'aparato-horno': { src: require('../../assets/fotos/aparato-horno.jpg'), autor: "Phoebe", licencia: "CC BY-SA 3.0", pagina: "https://commons.wikimedia.org/wiki/File:Roasted_chicken_with_vegetables.jpg" },
   'aparato-kitchenaid': { src: require('../../assets/fotos/aparato-kitchenaid.jpg'), autor: "Cmh at English Wikipedia", licencia: "CC BY-SA 3.0", pagina: "https://commons.wikimedia.org/wiki/File:KitchenAid_Stand_Mixer.jpg" },
   'aparato-licuadora': { src: require('../../assets/fotos/aparato-licuadora.jpg'), autor: "Infrogmation of New Orleans", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Pi%C3%B1a_Coladas_made_in_home_kitchen_blender_-_3.jpg" },
   'aparato-microondas': { src: require('../../assets/fotos/aparato-microondas.jpg'), autor: "Srini297", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Microwave_Oven.jpg" },
@@ -66,7 +66,6 @@ export const FOTOS: Record<string, Foto> = {
   'sopa-pollo': { src: require('../../assets/fotos/sopa-pollo.jpg'), autor: "El Gran Dee", licencia: "CC BY 2.0", pagina: "https://commons.wikimedia.org/wiki/File:Caldo_de_Pollo_(2411932823).jpg" },
   'tacos-res': { src: require('../../assets/fotos/tacos-res.jpg'), autor: "Larry Miller", licencia: "CC BY-SA 2.0", pagina: "https://commons.wikimedia.org/wiki/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg" },
   'tilapia-horno': { src: require('../../assets/fotos/tilapia-horno.jpg'), autor: "USDAgov", licencia: "Public domain", pagina: "https://commons.wikimedia.org/wiki/File:Child_Care_Recipes_(Team_Nutiriton)_(20211103-FNS-UNC-9514).jpg" },
-  'tortitas-carne': { src: require('../../assets/fotos/tortitas-carne.jpg'), autor: "Horacio Cambeiro", licencia: "CC BY-SA 3.0", pagina: "https://commons.wikimedia.org/wiki/File:Capeletti_argentino_con_salsa_de_tomate,_carne_picada_y_cebolla.jpg" },
   'tortitas-papa': { src: require('../../assets/fotos/tortitas-papa.png'), autor: "Marco", licencia: "CC BY 2.0", pagina: "https://commons.wikimedia.org/wiki/File:Potato_patties_1.PNG" },
   'tostadas': { src: require('../../assets/fotos/tostadas.jpg'), autor: "Ccl099", licencia: "CC BY-SA 4.0", pagina: "https://commons.wikimedia.org/wiki/File:Tostada_Siberia.jpg" },
   'tostadas-francesas': { src: require('../../assets/fotos/tostadas-francesas.jpg'), autor: "Ocdp", licencia: "CC0", pagina: "https://commons.wikimedia.org/wiki/File:French_toast_001.jpg" },
